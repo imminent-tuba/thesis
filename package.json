@@ -1,0 +1,19 @@
+{
+  "name": "emotion-bot-visualizer",
+  "version": "1.0.0",
+  "description": "builds visualizations based on user input",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tynes/thesis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tynes/thesis/issues"
+  },
+  "homepage": "https://github.com/Tynes/thesis#readme"
+}
