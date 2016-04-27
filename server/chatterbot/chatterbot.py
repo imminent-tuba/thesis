@@ -14,6 +14,8 @@ bot = ChatBot(
 bot.train("chatterbot.corpus.english")
 bot.train(["what's your name?", "derpy mcbotimus"])
 
+print('begin dialogue')
+
 while True:
     try:
         user_input = bot.get_input()
