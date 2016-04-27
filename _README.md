@@ -1,6 +1,14 @@
 # Imminent Tuba Thesis Project!
 
-### Ideas are brewing, be back soon
+### Chat Bot Data Visualization
+Talk to our chatbot and our website will update live with data based on the conversations you hold with it.
+Our chatbot will be found on Slack and possibly Facebook Messenger.
+
+### For development
+To start the server:
+```
+$ npm run start
+```
 
 ##### Issues
 [![Stories in Ready](https://badge.waffle.io/imminent-tuba/thesis.svg?label=ready&title=Ready)](http://waffle.io/imminent-tuba/thesis)
