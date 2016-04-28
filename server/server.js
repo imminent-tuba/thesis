@@ -14,5 +14,5 @@ ioServer.on('connection', function(socket){
 });
 
 var server = theServer.listen(port, function(){
-  console.log('listening on *:1337');
+  console.log('listening on localhost:1337');
 });
