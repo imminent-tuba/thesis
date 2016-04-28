@@ -1,9 +1,8 @@
-describe('getDiv', function() {
-    var d = document.querySelector('#app');
-
-    it('Should exist', function() {
-        expect(d.nodeName).toBe('DIV');
-    });
+describe("A suite", function() {
+  it("contains spec with an expectation", function() {
+    
+    expect(true).toBe(true);
+  });
 });
 
 // describe("The 'toBe' matcher compares with ===", function() {
