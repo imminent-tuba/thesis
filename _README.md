@@ -5,9 +5,15 @@ Talk to our chatbot and our website will update live with data based on the conv
 Our chatbot will be found on Slack and possibly Facebook Messenger.
 
 ### For development
-To start the server:
+To start the server using the babel transpiler and nodemon, run
 ```
 $ npm run start
+```
+The front end code is packaged with webpack. It is nice to have two terminal windows open with nodemon
+running in one and webpack running in the other. This way you can see errors in either process.
+To start webpack, run
+```
+$ npm run webpack
 ```
 
 ##### Issues
