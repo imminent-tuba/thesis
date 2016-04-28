@@ -4,7 +4,11 @@
 Talk to our chatbot and our website will update live with data based on the conversations you hold with it.
 Our chatbot will be found on Slack and possibly Facebook Messenger.
 
-### For development
+### Installation
+
+### Usage
+
+### Contributing
 To start the server using the babel transpiler and nodemon, run
 ```
 $ npm run start
@@ -15,6 +19,10 @@ To start webpack, run
 ```
 $ npm run webpack
 ```
+### Authors
+
+### License
+MIT
 
 ##### Issues
 [![Stories in Ready](https://badge.waffle.io/imminent-tuba/thesis.svg?label=ready&title=Ready)](http://waffle.io/imminent-tuba/thesis)
