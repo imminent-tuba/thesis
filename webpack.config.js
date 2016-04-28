@@ -1,8 +1,8 @@
 module.exports = {
   entry: './client/app.jsx',
   output: {
-    path: 'dist',
-    publicPath: 'dist',
+    path: './client/dist',
+    publicPath: './client/dist',
     filename: 'bundle.js',
   },
   module: {
