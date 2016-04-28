@@ -65,7 +65,7 @@ module.exports = function(config) {
         base: 'Chrome',
         flags: ['--disable-web-security']
       }
-    }
+    },
 
 
     // Continuous Integration mode
