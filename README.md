@@ -5,6 +5,9 @@ Talk to our chatbot and our website will update live with data based on the conv
 Our chatbot will be found on Slack and possibly Facebook Messenger.
 
 ### Installation
+```
+python setup.py develop
+```
 
 ### Usage
 

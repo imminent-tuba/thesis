@@ -1,5 +1,9 @@
 ### node etc ###
 
+# bot data
+server/chatterbox/seinfeld/
+tubachatbot.egg-info/
+
 # Logs
 logs
 *.log
