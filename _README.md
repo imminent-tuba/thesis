@@ -10,7 +10,7 @@ To start the server using the babel transpiler and nodemon, run
 $ npm run start
 ```
 The front end code is packaged with webpack. It is nice to have two terminal windows open with nodemon
-running in one and webpack running in the other. This way you can see errors in either process.
+running in one and webpack running in the other. This way you can see errors in either process.  
 To start webpack, run
 ```
 $ npm run webpack
