@@ -1,5 +1,8 @@
 // Karma configuration
 // Generated on Wed Apr 27 2016 16:41:03 GMT-0700 (PDT)
+var webpack = require('webpack');
+var webpackConfig = require('./webpack.config.js');
+webpackConfig.entry = {};
 
 module.exports = function(config) {
   config.set({
@@ -50,15 +53,13 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    // browsers: ['Chrome','Chrome_without_security'],
+    browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome'],
 
-    // browsers: ['ChromeExtra'],
-    // browsers: ['Firefox'],
     customLaunchers: {
       Chrome_travis_ci: {
         base: 'Chrome',
@@ -69,10 +70,12 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
-  })
-}
+    concurrency: Infinity,
+
+    webpack: webpackConfig
+  });
+};
