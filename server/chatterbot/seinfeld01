@@ -1,18 +1,4 @@
-from chatterbot import ChatBot
-
-bot = ChatBot(
-    "My ChatterBot",
-    storage_adapter="chatterbot.adapters.storage.MongoDatabaseAdapter",
-    logic_adapters=["chatterbot.adapters.logic.ClosestMatchAdapter",
-    "chatterbot.adapters.logic.ClosestMeaningAdapter",
-    "chatterbot.adapters.logic.EvaluateMathematically",
-    "chatterbot.adapters.logic.TimeLogicAdapter"],
-    io_adapter="chatterbot.adapters.io.NoOutputAdapter",
-    database="test"
-)
-
-bot.train("chatterbot.corpus.english")
-bot.train(["Every time somebody recommends a doctor, he's always the best.",
+["Every time somebody recommends a doctor, he's always the best.",
 "This guy's the best.",
 "They can't all be the best.",
 "There can't be this many bests.",
@@ -387,15 +373,4 @@ bot.train(["Every time somebody recommends a doctor, he's always the best.",
 "What if I accidentally wander into some sort of homosexual store thinking it's a shoe store, and the salesman goes: 'Just hold this guy's hand, walk around the store.",
 "See how you feel.",
 "No obligation, no pressure, just try it.",
-"Would you like to see him in a sandal?"])
-
-print('begin dialogue')
-
-while True:
-    try:
-        user_input = bot.get_input()
-        bot_input = bot.get_response(user_input)
-        print(bot_input)
-
-    except (KeyboardInterrupt, EOFError, SystemExit):
-        break
+"Would you like to see him in a sandal?"]
