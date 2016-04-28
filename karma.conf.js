@@ -57,16 +57,9 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['Chrome'],
 
-    browsers: ['ChromeExtra'],
+    // browsers: ['ChromeExtra'],
+    browsers: ['Firefox'],
  
-    // you can define custom flags 
-    // customLaunchers: {
-    //   Chrome_without_security: {
-    //     base: 'Chrome',
-    //     flags: ['--disable-web-security']
-    //   }
-    // },
-
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
