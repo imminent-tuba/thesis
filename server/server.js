@@ -2,17 +2,17 @@ import http from 'http';
 import express from 'express';
 import io from 'socket.io';
 
-var app = express();
-var theServer = http.Server(app);
-var ioServer = io(theServer);
+const app = express();
+const theServer = http.Server(app);
+const ioServer = io(theServer);
 
-var port = process.env.PORT || 1337;
+const port = process.env.PORT || 1337;
 app.use(express.static(__dirname + '/../client'));
 
-ioServer.on('connection', function(socket){
-  console.log('a user connected');
+ioServer.on('connection', (socket) => {
+  console.log('a user connected: ', socket);
 });
 
-var server = theServer.listen(port, function(){
+let server = theServer.listen(port, () => {
   console.log('listening on localhost:1337');
 });
