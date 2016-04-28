@@ -60,12 +60,12 @@ module.exports = function(config) {
     browsers: ['ChromeExtra'],
  
     // you can define custom flags 
-    customLaunchers: {
-      Chrome_without_security: {
-        base: 'Chrome',
-        flags: ['--disable-web-security']
-      }
-    },
+    // customLaunchers: {
+    //   Chrome_without_security: {
+    //     base: 'Chrome',
+    //     flags: ['--disable-web-security']
+    //   }
+    // },
 
 
     // Continuous Integration mode
