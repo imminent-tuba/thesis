@@ -1,8 +1,8 @@
 // Karma configuration
 // Generated on Wed Apr 27 2016 16:41:03 GMT-0700 (PDT)
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config.js');
-webpackConfig.entry = {};
+// var webpack = require('webpack');
+// var webpackConfig = require('./webpack.config.js');
+// webpackConfig.entry = {};
 
 module.exports = function(config) {
   config.set({
@@ -74,8 +74,8 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
+    concurrency: Infinity
 
-    webpack: webpackConfig
+    // webpack: webpackConfig
   });
 };
