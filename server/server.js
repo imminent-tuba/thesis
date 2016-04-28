@@ -1,8 +1,18 @@
 import http from 'http';
+import express from 'express';
+import io from 'socket.io';
 
-http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
+var app = express();
+var theServer = http.Server(app);
+var ioServer = io(theServer);
 
-console.log('Server running at http://127.0.0.1:1337/');
+var port = process.env.PORT || 1337;
+app.use(express.static(__dirname + '/../client'));
+
+ioServer.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+var server = theServer.listen(port, function(){
+  console.log('listening on *:1337');
+});
