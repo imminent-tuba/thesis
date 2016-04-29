@@ -16,7 +16,6 @@ ioServer.on('connection', (socket) => {
   console.log('a user connected: ', socket);
 });
 
-
-const server = theServer.listen(port, () => {
-  console.log('listening on localhost:1337');
+theServer.listen(port, () => {
+  console.log('listening on localhost:', port);
 });

@@ -1,25 +1,30 @@
 from chatterbot import ChatBot
+import sys
 
 bot = ChatBot(
     "My ChatterBot",
     storage_adapter="chatterbot.adapters.storage.MongoDatabaseAdapter",
-    logic_adapters=["chatterbot.adapters.logic.ClosestMatchAdapter",
-    "chatterbot.adapters.logic.ClosestMeaningAdapter",
-    "chatterbot.adapters.logic.EvaluateMathematically",
-    "chatterbot.adapters.logic.TimeLogicAdapter"],
-    io_adapter="chatterbot.adapters.io.NoOutputAdapter",
+    logic_adapter="chatterbot.adapters.logic.ClosestMatchAdapter",
+    io_adapter="chatterbot.adapters.io.TerminalAdapter",
     database="test"
 )
 
 bot.train("chatterbot.corpus.english")
+print('ready to chat')
+sys.stdout.flush()
 
-print('begin dialogue')
-
-while True:
-    try:
-        user_input = bot.get_input()
-        bot_input = bot.get_response(user_input)
-        print(bot_input)
-
-    except (KeyboardInterrupt, EOFError, SystemExit):
-        break
+inputMode = 'respond'
+for line in sys.stdin:
+    if line == 'xxstartxx\n':
+        inputMode = 'train'
+        trainList = []
+    elif line == 'xxendxx\n':
+        inputMode = 'respond'
+        bot.train(trainList)
+        print('training finished')
+        sys.stdout.flush()
+    else:
+        if inputMode == 'respond':
+            bot.get_response(line)
+        elif inputMode == 'train':
+            trainList.append(line)
