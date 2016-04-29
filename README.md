@@ -11,6 +11,23 @@ python setup.py develop
 
 ### Usage
 
+### Deployment
+We are using an Amazon Linux AMI EC2 instance on Amazon Web Services with CodeDeploy to host our application but
+other deployment options should work as well.
+Once the instance is deployed, SSH into the server using the key-pair then run:
+```
+sudo yum install gcc-c++ make
+sudo yum install openssl-devel
+sudo yum install git
+git clone git://github.com/nodejs/node
+cd node
+git checkout v6.0.0
+./configure
+make
+sudo make install
+```
+This will install node on the AWS instance.
+
 ### Contributing
 To start the server using the babel transpiler and nodemon, run
 ```
