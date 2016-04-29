@@ -29,3 +29,7 @@ node_modules/
 bower_components/
 
 dist
+
+# API keys
+server/config/AlchemyApiKey.js
+
