@@ -27,7 +27,27 @@ make
 sudo make install
 ```
 This will install node on the AWS instance. 
-TODO: add it to sudo's path
+Now we must add it to sudo's path
+```
+sudo su
+vim /etc/sudoers
+```
+Once inside the file, scroll down and change the line
+```
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+```
+to this:
+```
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+```
+Now to install npm
+```
+cd
+git clone https://github.com/npm/npm.git
+cd npm
+sudo make install
+```
+Now the instance has node and npm installed
 
 ### Contributing
 To start the server using the babel transpiler and nodemon, run
