@@ -26,7 +26,8 @@ git checkout v6.0.0
 make
 sudo make install
 ```
-This will install node on the AWS instance.
+This will install node on the AWS instance. 
+TODO: add it to sudo's path
 
 ### Contributing
 To start the server using the babel transpiler and nodemon, run
