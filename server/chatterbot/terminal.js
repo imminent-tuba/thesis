@@ -21,6 +21,6 @@ stdin.addListener('data', d => {
   } else if (d.toString().trim() === 'train6') {
     bot.train(seinfeld6);
   } else {
-    bot.response(d.toString().trim());
+    bot.response('terminal', d.toString().trim());
   }
 });
