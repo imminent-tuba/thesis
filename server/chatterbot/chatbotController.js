@@ -35,7 +35,7 @@ server.on('listening', () => {
 server.bind(NODE_PORT, LOCALHOST);
 
 // create std in/out listeners for error handling
-const pyProcess = new PyShell(`${__dirname}/chatterbot.py`, options);
+const pyProcess = new PyShell(`./server/chatterbot/chatterbot.py`, options);
 
 pyProcess.on('message', message => {
   console.log(message);
