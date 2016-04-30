@@ -1,6 +1,7 @@
 // import db = from '../db/dbConfig.js';
 
 module.exports = {
-  saveAnalysis: (user,callback) => {
+  saveAnalysis: (user, callback) => {
+    callback();
   },
 };
