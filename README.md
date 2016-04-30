@@ -48,6 +48,7 @@ cd npm
 sudo make install
 ```
 Now the instance has node and npm installed
+The instance needs MongoDB. Install it with [this](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-amazon/) guide.
 
 ### Contributing
 To start the server using the babel transpiler and nodemon, run
