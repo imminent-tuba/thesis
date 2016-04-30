@@ -11,7 +11,7 @@ const theServer = http.Server(app);
 const ioServer = io(theServer);
 
 const port = process.env.PORT || 1337;
-app.use(express.static(__dirname + '/../client'));
+app.use(express.static(`${__dirname}/../client`));
 app.use(bodyparser);
 routes(app);
 

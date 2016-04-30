@@ -26,7 +26,7 @@ def socketListener():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_address = (LOCALHOST, PY_PORT)
     sock.bind(server_address)
-    print('starting up on %s port %s' % server_address)
+    print('chatbot on %s port %s' % server_address)
     sys.stdout.flush()
 
     while True:
@@ -59,3 +59,5 @@ for line in sys.stdin:
         sys.stdout.flush()
     elif line == 'xxinitxx\n':
         bot.train("chatterbot.corpus.english")
+        print('bot initialized with english')
+        sys.stdout.flush()
