@@ -7,7 +7,10 @@ const options = {
   args: ['test'],
 };
 
-const pyProcess = new PyShell('./chatterbot.py', options);
+const LOCALHOST = '127.0.0.1';
+const NODE_PORT = 41234;
+
+// create UDP socket for conversing with bot
 const server = dgram.createSocket('udp4');
 
 server.on('error', (err) => {
@@ -25,7 +28,10 @@ server.on('listening', () => {
   console.log(`server listening ${address.address}:${address.port}`);
 });
 
-server.bind(41234, '127.0.0.1');
+server.bind(NODE_PORT, LOCALHOST);
+
+// create std in/out listeners for error handling
+const pyProcess = new PyShell('./chatterbot.py', options);
 
 pyProcess.on('message', message => {
   console.log(message);
@@ -54,4 +60,5 @@ module.exports = {
       pyProcess.send(conversation[i]);
     }
   },
+  init: () => pyProcess.send('xxtrainxx'),
 };

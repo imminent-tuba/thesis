@@ -12,8 +12,6 @@ bot = ChatBot(
     database="test"
 )
 
-bot.train("chatterbot.corpus.english")
-
 LOCALHOST = "127.0.0.1"
 NODE_PORT = 41234
 PY_PORT = 51234
@@ -34,29 +32,21 @@ def socketListener():
         
         if data:
             msg = json.loads(data.decode('utf-8'))
-            responseThread(msg, sock)
-            # r = threading.Thread(target=responseThread, args=(data, sock))
+            r = threading.Thread(target=responseThread, args=(msg, sock))
 
-socketListener()
-# t = threading.Thread(target=socketListener)
-# t.daemon = True
-# t.start()
+t = threading.Thread(target=socketListener)
+t.daemon = True
+t.start()
 
 print('ready to chat')
 sys.stdout.flush()
 
-inputMode = 'respond'
 for line in sys.stdin:
     if line == 'xxstartxx\n':
-        inputMode = 'train'
         trainList = []
     elif line == 'xxendxx\n':
-        inputMode = 'respond'
         bot.train(trainList)
         print('training finished')
         sys.stdout.flush()
-    else:
-        if inputMode == 'respond':
-            bot.get_response(line)
-        elif inputMode == 'train':
-            trainList.append(line)
+    elif line == 'xxinitxx\n':
+        bot.train("chatterbot.corpus.english")
