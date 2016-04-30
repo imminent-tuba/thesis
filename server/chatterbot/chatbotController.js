@@ -10,6 +10,8 @@ const options = {
 const LOCALHOST = '127.0.0.1';
 const NODE_PORT = 41234;
 
+const callbacks = {};
+
 // create UDP socket for conversing with bot
 const server = dgram.createSocket('udp4');
 
@@ -20,7 +22,8 @@ server.on('error', (err) => {
 
 server.on('message', (msg /* rinfo*/) => {
   const myMsg = JSON.parse(msg);
-  router(myMsg);
+  callbacks[myMsg.id](myMsg.message);
+  delete callbacks[myMsg.id];
 });
 
 server.on('listening', () => {
@@ -47,7 +50,8 @@ pyProcess.on('error', err => {
 });
 
 module.exports = {
-  response: (id, message) => {
+  response: (id, message, callback) => {
+    callbacks[id] = callback;
     const toSend = { id: id, message: message };
     server.send(JSON.stringify(toSend), 51234, 'localhost', (err) => {
       if (err) { console.log(err); }

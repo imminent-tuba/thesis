@@ -20,7 +20,7 @@ stdin.addListener('data', d => {
     bot.train(seinfeld5);
   } else if (d.toString().trim() === 'train6') {
     bot.train(seinfeld6);
-  } else if (d.toString().trim() === 'train') {
+  } else if (d.toString().trim() === 'init') {
     bot.init();
   } else {
     bot.response('terminal', d.toString().trim());
