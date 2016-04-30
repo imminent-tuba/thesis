@@ -1,6 +1,5 @@
 const PyShell = require('python-shell');
 const dgram = require('dgram');
-const router = require('./botRouter.js');
 
 const options = {
   mode: 'text',
@@ -11,6 +10,7 @@ const LOCALHOST = '127.0.0.1';
 const NODE_PORT = 41234;
 
 const callbacks = {};
+let callcount = 0;
 
 // create UDP socket for conversing with bot
 const server = dgram.createSocket('udp4');
@@ -22,19 +22,20 @@ server.on('error', (err) => {
 
 server.on('message', (msg /* rinfo*/) => {
   const myMsg = JSON.parse(msg);
-  callbacks[myMsg.id](myMsg.message);
+  myMsg.message = myMsg.message.replace('\n', '');
+  callbacks[myMsg.id](null, myMsg.message);
   delete callbacks[myMsg.id];
 });
 
 server.on('listening', () => {
   const address = server.address();
-  console.log(`server listening ${address.address}:${address.port}`);
+  console.log(`node listening ${address.address}:${address.port}`);
 });
 
 server.bind(NODE_PORT, LOCALHOST);
 
 // create std in/out listeners for error handling
-const pyProcess = new PyShell('./chatterbot.py', options);
+const pyProcess = new PyShell(`${__dirname}/chatterbot.py`, options);
 
 pyProcess.on('message', message => {
   console.log(message);
@@ -50,9 +51,11 @@ pyProcess.on('error', err => {
 });
 
 module.exports = {
-  response: (id, message, callback) => {
-    callbacks[id] = callback;
-    const toSend = { id: id, message: message };
+  response: (message, callback) => {
+    callcount = ++callcount % 3000;
+    const Uid = callcount.toString();
+    callbacks[Uid] = callback;
+    const toSend = { id: Uid, message: message };
     server.send(JSON.stringify(toSend), 51234, 'localhost', (err) => {
       if (err) { console.log(err); }
     });

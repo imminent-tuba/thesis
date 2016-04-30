@@ -4,6 +4,8 @@ import socket
 import threading
 import json
 
+threaded = True
+
 bot = ChatBot(
     "My ChatterBot",
     storage_adapter="chatterbot.adapters.storage.MongoDatabaseAdapter",
@@ -24,7 +26,7 @@ def socketListener():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_address = (LOCALHOST, PY_PORT)
     sock.bind(server_address)
-    print('starting up on %s port %s' % server_address)
+    print('chatbot on %s port %s' % server_address)
     sys.stdout.flush()
 
     while True:
@@ -32,11 +34,18 @@ def socketListener():
         
         if data:
             msg = json.loads(data.decode('utf-8'))
-            r = threading.Thread(target=responseThread, args=(msg, sock))
+            if threaded:
+                r = threading.Thread(target=responseThread, args=(msg, sock))
+                r.start()
+            else:
+                responseThread(msg, sock)
 
-t = threading.Thread(target=socketListener)
-t.daemon = True
-t.start()
+if threaded:
+    t = threading.Thread(target=socketListener)
+    t.daemon = True
+    t.start()
+else:
+    socketListener()
 
 print('ready to chat')
 sys.stdout.flush()
@@ -50,3 +59,5 @@ for line in sys.stdin:
         sys.stdout.flush()
     elif line == 'xxinitxx\n':
         bot.train("chatterbot.corpus.english")
+        print('bot initialized with english')
+        sys.stdout.flush()

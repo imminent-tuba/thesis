@@ -6,6 +6,9 @@ Our chatbot will be found on Slack and possibly Facebook Messenger.
 
 ### Installation
 ```
+on ubuntu:
+  sudo apt-get install python-dev
+
 python setup.py develop
 ```
 
