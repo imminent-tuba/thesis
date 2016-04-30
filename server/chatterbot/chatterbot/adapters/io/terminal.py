@@ -1,6 +1,6 @@
 from chatterbot.adapters.io import IOAdapter
 from chatterbot.utils.read_input import input_function
-
+import sys
 
 class TerminalAdapter(IOAdapter):
     """
@@ -17,4 +17,5 @@ class TerminalAdapter(IOAdapter):
 
     def process_response(self, statement):
         print(statement.text)
+        sys.stdout.flush()
         return statement.text
