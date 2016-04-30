@@ -4,6 +4,8 @@ import socket
 import threading
 import json
 
+threaded = True
+
 bot = ChatBot(
     "My ChatterBot",
     storage_adapter="chatterbot.adapters.storage.MongoDatabaseAdapter",
@@ -32,11 +34,18 @@ def socketListener():
         
         if data:
             msg = json.loads(data.decode('utf-8'))
-            r = threading.Thread(target=responseThread, args=(msg, sock))
+            if threaded:
+                r = threading.Thread(target=responseThread, args=(msg, sock))
+                r.start()
+            else:
+                responseThread(msg, sock)
 
-t = threading.Thread(target=socketListener)
-t.daemon = True
-t.start()
+if threaded:
+    t = threading.Thread(target=socketListener)
+    t.daemon = True
+    t.start()
+else:
+    socketListener()
 
 print('ready to chat')
 sys.stdout.flush()

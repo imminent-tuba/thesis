@@ -23,6 +23,6 @@ stdin.addListener('data', d => {
   } else if (d.toString().trim() === 'init') {
     bot.init();
   } else {
-    bot.response('terminal', d.toString().trim());
+    bot.response('terminal', d.toString().trim(), (msg) => console.log(msg));
   }
 });

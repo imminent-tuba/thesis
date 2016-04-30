@@ -18,12 +18,10 @@ routes(app);
 ioServer.on('connection', (socket) => {
   console.log('a user connected: ', socket);
 
-  let msgCount = 0;
   socket.on('message', (msg) => {
-    chatbot.response(socket.conn.id + msgCount.toString(), msg, (response) => {
+    chatbot.response(socket.conn.id, msg, (response) => {
       socket.emit(response);
     });
-    msgCount++;
   });
 });
 
