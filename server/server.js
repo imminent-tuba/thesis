@@ -19,10 +19,13 @@ ioServer.on('connection', (socket) => {
   console.log('a user connected: ', socket);
 
   socket.on('message', (msg) => {
-    chatbot.response(socket.conn.id, msg, (response) => {
-      socket.emit(response);
+    chatbot.response(socket.conn.id, msg, (err, response) => {
+      if (err) { console.log(err); }
+      socket.emit('message', response);
     });
   });
+
+  socket.on('disconnect', () => { console.log('user disconnected'); });
 });
 
 theServer.listen(port, () => {
