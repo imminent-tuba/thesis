@@ -1,9 +1,13 @@
 const PyShell = require('python-shell');
 const dgram = require('dgram');
+const path = require('path');
+
+const virtualEnvPath = path.relative(__dirname, '.virtualenvs/thesis/bin/python3');
 
 const options = {
   mode: 'text',
   args: ['test'],
+  pythonPath: __dirname + '/../' + virtualEnvPath,
 };
 
 const LOCALHOST = '127.0.0.1';

@@ -37,3 +37,6 @@ dist
 # API keys
 server/config/AlchemyApiKey.js
 
+extras
+
+*.pyc
