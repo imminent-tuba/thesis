@@ -4,6 +4,7 @@ const dgram = require('dgram');
 const options = {
   mode: 'text',
   args: ['test'],
+  pythonPath: 'python3',
 };
 
 const LOCALHOST = '127.0.0.1';
