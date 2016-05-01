@@ -11,6 +11,34 @@ on ubuntu:
 
 python setup.py develop
 ```
+If you are on Mac and do not have Python 3 installed, install it with homebrew:
+```
+brew python3
+```
+
+
+To set up the Python dev environment, use virtualenv and virtualenvwrapper
+```
+$ pip install virtualenv
+$ pip install virtualenvwrapper
+
+```
+Then place these 3 lines in your shell startup file of choice (.bashrc)
+Can be found in /etc
+```
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+```
+Then go to the root of the application directory and run
+```
+mkvirtualenv -r requirements.txt -a </path/to/directory> --python=</path/to/python3> thesis
+```
+If you do not know your path to Python 3, run:
+```
+which python3
+```
+This creates a virtual environment for Python and installs the dependencies from inside requirements.txt
 
 ### Usage
 
