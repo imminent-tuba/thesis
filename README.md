@@ -16,15 +16,14 @@ If you are on Mac and do not have Python 3 installed, install it with homebrew:
 brew python3
 ```
 
-
 To set up the Python dev environment, use virtualenv and virtualenvwrapper
 ```
 $ pip install virtualenv
 $ pip install virtualenvwrapper
 
 ```
-Then place these 3 lines in your shell startup file of choice (.bashrc)
-Can be found in /etc
+Then place these 3 lines in your shell startup file of choice (```.bashrc``` or ```.zshrc```)
+Can be found as a hidden file in your home directory or /etc
 ```
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
@@ -39,7 +38,35 @@ If you do not know your path to Python 3, run:
 which python3
 ```
 This creates a virtual environment for Python and installs the dependencies from inside requirements.txt
-Will explain more about workon in the future
+Python and its dependencies are installed to a directory that is then added to the front of your $PATH.
+This will shadow the global Python that is installed on your machine.
+If you would like to have the reference to your global Python back, run:
+```
+deactivate
+```
+When you want to access your projects virtual environment again, from the root of the application, run:
+```
+workon .
+```
+##### Bonus
+If you use zsh and would like a visual display of when you have a virtual environment set, go
+to your home directory and
+```
+cd .virtualenvs
+```
+Inside of this directory, you will find all of the virtual environments that you have created. You will also
+find some hooks that are ran during different parts of the virtual environment's lifecycle.
+Inside of ```postactivate```:
+```
+PS1="$_OLD_VIRTUAL_PS1"
+_OLD_RPROMPT="$RPROMPT"
+RPROMPT="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%} $RPROMPT"
+```
+Inside of ```postdeactivate```:
+```
+RPROMPT="$_OLD_RPROMPT"
+```
+Thanks to the contributors to the [docs](http://virtualenvwrapper.readthedocs.io/en/latest/index.html) for the tips!
 
 ### Usage
 
