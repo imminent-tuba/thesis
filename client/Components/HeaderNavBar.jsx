@@ -1,12 +1,12 @@
 import React from 'react';
 
 /* MUI lib files */
-import AppBar from 'material-ui/AppBar/AppBar';
-import IconButton from 'material-ui/IconButton/IconButton';
-import Avatar from 'material-ui/Avatar/Avatar';
-import IconMenu from 'material-ui/'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/MenuItem/MenuItem';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import Avatar from 'material-ui/lib/avatar';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 
 export default class HeaderNavBar extends React.Component {
   constructor(props) {
