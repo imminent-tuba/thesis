@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 
 /* Material Design module*/
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
 /* End of Material Design module */
 
 /* React-tab-event-plugin */
