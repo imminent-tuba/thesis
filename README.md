@@ -39,6 +39,7 @@ If you do not know your path to Python 3, run:
 which python3
 ```
 This creates a virtual environment for Python and installs the dependencies from inside requirements.txt
+Will explain more about workon in the future
 
 ### Usage
 
