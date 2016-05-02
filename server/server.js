@@ -3,6 +3,7 @@ import express from 'express';
 import io from 'socket.io';
 import bodyparser from 'body-parser';
 import chatbot from './chatterbot/chatbotController.js';
+import analyzerController from './controllers/analyzerController.js';
 
 const routes = require('./config/routes.js');
 
@@ -15,10 +16,12 @@ app.use(express.static(`${__dirname}/../client`));
 app.use(bodyparser);
 routes(app);
 
+
 ioServer.on('connection', (socket) => {
   console.log('a user connected: ', socket.conn.id);
 
   socket.on('message', (msg) => {
+    analyzerController.setAnalysis(msg);
     chatbot.response(socket.conn.id, msg, (err, response) => {
       if (err) { console.log(err); }
       socket.emit('message', response);
