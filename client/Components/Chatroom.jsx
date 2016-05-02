@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+/* Material-ui Components */
 import Menu from 'material-ui/lib/menus/menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import LeftNav from 'material-ui/lib/left-nav';
