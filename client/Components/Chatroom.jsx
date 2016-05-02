@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 /* Material-ui Components */
 import Menu from 'material-ui/lib/menus/menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
@@ -20,17 +21,34 @@ export default class Chatroom extends React.Component {
     // message = message.value;
     console.log(message);
     this.props.sendChat(message);
+    this.refs.currentInputMessage.value = '';
   }
 
   render() {
+    let innerDivStyle = {
+      align: 'right'
+    }
+
     return (
       <div>
         <List>
           {this.props.chats.map( (val, idx) => {
-            console.log(val.message);
-            return <ListItem primaryText={val.message} key={idx}/>
+            /* when user's message */
+            if(val.user === 'user') {
+              return (
+                <Col md={6} key={idx}>
+                    <ListItem primaryText={val.message} />
+                </Col>
+              )
+            } else {
+              /* when bot's message */
+              return (
+                <Col md={6} key={idx}>
+                    <ListItem primaryText={val.message} key={idx}/>
+                </Col>
+              )
+            }
           })}
-
         </List>
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
@@ -44,5 +62,4 @@ export default class Chatroom extends React.Component {
       </div>
     );
   }
-
 }
