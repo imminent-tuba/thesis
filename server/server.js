@@ -16,7 +16,7 @@ app.use(bodyparser);
 routes(app);
 
 ioServer.on('connection', (socket) => {
-  console.log('a user connected: ', socket);
+  console.log('a user connected: ', socket.conn.id);
 
   socket.on('message', (msg) => {
     chatbot.response(socket.conn.id, msg, (err, response) => {
