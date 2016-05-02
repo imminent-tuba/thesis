@@ -36,18 +36,23 @@
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
     "body-parser": "^1.15.0",
+    "classnames": "^2.2.4",
+    "css-loader": "^0.23.1",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-plugin-import": "^1.6.0",
     "eslint-plugin-jsx-a11y": "^1.0.3",
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.13.4",
+    "flexboxgrid": "^6.3.0",
     "material-ui": "^0.14.4",
     "python-shell": "^0.4.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
+    "react-flexbox-grid": "^0.9.6",
     "react-tap-event-plugin": "^0.2.0",
     "socket.io": "^1.4.5",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.0"
   }
 }

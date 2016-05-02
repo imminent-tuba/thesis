@@ -1,10 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import  { Grid, Row, Col } from 'react-flexbox-grid';
 
-/* Material Design module*/
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
-/* End of Material Design module */
 
 /* React-tab-event-plugin */
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -13,14 +10,19 @@ injectTapEventPlugin();
 
 /* Import Components */
 import HeaderNavBar from './Components/HeaderNavBar.jsx';
-// import HeaderNavBar from './Components/';
+import Chatroom from './Components/Chatroom.jsx';
 
-var App = () => (
-  // render ()(
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
+const App = () => (
+  <div>
     <HeaderNavBar />
-  </MuiThemeProvider>
-  // )
+    <Grid fluid>
+      <Row>
+        <Col xs={6}>
+          <Chatroom />
+        </Col>
+      </Row>
+    </Grid>
+  </div>
 );
 
 render(<App />, document.getElementById('app'));
