@@ -7,6 +7,8 @@ module.exports = {
       if (err) { console.log(err); }
       // store results in db
     });
-    chatbot.response('slack', req.body);
+    chatbot.response(req.body, (msg) => {
+      res.send(msg);
+    });
   },
 };
