@@ -12,21 +12,23 @@ const theServer = http.Server(app);
 const ioServer = io(theServer);
 
 const port = process.env.PORT || 1337;
-app.use(express.static(__dirname + '/../client'));
+app.use(express.static(`${__dirname}/../client`));
 app.use(bodyparser);
 routes(app);
 
-ioServer.on('connection', (socket) => {
-  console.log('a user connected: ', socket);
 
-  let msgCount = 0;
+ioServer.on('connection', (socket) => {
+  console.log('a user connected: ', socket.conn.id);
+
   socket.on('message', (msg) => {
     analyzerController.setAnalysis(msg);
-    chatbot.response(socket.conn.id + msgCount.toString(), msg, (response) => {
-      socket.emit(response);
+    chatbot.response(socket.conn.id, msg, (err, response) => {
+      if (err) { console.log(err); }
+      socket.emit('message', response);
     });
-    msgCount++;
   });
+
+  socket.on('disconnect', () => { console.log('user disconnected'); });
 });
 
 theServer.listen(port, () => {
