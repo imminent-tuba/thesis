@@ -17,7 +17,7 @@ class App extends React.Component {
       chats: [],
     };
     socket.on('message', (msg) => {
-      const updateChat = this.state.chat.splice();
+      const updateChat = this.state.chats.splice();
       updateChat.push({
         user: 'bot',
         message: msg,
@@ -28,12 +28,14 @@ class App extends React.Component {
 
   sendChat(msg) {
     socket.emit('message', msg);
-    const updateChat = this.state.chat.splice();
+
+    let updateChat = this.state.chats.splice(0);
+    console.log('chats - ', updateChat);
     updateChat.push({
       user: 'user',
       message: msg,
     });
-    this.setState({ chats: updateChat });
+    return this.setState({ chats: updateChat });
   }
 
   render() {
@@ -49,7 +51,7 @@ class App extends React.Component {
               <p> FOO </p>
             </Col>
             <Col md={3}>
-              <Chatroom sendChat={this.sendChat} chats={this.state.chats} />
+              <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />
             </Col>
           </Row>
 

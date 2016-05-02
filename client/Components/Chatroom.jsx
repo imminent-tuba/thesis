@@ -8,42 +8,41 @@ import TextField from 'material-ui/lib/text-field';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
-/*
-this.props.chat [];
-events: sendChat()
-array: {user: '' , message: ''} user and Bot
-// on submit => props => sendChat()
 
-*/
 export default class Chatroom extends React.Component {
   constructor(props) {
     super(props);
-    // this.setState({
-    //   allChats: this.props,
-    //
-    // })
-    // 1.redner all charts from this.props.chats
-    // 2. databinding between chats and textarea
-    //
   }
+
+  _handleSubmitEvent(e) {
+    e.preventDefault();
+    let message = this.refs.currentInputMessage.value;
+    // message = message.value;
+    console.log(message);
+    this.props.sendChat(message);
+  }
+
   render() {
     return (
       <div>
         <List>
-          <ListItem primaryText="test" />
+          {this.props.chats.map( (val, idx) => {
+            console.log(val.message);
+            return <ListItem primaryText={val.message} key={idx}/>
+          })}
+
         </List>
         <div>
-          <form onSubmit={this.props.sendChat}>
-            <TextField
-              fullwidth={true}
+          <form onSubmit={this._handleSubmitEvent.bind(this)}>
+            <input
               type="text"
-              floatingLabelText="Talk with the Bot!"
-              value={this.props.chats}
+              ref='currentInputMessage'
             />
-          <button> submit </button>
+            <button type='submit'> submit </button>
           </form>
         </div>
       </div>
     );
   }
+
 }
