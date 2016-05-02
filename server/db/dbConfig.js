@@ -11,10 +11,10 @@ const url = 'mongodb://localhost:27017/myproject';
 module.exports = {
   connection: (data, callback) => {
     MongoClient.connect(url, (err, db) => {
-      console.log('err', err);
-      console.log("Connected correctly to server");
+      console.log('DB conection err', err);
+      console.log("DB Connected correctly to server");
       callback(data, db, (err, result) => {
-          db.close();
+        db.close();
       });
     });
   },
