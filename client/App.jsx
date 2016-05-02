@@ -17,7 +17,7 @@ class App extends React.Component {
       chats: [],
     };
     socket.on('message', (msg) => {
-      const updateChat = this.state.chat.splice();
+      const updateChat = this.state.chats.splice(0);
       updateChat.push({
         user: 'bot',
         message: msg,
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   sendChat(msg) {
     socket.emit('message', msg);
-    const updateChat = this.state.chat.splice();
+    let updateChat = this.state.chats.splice(0);
     updateChat.push({
       user: 'user',
       message: msg,
@@ -46,10 +46,10 @@ class App extends React.Component {
               <DataViewList />
             </Col>
             <Col md={6}>
-              <p> FOO </p>
+              <p> D3 Charts Go here </p>
             </Col>
             <Col md={3}>
-              <Chatroom sendChat={this.sendChat} chats={this.state.chats} />
+              <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />
             </Col>
           </Row>
 
