@@ -7,7 +7,7 @@ const virtualEnvPath = path.relative(__dirname, '.virtualenvs/thesis/bin/python3
 const options = {
   mode: 'text',
   args: ['test'],
-  pythonPath: __dirname + '/../' + virtualEnvPath,
+  pythonPath: __dirname + '/../../' + virtualEnvPath,
 };
 
 const LOCALHOST = '127.0.0.1';
