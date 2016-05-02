@@ -12,7 +12,7 @@ import PersonAdd from 'material-ui/lib/svg-icons/social/person-add';
 import RemoveRedEye from 'material-ui/lib/svg-icons/image/remove-red-eye';
 
 
-export default class SideNavBar extends React.Component {
+export default class DataViewList extends React.Component {
   constructor() {
     super();
   }
@@ -34,19 +34,12 @@ export default class SideNavBar extends React.Component {
       },
     };
 
-
-
     return (
       <div>
         <Menu style={style.menu}>
-          <MenuItem primaryText="Preview" leftIcon={<RemoveRedEye />} />
-          <MenuItem primaryText="Share" leftIcon={<PersonAdd />} />
-          <MenuItem primaryText="Get links" leftIcon={<ContentLink />} />
-          <Divider />
-          <MenuItem primaryText="Make a copy" leftIcon={<ContentCopy />} />
-          <MenuItem primaryText="Download" leftIcon={<Download />} />
-          <Divider />
-          <MenuItem primaryText="Remove" leftIcon={<Delete />} />
+          <MenuItem primaryText="Graph" leftIcon={<RemoveRedEye />} />
+          <MenuItem primaryText="Bar Chart" leftIcon={<PersonAdd />} />
+          <MenuItem primaryText="Taxonomy" leftIcon={<ContentLink />} />
         </Menu>
 
     </div>

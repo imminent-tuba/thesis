@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-
+import  { Grid, Row, Col } from 'react-flexbox-grid';
 /* Material Design module*/
 // import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 // import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
@@ -13,18 +13,27 @@ injectTapEventPlugin();
 
 /* Import Components */
 import HeaderNavBar from './Components/HeaderNavBar.jsx';
-import SideNavBar from './Components/SideNavBar.jsx';
+import DataViewList from './Components/DataViewList.jsx';
+import Chatroom from './Components/Chatroom.jsx';
 
 var App = () => (
-  // render ()(
+  <div>
+    <HeaderNavBar />
+    <Grid fluid>
+      <Row>
+        <Col md={3}>
+          <DataViewList />
+        </Col>
+        <Col md={6}>
+          <p> FOO </p>
+        </Col>
+        <Col md={3}>
+          <Chatroom />
+        </Col>
+      </Row>
 
-    <div>
-      <HeaderNavBar />
-      <SideNavBar />
-      <Body />
-    </div>
-
-  // )
+    </Grid>
+  </div>
 );
 
 render(<App />, document.getElementById('app'));
