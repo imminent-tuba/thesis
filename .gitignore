@@ -3,6 +3,7 @@
 # bot data
 server/chatterbot/seinfeld/
 tubachatbot.egg-info/
+server/config/pythonSettings.js
 
 # Logs
 logs
