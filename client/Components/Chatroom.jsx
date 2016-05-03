@@ -15,8 +15,14 @@ export default class Chatroom extends React.Component {
     super(props);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.nextProps === this.props) {
+      return false;
+      console.log('no-update');
+    } else { return true; }
+  }
+
   componentDidUpdate() {
-    console.log('updated');
     document.getElementById('chatInput').focus();
     document.getElementById('chatInput').select();
   }
