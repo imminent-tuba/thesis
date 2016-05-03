@@ -14,6 +14,7 @@ bot = ChatBot(
     io_adapter="chatterbot.adapters.io.NoOutputAdapter",
     database="test"
 )
+bot.train("chatterbot.corpus.english")
 
 LOCALHOST = "127.0.0.1"
 NODE_PORT = 41234
