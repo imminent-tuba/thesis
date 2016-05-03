@@ -19,6 +19,7 @@ class App extends React.Component {
       emotions: {},
       d3View: 'pie',
     };
+
     socket.on('message', (msg) => {
       const updateChat = this.state.chats.splice(0);
       updateChat.unshift({
@@ -47,6 +48,15 @@ class App extends React.Component {
     this.setState({ d3View: view });
   }
 
+  badWordReject() {
+    const updateChat = this.state.chats.splice(0);
+    updateChat.unshift({
+      user: 'bot',
+      message: 'Don\'t be a troll please',
+    });
+    this.setState({ chats: updateChat });
+  }
+
   render() {
     return (
       <div>
@@ -56,11 +66,11 @@ class App extends React.Component {
             <Col md={3}>
               <DataViewList handleClick={this.handleDataViewListClick.bind(this)} />
             </Col>
-            <Col md={6}>
+            <Col md={5}>
               <D3View emotions={this.state.emotions} view={this.state.d3View} />
             </Col>
-            <Col md={3}>
-              <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />
+            <Col md={4}>
+              <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} reject={this.badWordReject.bind(this)} />
             </Col>
           </Row>
 

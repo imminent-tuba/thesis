@@ -63,5 +63,5 @@ module.exports = {
       pyProcess.send(conversation[i]);
     }
   },
-  init: () => pyProcess.send('xxtrainxx'),
+  init: () => pyProcess.send('xxinitxx'),
 };
