@@ -22,7 +22,7 @@ ioServer.on('connection', (socket) => {
 
   socket.on('message', (msg) => {
     analyzerController.setAnalysis(msg);
-    chatbot.response(socket.conn.id, msg, (err, response) => {
+    chatbot.response(msg, (err, response) => {
       if (err) { console.log(err); }
       socket.emit('message', response);
     });
