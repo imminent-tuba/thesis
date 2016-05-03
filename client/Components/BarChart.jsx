@@ -10,19 +10,19 @@ export default class HeaderNavBar extends React.Component {
   
   render() {
     const pieData = [
-      { label: 'anger', value: this.props.emotions.anger * 100 },
-      { label: 'disgust', value: this.props.emotions.disgust * 100 },
-      { label: 'fear', value: this.props.emotions.fear * 100 },
-      { label: 'joy', value: this.props.emotions.joy * 100 },
-      { label: 'sadness', value: this.props.emotions.sadness * 100 },
+      { label: 'anger', value: Math.floor(this.props.emotions.anger * 100) },
+      { label: 'disgust', value: Math.floor(this.props.emotions.disgust * 100) },
+      { label: 'fear', value: Math.floor(this.props.emotions.fear * 100) },
+      { label: 'joy', value: Math.floor(this.props.emotions.joy * 100) },
+      { label: 'sadness', value: Math.floor(this.props.emotions.sadness * 100) },
     ];
     return (
       <PieChart
         data={pieData}
-        width={400}
-        height={400}
-        radius={100}
-        innerRadius={20}
+        width={800}
+        height={800}
+        radius={200}
+        innerRadius={40}
         sectorBorderColor="white"
         title="Pie Chart"
       />
