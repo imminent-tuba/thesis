@@ -64,10 +64,10 @@ class App extends React.Component {
         <HeaderNavBar />
         <Grid fluid>
           <Row>
-            <Col md={3}>
+            <Col md={2}>
               <DataViewList handleClick={this.handleDataViewListClick.bind(this)} />
             </Col>
-            <Col md={5}>
+            <Col md={6}>
               <D3View emotions={this.state.emotions} view={this.state.d3View} />
             </Col>
             <Col md={4}>

@@ -1,55 +1,46 @@
 import analyzerModel from '../models/analyzerModel.js';
 import AlchemyApiKey from '../config/AlchemyApiKey.js';
-//Create the AlchemyAPI object
+
 import AlchemyAPI from 'alchemy-api';
 const alchemyapi = new AlchemyAPI(AlchemyApiKey);
 
-//DemoText for test, replace data in the call to alchemyapi.emotion for this variable (demoText)
-//const demoText = 'Yesterday good Bob destroyed my fancy iPhone in beautiful Denver, Colorado. I guess I will have to head over to the Apple Store and buy a new one.';
-const demoText = 'I may run out of messages to text you. I may run out of jokes, too. I may also run out of battery, but my heart won\'t run out of space for you!';
-
-//Beta Method that is not included in the AlchemyAPI
-AlchemyAPI.prototype.emotion = function (data, options, cb) {
-  this._doRequest(this._getQuery(data, options, "GetEmotion"), cb);
+// Beta Method that is not included in the AlchemyAPI
+AlchemyAPI.prototype.emotion = function(data, options, cb) {
+  this._doRequest(this._getQuery(data, options, 'GetEmotion'), cb);
 };
 
 module.exports = {
   setAnalysis: (data) => {
-    //call Alchemy API (data, options, callback)
-    //params: @data, message that we received from the chat
     alchemyapi.emotion(data, {}, (err, response) => {
-      //Create an object with the information that we need;
-      const data = { channel: 'general', language: response.language, emotions: response.docEmotions };
-      //Call the Model (data, callback)
-      analyzerModel.saveAnalysis(data, (data, db, callback) => {
-        // Get the analysis collection
-        const collection = db.collection('Analysis');
-        // Insert the data into the MongoDB
-        collection.insert(data, (err, result) => {
-          //result of the insert data
-          if (err) { console.log('Retrieve data err ', err); }
-          //call the callback that close the connetion from the DB
-          callback(err, result);
+      if (err) { console.log('alchemy emotion response error - ', err); } else {
+        const emotionData = {
+          channel: 'general',
+          language: response.language,
+          emotions: response.docEmotions,
+        };
+        analyzerModel.saveAnalysis(emotionData, (newData, db, callback) => {
+          const collection = db.collection('Analysis');
+          collection.insert(newData, (error, result) => {
+            if (error) { console.log('Retrieve data err ', error); } else {
+              callback(err, result);
+            }
+          });
         });
-      });
+      }
     });
   },
   getAnalysis: (callbackSocket) => {
-    //Call the Model (channel, callback)
     const channel = 'general';
     analyzerModel.getAnalysis(channel, (data, db, callback) => {
-      //retrieve the information for
       const emotionsData = db.collection('Analysis').find({ channel: channel });
-      //obj to store the AVG emotion for the channel
-      let emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
+      const emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
       let numOfData = emotionsData.s.numberOfRetries;
       let numOfEmotions = 0;
       emotionsData.each((err, result) => {
+        if (err) { console.log('find emotions error - ', err); }
         numOfData--;
-        if (result != null){
+        if (result != null) {
           numOfEmotions++;
-          //iterate across the result obj from the DB and store the result in emotionAVG
-          //calculate the AVG for every key in the objs
           for (let key in result.emotions) {
             emotionAVG[key] += +result.emotions[key];
             if (numOfData === 0) {
@@ -57,9 +48,7 @@ module.exports = {
             }
           }
         }
-        //close the connection in the DB
         callback(err, result);
-        //if there are no more objs to process, return the emotionAVG to the client
         if (numOfData === 0) {
           callbackSocket(err, emotionAVG);
         }

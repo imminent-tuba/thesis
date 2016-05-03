@@ -1,0 +1,24 @@
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install python-pip
+sudo apt-get install python-dev
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+sudo ln -sf /usr/local/n/versions/node/6.0.0/bin/node /usr/bin/node
+git clone https://github.com/imminent-tuba/thesis.git
+cd thesis
+sudo pip install -r requirements.txt
+sudo npm install -g webpack
+sudo npm install
+
+# put pythonSettings.js in server/config/
+  module.exports = {
+    mode: 'text',
+    pythonPath: 'Python',
+  };
+
+# put AlchemyApiKey.js in server/config/
+  module.exports = '0cdb053969e130b008daad878a10c680fed2b1b1';
+
+sudo npm start && sudo npm run webpack
