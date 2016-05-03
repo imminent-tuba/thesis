@@ -1,11 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-// 27017 is the default port for connecting to MongoDB
-// const server = new mongodb.Server('127.0.0.1', 27017, {});
-// const client = new mongodb.Db('ChatAnalysis', server);
-
-
 const url = 'mongodb://localhost:27017/myproject';
 // Use connect method to connect to the Server
 module.exports = {
@@ -13,6 +8,7 @@ module.exports = {
     MongoClient.connect(url, (err, db) => {
       if (err) { console.log('DB conection err', err); }
       callback(data, db, (err, result) => {
+        if (err) { console.log('dbconfig line 11', err); }
         db.close();
       });
     });

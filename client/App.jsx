@@ -20,7 +20,7 @@ class App extends React.Component {
     };
     socket.on('message', (msg) => {
       const updateChat = this.state.chats.splice(0);
-      updateChat.push({
+      updateChat.unshift({
         user: 'bot',
         message: msg,
       });
@@ -39,7 +39,7 @@ class App extends React.Component {
   sendChat(msg) {
     socket.emit('message', msg);
     let updateChat = this.state.chats.splice(0);
-    updateChat.push({
+    updateChat.unshift({
       user: 'user',
       message: msg,
     });

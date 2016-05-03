@@ -5,10 +5,10 @@ import { PieChart } from 'react-d3';
 export default class HeaderNavBar extends React.Component {
   constructor(props) {
     super(props);
-    // this.props.getEmotions();
-  }
-  render() {
     this.props.getEmotions();
+  }
+  
+  render() {
     const pieData = [
       { label: 'anger', value: this.props.emotions.anger * 100 },
       { label: 'disgust', value: this.props.emotions.disgust * 100 },
