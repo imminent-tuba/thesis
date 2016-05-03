@@ -23,7 +23,7 @@ export default class EmotionPieChart extends React.Component {
     return (
       <PieChart
         data={pieData}
-        width={300}
+        width={400}
         height={300}
         radius={100}
         innerRadius={20}

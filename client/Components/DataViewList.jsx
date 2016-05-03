@@ -4,10 +4,8 @@ import Menu from 'material-ui/lib/menus/menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
 export default class DataViewList extends React.Component {
-  constructor() {
-    super();
-  }
-  render () {
+
+  render() {
     const style = {
       menu: {
         animated: true,
@@ -18,6 +16,8 @@ export default class DataViewList extends React.Component {
         float: 'left',
         position: 'relative',
         zIndex: 0,
+        width: '50%',
+        height: '80%',
       },
       rightIcon: {
         textAlign: 'center',
@@ -32,7 +32,7 @@ export default class DataViewList extends React.Component {
           <MenuItem primaryText="Bar Chart" onClick={() => this.props.handleClick('bar')} />
           <MenuItem primaryText="Taxonomy" onClick={() => this.props.handleClick('tax')} />
         </Menu>
-    </div>
-    )
+      </div>
+    );
   }
 }
