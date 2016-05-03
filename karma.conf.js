@@ -16,12 +16,8 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-<<<<<<< 754ba3f712fad1502267668150a753617058fcad
-      'client/*.html', 'test/**/*Spec.js',
-=======
       'client/tests.webpack.js',
       'server/tests/*',
->>>>>>> update .gitignore with DS_Store
     ],
 
     // list of files to exclude
@@ -32,7 +28,6 @@ module.exports = function (config) {
     preprocessors: {
       'client/tests.webpack.js': ['webpack', 'sourcemap'],
       // preprocess with webpack and our sourcemap loader
-
     },
 
     // test results reporter to use
@@ -78,10 +73,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox'],
       },
     },
-<<<<<<< 754ba3f712fad1502267668150a753617058fcad
-
-=======
->>>>>>> update .gitignore with DS_Store
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
