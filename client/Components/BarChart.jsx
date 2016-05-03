@@ -7,8 +7,11 @@ export default class HeaderNavBar extends React.Component {
     super(props);
     this.props.getEmotions();
   }
-  
+
   render() {
+    if (!this.props.emotions.anger) {
+      return <div></div>;
+    }
     const pieData = [
       { label: 'anger', value: Math.floor(this.props.emotions.anger * 100) },
       { label: 'disgust', value: Math.floor(this.props.emotions.disgust * 100) },
