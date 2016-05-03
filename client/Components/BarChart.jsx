@@ -1,6 +1,6 @@
 import React from 'react';
-// import rd3 from 'react-d3';
-import { PieChart } from 'react-d3';
+import { PieChart } from 'rd3';
+// import { PieChart } from 'react-d3';
 
 export default class HeaderNavBar extends React.Component {
   constructor(props) {

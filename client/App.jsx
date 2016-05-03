@@ -9,7 +9,7 @@ injectTapEventPlugin();
 import HeaderNavBar from './Components/HeaderNavBar.jsx';
 import DataViewList from './Components/DataViewList.jsx';
 import Chatroom from './Components/Chatroom.jsx';
-import BarChart from './Components/BarChart.jsx';
+import D3View from './Components/D3View.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -57,8 +57,7 @@ class App extends React.Component {
               <DataViewList />
             </Col>
             <Col md={6}>
-              <p> D3 Charts Go here </p>
-              <BarChart getEmotions={this.getEmotions} emotions={this.state.emotions}/>
+              <D3View getEmotions={this.getEmotions} emotions={this.state.emotions} />
             </Col>
             <Col md={3}>
               <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />
