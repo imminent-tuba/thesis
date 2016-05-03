@@ -27,8 +27,7 @@ module.exports = {
         // Insert the data into the MongoDB
         collection.insert(data, (err, result) => {
           //result of the insert data
-          console.log('Retrieve data err ', err);
-          console.log('information saved ', result);
+          if (err) { console.log('Retrieve data err ', err); }
           //call the callback that close the connetion from the DB
           callback(err, result);
         });

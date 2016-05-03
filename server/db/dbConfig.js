@@ -11,8 +11,7 @@ const url = 'mongodb://localhost:27017/myproject';
 module.exports = {
   connection: (data, callback) => {
     MongoClient.connect(url, (err, db) => {
-      console.log('DB conection err', err);
-      console.log("DB Connected correctly to server");
+      if (err) { console.log('DB conection err', err); }
       callback(data, db, (err, result) => {
         db.close();
       });
