@@ -40,4 +40,5 @@ server/config/AlchemyApiKey.js
 
 extras
 
+server/chatterbot/chatterbot/**/*.pyc
 *.pyc
