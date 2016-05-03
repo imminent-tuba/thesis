@@ -2,12 +2,6 @@ const PyShell = require('python-shell');
 const dgram = require('dgram');
 const pySettings = require('../config/pythonSettings.js');
 
-const options = {
-  mode: 'text',
-  args: ['test'],
-  pythonPath: pySettings.pythonPath,
-};
-
 const LOCALHOST = '127.0.0.1';
 const NODE_PORT = 41234;
 
@@ -37,7 +31,7 @@ server.on('listening', () => {
 server.bind(NODE_PORT, LOCALHOST);
 
 // create std in/out listeners for error handling
-const pyProcess = new PyShell(`./server/chatterbot/chatterbot.py`, options);
+const pyProcess = new PyShell(`./server/chatterbot/chatterbot.py`, pySettings);
 
 pyProcess.on('message', message => {
   console.log(message);
