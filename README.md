@@ -1,5 +1,5 @@
 # Imminent Tuba Thesis Project!
-ec2-52-39-184-38.us-west-2.compute.amazonaws.com:1337  ---  52.39.184.38
+ec2-52-11-162-224.us-west-2.compute.amazonaws.com:1337  ---  52.11.162.224
 
 ### Chat Bot Data Visualization
 Talk to our chatbot and our website will update live with data based on the conversations you hold with it.
