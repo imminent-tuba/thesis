@@ -4,7 +4,6 @@ import { PieChart } from 'rd3';
 export default class EmotionPieChart extends React.Component {
   constructor(props) {
     super(props);
-    // this.props.getEmotions(); // on componentWillMount?
   }
   componentWillMount() {
     socket.emit('emotions');
