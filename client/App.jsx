@@ -9,7 +9,7 @@ injectTapEventPlugin();
 import HeaderNavBar from './Components/HeaderNavBar.jsx';
 import DataViewList from './Components/DataViewList.jsx';
 import Chatroom from './Components/Chatroom.jsx';
-import BarChart from './Components/BarChart.jsx';
+import D3View from './Components/D3View.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class App extends React.Component {
     this.state = {
       chats: [],
       emotions: {},
+      d3View: 'pie',
     };
     socket.on('message', (msg) => {
       const updateChat = this.state.chats.splice(0);
@@ -32,10 +33,6 @@ class App extends React.Component {
     });
   }
 
-  getEmotions() {
-    socket.emit('emotions');
-  }
-
   sendChat(msg) {
     socket.emit('message', msg);
     let updateChat = this.state.chats.splice(0);
@@ -46,6 +43,9 @@ class App extends React.Component {
     this.setState({ chats: updateChat });
   }
 
+  handleDataViewListClick(view) {
+    this.setState({ d3View: view });
+  }
 
   render() {
     return (
@@ -54,11 +54,10 @@ class App extends React.Component {
         <Grid fluid>
           <Row>
             <Col md={3}>
-              <DataViewList />
+              <DataViewList handleClick={this.handleDataViewListClick.bind(this)} />
             </Col>
             <Col md={6}>
-              <p> D3 Charts Go here </p>
-              <BarChart getEmotions={this.getEmotions} emotions={this.state.emotions}/>
+              <D3View emotions={this.state.emotions} view={this.state.d3View} />
             </Col>
             <Col md={3}>
               <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />
