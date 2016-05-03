@@ -9,12 +9,14 @@ injectTapEventPlugin();
 import HeaderNavBar from './Components/HeaderNavBar.jsx';
 import DataViewList from './Components/DataViewList.jsx';
 import Chatroom from './Components/Chatroom.jsx';
+import BarChart from './Components/BarChart.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       chats: [],
+      emotions: {},
     };
     socket.on('message', (msg) => {
       const updateChat = this.state.chats.splice(0);
@@ -24,6 +26,14 @@ class App extends React.Component {
       });
       this.setState({ chats: updateChat });
     });
+
+    socket.on('emotions', (emotions) => {
+      this.setState({ emotions: emotions });
+    });
+  }
+
+  getEmotions() {
+    socket.emit('emotions');
   }
 
   sendChat(msg) {
@@ -36,6 +46,7 @@ class App extends React.Component {
     this.setState({ chats: updateChat });
   }
 
+
   render() {
     return (
       <div>
@@ -47,6 +58,7 @@ class App extends React.Component {
             </Col>
             <Col md={6}>
               <p> D3 Charts Go here </p>
+              <BarChart getEmotions={this.getEmotions} emotions={this.state.emotions}/>
             </Col>
             <Col md={3}>
               <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />

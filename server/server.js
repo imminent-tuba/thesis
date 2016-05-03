@@ -30,6 +30,13 @@ ioServer.on('connection', (socket) => {
     });
   });
 
+  socket.on('emotions', () => {
+    analyzerController.getAnalysis((err, response) => {
+      if (err) { console.log(err); }
+      socket.emit('emotions', response);
+    });
+  });
+
   socket.on('disconnect', () => { console.log('user disconnected'); });
 });
 

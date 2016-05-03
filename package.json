@@ -49,6 +49,7 @@
     "mongodb": "^2.1.18",
     "python-shell": "^0.4.0",
     "react": "^0.14.8",
+    "react-d3": "^0.4.0",
     "react-dom": "^0.14.8",
     "react-flexbox-grid": "^0.9.6",
     "react-tap-event-plugin": "^0.2.0",
