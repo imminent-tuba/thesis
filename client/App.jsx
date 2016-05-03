@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { io } from 'socket.io-client/socket.io';
 /* React-tab-event-plugin */
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -39,6 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <h1> FOO </h1>
         <HeaderNavBar />
         <Grid fluid>
           <Row>

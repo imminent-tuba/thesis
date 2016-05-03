@@ -28,6 +28,7 @@ module.exports = function (config) {
     preprocessors: {
       'client/tests.webpack.js': ['webpack', 'sourcemap'],
       // preprocess with webpack and our sourcemap loader
+
     },
 
     // test results reporter to use
