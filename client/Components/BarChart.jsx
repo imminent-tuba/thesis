@@ -19,10 +19,10 @@ export default class HeaderNavBar extends React.Component {
     return (
       <PieChart
         data={pieData}
-        width={800}
-        height={800}
-        radius={200}
-        innerRadius={40}
+        width={300}
+        height={300}
+        radius={100}
+        innerRadius={20}
         sectorBorderColor="white"
         title="Pie Chart"
       />
