@@ -11,16 +11,6 @@ import ListItem from 'material-ui/lib/lists/list-item';
 
 
 export default class Chatroom extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.nextProps === this.props) {
-      return false;
-      console.log('no-update');
-    } else { return true; }
-  }
 
   componentDidUpdate() {
     document.getElementById('chatInput').focus();
