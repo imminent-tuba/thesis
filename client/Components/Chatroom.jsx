@@ -5,7 +5,6 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import badWords from '../badWords.js';
 
-
 export default class Chatroom extends React.Component {
 
   componentDidUpdate() {
@@ -25,9 +24,14 @@ export default class Chatroom extends React.Component {
 
   _handleSubmitEvent(e) {
     e.preventDefault();
-    let message = this.refs.currentInputMessage.value;
-
-    this.props.sendChat(message);
+    const message = this.refs.currentInputMessage.value;
+    if (!this.isBadWord(message)) {
+      this.props.sendChat(message);
+    } else if (message === '') {
+      return;
+    } else {
+      this.props.reject();
+    }
     this.refs.currentInputMessage.value = '';
   }
 
@@ -53,16 +57,12 @@ export default class Chatroom extends React.Component {
             /* when user's message */
             if(val.user === 'user') {
               return (
-                <Col md={6} key={idx}>
-                  <ListItem primaryText={val.message} style={innerDivStyle[val.id]} />
-                </Col>
+                <ListItem primaryText={val.message} style={innerDivStyle[val.id]} key={idx}/>
               );
             } else {
               /* when bot's message */
               return (
-                <Col md={6} key={idx}>
-                  <ListItem primaryText={val.message} key={idx}/>
-                </Col>
+                <ListItem primaryText={val.message} key={idx}/>
               );
             }
           })}

@@ -1,3 +1,18 @@
 module.exports = [
-
-]
+  'asshole',
+  'fuck',
+  'shit',
+  'cunt',
+  'dick',
+  '<script',
+  '<img',
+  'fag',
+  'pussy',
+  'bastard',
+  'cock',
+  'slut',
+  'douche',
+  'cock',
+  'whore',
+  'retard',
+];
