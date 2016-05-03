@@ -34,7 +34,8 @@ module.exports = {
       });
     });
   },
-  getAnalysis: (callback) => {
+  getAnalysis: (callbackSocket) => {
+    console.log('Emotions Controller');
     //Call the Model (channel, callback)
     const channel = 'general';
     analyzerModel.getAnalysis(channel, (data, db, callback) => {
@@ -61,7 +62,7 @@ module.exports = {
         callback(err, result);
         //if there are no more objs to process, return the emotionAVG to the client
         if (numOfData === 0) {
-          callback(err, emotionAVG);
+          callbackSocket(err, emotionAVG);
         }
       });
     });

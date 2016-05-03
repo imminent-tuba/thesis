@@ -31,7 +31,6 @@ ioServer.on('connection', (socket) => {
   });
 
   socket.on('emotions', () => {
-    console.log('a user connected: ', socket.conn.id);
     analyzerController.getAnalysis((err, response) => {
       if (err) { console.log(err); }
       socket.emit('emotions', response);

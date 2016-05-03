@@ -58,6 +58,7 @@ class App extends React.Component {
             </Col>
             <Col md={6}>
               <p> D3 Charts Go here </p>
+              <BarChart getEmotions={this.getEmotions} emotions={this.state.emotions}/>
             </Col>
             <Col md={3}>
               <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} />
