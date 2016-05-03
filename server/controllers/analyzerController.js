@@ -35,7 +35,6 @@ module.exports = {
     });
   },
   getAnalysis: (callbackSocket) => {
-    console.log('Emotions Controller');
     //Call the Model (channel, callback)
     const channel = 'general';
     analyzerModel.getAnalysis(channel, (data, db, callback) => {
