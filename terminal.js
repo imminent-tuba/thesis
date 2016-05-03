@@ -1,5 +1,6 @@
 const stdin = process.openStdin();
 const bot = require('./server/chatterbot/chatbotController.js');
+bot.init();
 
 stdin.addListener('data', d => {
 
