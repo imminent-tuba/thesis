@@ -21,9 +21,11 @@ ioServer.on('connection', (socket) => {
   console.log('a user connected: ', socket.conn.id);
 
   socket.on('message', (msg) => {
+    console.log('client - ', msg);
     analyzerController.setAnalysis(msg);
     chatbot.response(msg, (err, response) => {
       if (err) { console.log(err); }
+      console.log('bot says - ', response);
       socket.emit('message', response);
     });
   });
