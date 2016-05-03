@@ -39,5 +39,5 @@ dist
 server/config/AlchemyApiKey.js
 
 extras
-
 *.pyc
+*.DS_Store
