@@ -6,7 +6,7 @@ export default class EmotionPieChart extends React.Component {
     super(props);
   }
   componentWillMount() {
-    socket.emit('emotions');
+    socket.emit('emotions', 'body');
   }
 
   render() {

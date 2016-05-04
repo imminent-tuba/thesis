@@ -1,7 +1,7 @@
-import analyzerModel from '../models/analyzerModel.js';
-import AlchemyApiKey from '../config/AlchemyApiKey.js';
+const analyzerModel = require('../models/analyzerModel.js');
+const AlchemyApiKey = require('../config/AlchemyApiKey.js');
 
-import AlchemyAPI from 'alchemy-api';
+const AlchemyAPI = require('alchemy-api');
 const alchemyapi = new AlchemyAPI(AlchemyApiKey);
 
 // Beta Method that is not included in the AlchemyAPI
@@ -33,7 +33,8 @@ module.exports = {
     const channel = 'general';
     analyzerModel.getAnalysis(channel, (data, db, callback) => {
       const emotionsData = db.collection('Analysis').find({ channel: channel });
-      const emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
+      console.log('eeemotions - ', emotionsData);
+      let emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
       let numOfData = emotionsData.s.numberOfRetries;
       let numOfEmotions = 0;
       emotionsData.each((err, result) => {

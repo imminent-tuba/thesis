@@ -1,4 +1,4 @@
-import db from '../db/dbConfig.js';
+const db = require('../db/dbConfig.js');
 
 
 module.exports = {

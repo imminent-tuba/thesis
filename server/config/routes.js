@@ -1,5 +1,5 @@
-import analyzerController from '../controllers/analyzerController.js';
-import slack from '../controllers/slackController.js';
+const analyzerController = require('../controllers/analyzerController.js');
+const slack = require('../controllers/slackController.js');
 
 module.exports = (app) => {
   // app.get('/analysis', analyzerController.setAnalysis);
