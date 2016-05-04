@@ -28,6 +28,7 @@ module.exports = function (config) {
     files: [
       'client/tests.webpack.js',
       'server/tests/*',
+      'server/controllers/analyzerController.js',
     ],
     plugins: [
       'karma-phantomjs-launcher',
@@ -49,5 +50,26 @@ module.exports = function (config) {
     },
     colors: true,
     autoWatch: true,
+
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome'],
+
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
+    },
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: true,
+
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity,
+    webpack: webpackConfig,
+
+    // webpack: webpackConfig
   });
 };

@@ -30,6 +30,7 @@ class App extends React.Component {
     });
 
     socket.on('emotions', (emotions) => {
+      console.log('Client emotion ---->>>', emotions);
       this.setState({ emotions: emotions });
     });
   }
@@ -67,7 +68,7 @@ class App extends React.Component {
               <DataViewList handleClick={this.handleDataViewListClick.bind(this)} />
             </Col>
             <Col md={6}>
-              <D3View emotions={this.state.emotions} view={this.state.d3View} />
+              <D3View emotions={this.state.emotions} view={this.state.d3View}/>
             </Col>
             <Col md={4}>
               <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} reject={this.badWordReject.bind(this)} />

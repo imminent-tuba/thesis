@@ -14,7 +14,7 @@ const D3View = ({ view, emotions }) => {
     <div>
       {(() => {
         switch (view) {
-          case 'pie': return <EmotionPieChart data={emotions} />;
+          case 'pie': return <EmotionPieChart data={emotions}/>;
           case 'bar': return <BarChart />;
           case 'tax': return <Taxonomy />;
           default: return <EmotionPieChart data={emotions} />;
