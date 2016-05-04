@@ -34,19 +34,17 @@ ioServer.on('connection', (socket) => {
         socket.emit('emotions', analysisResponse);
       });
     });
-    // socket.emit('message', msg);
 
     analyzerController.getAnalysis((err, response) => {
-      // if (err) { console.log(err); }
-      console.log('Socket response -->>', response);
+      if (err) { console.log('Analyzer Socket msg', err); }
+      console.log('Socket response message -->>', response);
       ioServer.emit('emotions', response);
     });
   });
 
   socket.on('emotions', () => {
-    // analyzerController.setAnalysis('Hi bot');
     analyzerController.getAnalysis((err, response) => {
-      // if (err) { console.log(err); }
+      if (err) { console.log('Analyzer Socket emotions', err); }
       console.log('Socket response -->>', response);
       socket.emit('emotions', response);
     });

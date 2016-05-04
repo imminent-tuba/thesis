@@ -27,17 +27,12 @@ class App extends React.Component {
         message: msg,
       });
       this.setState({ chats: updateChat });
-      // this.getEmotions();
     });
 
     socket.on('emotions', (emotions) => {
       console.log('Client emotion ---->>>', emotions);
       this.setState({ emotions: emotions });
     });
-  }
-
-  getEmotions() {
-    socket.emit('emotions', 'body');
   }
 
   sendChat(msg) {
@@ -73,7 +68,7 @@ class App extends React.Component {
               <DataViewList handleClick={this.handleDataViewListClick.bind(this)} />
             </Col>
             <Col md={6}>
-              <D3View emotions={this.state.emotions} view={this.state.d3View} />
+              <D3View emotions={this.state.emotions} view={this.state.d3View}/>
             </Col>
             <Col md={4}>
               <Chatroom sendChat={this.sendChat.bind(this)} chats={this.state.chats} reject={this.badWordReject.bind(this)} />
