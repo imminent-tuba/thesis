@@ -1,7 +1,6 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-// import { io } from 'socket.io-client/socket.io';
+import socket from './socket.js';
 /* React-tab-event-plugin */
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -80,4 +79,6 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('app'));
+export default App;
+//
+// module.exports = App;
