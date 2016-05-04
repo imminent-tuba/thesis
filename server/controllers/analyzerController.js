@@ -1,7 +1,7 @@
-import analyzerModel from '../models/analyzerModel.js';
-import AlchemyApiKey from '../config/AlchemyApiKey.js';
+const analyzerModel = require('../models/analyzerModel.js');
+const AlchemyApiKey = require('../config/AlchemyApiKey.js');
 
-import AlchemyAPI from 'alchemy-api';
+const AlchemyAPI = require('alchemy-api');
 const alchemyapi = new AlchemyAPI(AlchemyApiKey);
 
 // Beta Method that is not included in the AlchemyAPI

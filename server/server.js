@@ -1,9 +1,9 @@
-import http from 'http';
-import express from 'express';
-import io from 'socket.io';
-import bodyparser from 'body-parser';
-import chatbot from './chatterbot/chatbotController.js';
-import analyzerController from './controllers/analyzerController.js';
+const http = require('http');
+const express = require('express');
+const io = require('socket.io');
+const bodyparser = require('body-parser');
+const chatbot = require('./chatterbot/chatbotController.js');
+const analyzerController = require('./controllers/analyzerController.js');
 
 const routes = require('./config/routes.js');
 
