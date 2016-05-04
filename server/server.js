@@ -29,9 +29,10 @@ ioServer.on('connection', (socket) => {
       console.log('bot says - ', response);
       socket.emit('message', response);
 
-      analyzerController.getAnalysis((err, response) => {
-      if (err) { console.log(err); }
-      socket.emit('emotions', response);
+      analyzerController.getAnalysis((analysisErr, analysisResponse) => {
+        if (analysisErr) { console.log(err); }
+        socket.emit('emotions', analysisResponse);
+      });
     });
   });
 
