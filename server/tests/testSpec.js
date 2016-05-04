@@ -1,5 +1,5 @@
-describe('test', () => {
-  it('should exist', () => {
-    expect(true).toBe(true);
+describe('test', function()  {
+  it('should exist', function() {
+    expect(true).to.equal(true);
   });
 });
