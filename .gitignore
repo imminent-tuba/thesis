@@ -38,12 +38,10 @@ dist
 # API keys
 server/config/AlchemyApiKey.js
 
-extras
-<<<<<<< 754ba3f712fad1502267668150a753617058fcad
-
+# chatterbot
+server/chatterbot/chatterbot/*.pyc
 server/chatterbot/chatterbot/**/*.pyc
-*.pyc
-=======
-*.pyc
+server/chatterbot/chatterbot/**/**/*.pyc
+
+# extras
 *.DS_Store
->>>>>>> update .gitignore with DS_Store
