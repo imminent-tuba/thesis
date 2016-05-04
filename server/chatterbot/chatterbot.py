@@ -9,8 +9,7 @@ threaded = True
 bot = ChatBot(
     "My ChatterBot",
     storage_adapter="chatterbot.adapters.storage.MongoDatabaseAdapter",
-    logic_adapters=["chatterbot.adapters.logic.ClosestMeaningAdapter",
-                    "chatterbot.adapters.logic.ClosestMatchAdapter"],
+    logic_adapter="chatterbot.adapters.logic.ClosestMatchAdapter",
     io_adapter="chatterbot.adapters.io.NoOutputAdapter",
     database="test"
 )
