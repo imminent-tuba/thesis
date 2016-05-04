@@ -27,11 +27,17 @@ class App extends React.Component {
         message: msg,
       });
       this.setState({ chats: updateChat });
+      // this.getEmotions();
     });
 
     socket.on('emotions', (emotions) => {
+      console.log('Client emotion ---->>>', emotions);
       this.setState({ emotions: emotions });
     });
+  }
+
+  getEmotions() {
+    socket.emit('emotions', 'body');
   }
 
   sendChat(msg) {

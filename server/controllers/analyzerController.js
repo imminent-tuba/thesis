@@ -12,19 +12,19 @@ AlchemyAPI.prototype.emotion = function(data, options, cb) {
 module.exports = {
   setAnalysis: (data) => {
     alchemyapi.emotion(data, {}, (err, response) => {
-      if (err) { console.log('alchemy emotion response error - ', err); } else {
-        const emotionData = {
-          channel: 'general',
-          language: response.language,
-          emotions: response.docEmotions,
-        };
-        analyzerModel.saveAnalysis(emotionData, (newData, db, callback) => {
-          const collection = db.collection('Analysis');
-          collection.insert(newData, (error, result) => {
-            if (error) { console.log('Retrieve data err ', error); } else {
-              callback(err, result);
-            }
-          });
+      //Create an object with the information that we need;
+      console.log('Response Alchemy ->', response);
+      const data = { channel: 'general', language: response.language, emotions: response.docEmotions };
+      //Call the Model (data, callback)
+      analyzerModel.saveAnalysis(data, (data, db, callback) => {
+        // Get the analysis collection
+        const collection = db.collection('Analysis');
+        // Insert the data into the MongoDB
+        collection.insert(data, (err, result) => {
+          //result of the insert data
+          if (err) { console.log('Retrieve data err ', err); }
+          //call the callback that close the connetion from the DB
+          callback(err, result);
         });
       }
     });
@@ -33,9 +33,14 @@ module.exports = {
     const channel = 'general';
     analyzerModel.getAnalysis(channel, (data, db, callback) => {
       const emotionsData = db.collection('Analysis').find({ channel: channel });
-      console.log('eeemotions - ', emotionsData);
+      // const emotionsDatasss = db.collection('Analysis').count();
+      //obj to store the AVG emotion for the channel
       let emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
-      let numOfData = emotionsData.s.numberOfRetries;
+      let numOfData = 0;
+      db.collection('Analysis').find({ channel: channel }).count(function(err, count) {
+        if (err) {return;}
+        numOfData = count;
+      });
       let numOfEmotions = 0;
       emotionsData.each((err, result) => {
         if (err) { console.log('find emotions error - ', err); }
@@ -45,12 +50,13 @@ module.exports = {
           for (let key in result.emotions) {
             emotionAVG[key] += +result.emotions[key];
             if (numOfData === 0) {
-              emotionAVG[key] /= numOfEmotions;
+              emotionAVG[key] /= 12;
             }
           }
         }
         callback(err, result);
         if (numOfData === 0) {
+          console.log('AVG Emotions <->', emotionAVG);
           callbackSocket(err, emotionAVG);
         }
       });

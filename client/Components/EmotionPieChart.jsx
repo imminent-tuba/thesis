@@ -6,19 +6,24 @@ export default class EmotionPieChart extends React.Component {
     super(props);
   }
   componentWillMount() {
-    socket.emit('emotions', 'body');
+    socket.emit('emotions');
   }
 
   render() {
+    let sumEmotions = 0;
     if (!this.props.data.anger) {
       return <div></div>;
+    } else {
+      for (let key in this.props.data) {
+        sumEmotions += this.props.data[key];
+      }
     }
     const pieData = [
-      { label: 'anger', value: Math.floor(this.props.data.anger * 100) },
-      { label: 'disgust', value: Math.floor(this.props.data.disgust * 100) },
-      { label: 'fear', value: Math.floor(this.props.data.fear * 100) },
-      { label: 'joy', value: Math.floor(this.props.data.joy * 100) },
-      { label: 'sadness', value: Math.floor(this.props.data.sadness * 100) },
+      { label: 'anger', value: (this.props.data.anger * 100 / sumEmotions).toFixed(2) },
+      { label: 'disgust', value: (this.props.data.disgust * 100 / sumEmotions).toFixed(2) },
+      { label: 'fear', value: (this.props.data.fear * 100 / sumEmotions).toFixed(2) },
+      { label: 'joy', value: (this.props.data.joy * 100 / sumEmotions).toFixed(2) },
+      { label: 'sadness', value: (this.props.data.sadness * 100 / sumEmotions).toFixed(2) },
     ];
     return (
       <PieChart
@@ -33,3 +38,4 @@ export default class EmotionPieChart extends React.Component {
     );
   }
 }
+
