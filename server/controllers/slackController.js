@@ -1,5 +1,5 @@
-import chatbot from '../chatterbot/chatbotController.js';
-import AlchemyAPI from 'alchemy-api';
+const chatbot = require('../chatterbot/chatbotController.js');
+const AlchemyAPI = require('alchemy-api');
 
 module.exports = {
   postMessage: (req, res, next) => {
