@@ -28,6 +28,10 @@ ioServer.on('connection', (socket) => {
       if (err) { console.log(err); }
       console.log('bot says - ', response);
       socket.emit('message', response);
+
+      analyzerController.getAnalysis((err, response) => {
+      if (err) { console.log(err); }
+      socket.emit('emotions', response);
     });
   });
 
