@@ -7,7 +7,7 @@ const alchemyapi = new AlchemyAPI(AlchemyApiKey);
 const logger = require('../logger.js');
 
 // Beta Method that is not included in the AlchemyAPI
-AlchemyAPI.prototype.emotion = (data, options, cb) => {
+AlchemyAPI.prototype.emotion = function(data, options, cb) {
   this._doRequest(this._getQuery(data, options, 'GetEmotion'), cb);
 };
 

@@ -8,7 +8,7 @@ winston.add(winston.transports.Loggly, {
   tags: ['Winston-NodeJS'],
   json: true,
 });
-winston.add(winston.transports.File, { filename: 'somefile.log' });
+winston.add(winston.transports.File, { filename: './logs/server.log' });
 
 module.exports = winston;
 
