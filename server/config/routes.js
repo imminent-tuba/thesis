@@ -6,7 +6,7 @@ module.exports = (app) => {
   app.get('/getanalysis', analyzerController.getAnalysis);
   app.post('/slack', slack.postMessage);
   /* Login, Logout, Signup */
-  // app.post('/login', Oauth2.login);
+  // app.post('/login', Oauth2.login); /* cb(req, res) */
   // app.post('/signup', Oauth2.signup);
   // app.get('/', chatterBot)
 };
