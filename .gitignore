@@ -6,8 +6,8 @@ tubachatbot.egg-info/
 server/config/pythonSettings.js
 
 # Logs
-logs
-*.log
+logs/*.log
+
 
 # Runtime data
 pids

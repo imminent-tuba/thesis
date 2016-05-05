@@ -10,8 +10,9 @@ const routes = require('./config/routes.js');
 const app = express();
 const theServer = http.Server(app);
 const ioServer = io(theServer);
+const logger = require('./logger.js');
 
-console.log(process.env.PORT);
+logger.log('debug', 'environment port', process.env.PORT);
 const port = process.env.PORT || 1337;
 app.use(express.static(`${__dirname}/../client`));
 app.use(bodyparser);
@@ -19,40 +20,40 @@ routes(app);
 
 
 ioServer.on('connection', (socket) => {
-  console.log('a user connected: ', socket.conn.id);
+  logger.log('info', 'a user connected: ', socket.conn.id);
 
   socket.on('message', (msg) => {
-    console.log('client - ', msg);
+    logger.log('info', 'client - ', msg);
     analyzerController.setAnalysis(msg);
     chatbot.response(msg, (err, response) => {
-      if (err) { console.log(err); }
-      console.log('bot says - ', response);
+      if (err) { logger.log('error', err); }
+      logger.log('info', 'bot says - ', response);
       socket.emit('message', response);
 
       analyzerController.getAnalysis((analysisErr, analysisResponse) => {
-        if (analysisErr) { console.log(err); }
+        if (analysisErr) { logger.log('error', analysisErr); }
         socket.emit('emotions', analysisResponse);
       });
     });
 
     analyzerController.getAnalysis((err, response) => {
-      if (err) { console.log('Analyzer Socket msg', err); }
-      console.log('Socket response message -->>', response);
+      if (err) { logger.log('error', 'Analyzer Socket msg', err); }
+      logger.log('debug', 'Socket response message -', response);
       ioServer.emit('emotions', response);
     });
   });
 
   socket.on('emotions', () => {
     analyzerController.getAnalysis((err, response) => {
-      if (err) { console.log('Analyzer Socket emotions', err); }
-      console.log('Socket response -->>', response);
+      if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
+      logger.log('debug', 'Socket response - ', response);
       socket.emit('emotions', response);
     });
   });
 
-  socket.on('disconnect', () => { console.log('user disconnected'); });
+  socket.on('disconnect', () => { logger.log('info', 'user disconnected'); });
 });
 
 theServer.listen(port, () => {
-  console.log('listening on localhost:', port);
+  logger.log('info', 'listening on localhost:', port);
 });
