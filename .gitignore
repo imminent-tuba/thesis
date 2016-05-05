@@ -6,7 +6,7 @@ tubachatbot.egg-info/
 server/config/pythonSettings.js
 
 # Logs
-logs/*.log
+logs/
 server/config/winston.js
 
 # Runtime data

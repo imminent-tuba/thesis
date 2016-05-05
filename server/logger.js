@@ -1,6 +1,5 @@
 const winston = require('winston');
 const config = require('./config/winston.js');
-require('winston-loggly');
 
 config(winston);
 
