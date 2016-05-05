@@ -28,7 +28,6 @@ module.exports = function (config) {
     files: [
       'client/tests.webpack.js',
       'server/tests/*',
-      'server/controllers/analyzerController.js',
     ],
     plugins: [
       'karma-phantomjs-launcher',
@@ -51,9 +50,6 @@ module.exports = function (config) {
     colors: true,
     autoWatch: true,
 
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome'],
 
     customLaunchers: {
       Chrome_travis_ci: {
