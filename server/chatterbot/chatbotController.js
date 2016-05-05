@@ -1,6 +1,7 @@
 const PyShell = require('python-shell');
 const dgram = require('dgram');
 const pySettings = require('../config/pythonSettings.js');
+const logger = require('../logger.js');
 
 const LOCALHOST = '127.0.0.1';
 const NODE_PORT = 41234;
@@ -12,7 +13,7 @@ let callcount = 0;
 const server = dgram.createSocket('udp4');
 
 server.on('error', (err) => {
-  console.log(`server error:\n${err.stack}`);
+  logger.log('error', `server error:\n${err.stack}`);
   server.close();
 });
 
@@ -25,25 +26,25 @@ server.on('message', (msg /* rinfo*/) => {
 
 server.on('listening', () => {
   const address = server.address();
-  console.log(`node listening ${address.address}:${address.port}`);
+  logger.log('info', `node listening ${address.address}:${address.port}`);
 });
 
 server.bind(NODE_PORT, LOCALHOST);
 
 // create std in/out listeners for error handling
-const pyProcess = new PyShell(`./server/chatterbot/chatterbot.py`, pySettings);
+const pyProcess = new PyShell('./server/chatterbot/chatterbot.py', pySettings);
 
 pyProcess.on('message', message => {
-  console.log(message);
+  logger.log('info', message);
 });
 
 pyProcess.on('close', err => {
-  if (err) { console.log('python error ', err); }
-  else { console.log('python finished'); }
+  if (err) { logger.log('error', 'python error ', err); }
+  else { logger.log('info', 'python closed'); }
 });
 
 pyProcess.on('error', err => {
-  if (err) { console.log('python error ', err); }
+  if (err) { logger.log('error', 'python error ', err); }
 });
 
 module.exports = {
@@ -53,7 +54,7 @@ module.exports = {
     callbacks[Uid] = callback;
     const toSend = { id: Uid, message: message };
     server.send(JSON.stringify(toSend), 51234, 'localhost', (err) => {
-      if (err) { console.log(err); }
+      if (err) { logger.log('error', 'socket error', err); }
     });
   },
   train: conversation => {

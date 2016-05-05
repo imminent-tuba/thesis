@@ -4,6 +4,8 @@ const AlchemyApiKey = require('../config/AlchemyApiKey.js');
 const AlchemyAPI = require('alchemy-api');
 const alchemyapi = new AlchemyAPI(AlchemyApiKey);
 
+const logger = require('../logger.js');
+
 // Beta Method that is not included in the AlchemyAPI
 AlchemyAPI.prototype.emotion = function(data, options, cb) {
   this._doRequest(this._getQuery(data, options, 'GetEmotion'), cb);
@@ -12,19 +14,18 @@ AlchemyAPI.prototype.emotion = function(data, options, cb) {
 module.exports = {
   setAnalysis: (data) => {
     alchemyapi.emotion(data, {}, (err, response) => {
-      // Create an object with the information that we need;
-      console.log('Response Alchemy ->', response);
-      const data = { channel: 'general', language: response.language, emotions: response.docEmotions };
-      // Call the Model (data, callback)
-      analyzerModel.saveAnalysis(data, (data, db, callback) => {
-        // Get the analysis collection
+      if (err) { logger.log('error', 'alchemy error - ', err); }
+      logger.log('debug', 'Response Alchemy - ', response);
+      const emotionData = {
+        channel: 'general',
+        language: response.language,
+        emotions: response.docEmotions,
+      };
+      analyzerModel.saveAnalysis(emotionData, (analysisData, db, callback) => {
         const collection = db.collection('Analysis');
-        // Insert the data into the MongoDB
-        collection.insert(data, (err, result) => {
-          // result of the insert data
-          if (err) { console.log('Retrieve data err ', err); }
-          // call the callback that close the connetion from the DB
-          callback(err, result);
+        collection.insert(analysisData, (collectionErr, result) => {
+          if (collectionErr) { logger.log('error', 'Retrieve data err ', err); }
+          callback(collectionErr, result);
         });
       });
     });
@@ -33,17 +34,15 @@ module.exports = {
     const channel = 'general';
     analyzerModel.getAnalysis(channel, (data, db, callback) => {
       const emotionsData = db.collection('Analysis').find({ channel: channel });
-      let emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
+      const emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
       let numOfData = 0;
-      db.collection('Analysis').find({ channel: channel }).count(function(err, count) {
-        if (err) {console.log('ERR COUNT ', err)}
+      db.collection('Analysis').find({ channel: channel }).count((err, count) => {
+        if (err) { logger.log('error', 'ERR COUNT ', err); }
         numOfData = count;
       });
       let numOfEmotions = 0;
       emotionsData.each((err, result) => {
-        if (err) {
-          console.log('find emotions error ---- ', err);
-        }
+        if (err) { logger.log('error', 'find emotions error - ', err); }
         numOfData--;
         if (result != null) {
           numOfEmotions++;
@@ -55,9 +54,7 @@ module.exports = {
           }
         }
         callback(err, result);
-        if (numOfData === 0) {
-          callbackSocket(err, emotionAVG);
-        }
+        if (numOfData === 0) { callbackSocket(err, emotionAVG); }
       });
     });
   },
