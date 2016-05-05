@@ -44,4 +44,5 @@ server/chatterbot/chatterbot/**/*.pyc
 server/chatterbot/chatterbot/**/**/*.pyc
 
 # extras
+extras/
 *.DS_Store

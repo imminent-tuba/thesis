@@ -6,7 +6,7 @@ export default class EmotionPieChart extends React.Component {
     super(props);
   }
   componentWillMount() {
-    socket.emit('emotions');
+    this.props.getEmotions();
   }
 
   render() {
@@ -39,3 +39,7 @@ export default class EmotionPieChart extends React.Component {
   }
 }
 
+EmotionPieChart.propTypes = {
+  data: React.PropTypes.object,
+  getEmotions: React.PropTypes.func,
+};
