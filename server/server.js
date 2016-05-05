@@ -15,7 +15,8 @@ const logger = require('./logger.js');
 logger.log('debug', 'environment port', process.env.PORT);
 const port = process.env.PORT || 1337;
 app.use(express.static(`${__dirname}/../client`));
-app.use(bodyparser);
+app.use(bodyparser.json()); /* For req.body */
+app.use(bodyparser.urlencoded({ extended: true }));
 routes(app);
 
 
