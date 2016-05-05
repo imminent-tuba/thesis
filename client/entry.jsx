@@ -1,5 +1,6 @@
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App.jsx';
+import SocketWrapper from './Components/SocketWrapper.jsx';
 
-render(<App />, document.getElementById('app'));
+render(<SocketWrapper />, document.getElementById('app'));
