@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-// import socketHandlers from './socketHandlers.js';
+
 /* React-tab-event-plugin */
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
