@@ -7,7 +7,7 @@ server/config/pythonSettings.js
 
 # Logs
 logs/*.log
-
+server/config/winston.js
 
 # Runtime data
 pids

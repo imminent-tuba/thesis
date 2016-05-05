@@ -1,14 +1,8 @@
 const winston = require('winston');
+const config = require('./config/winston.js');
 require('winston-loggly');
 
-winston.level = 'info';
-winston.add(winston.transports.Loggly, {
-  token: 'f0c21076-0bdf-4274-ace0-5f95eaba77ae',
-  subdomain: 'joshwentworth',
-  tags: ['Winston-NodeJS'],
-  json: true,
-});
-winston.add(winston.transports.File, { filename: './logs/server.log' });
+config(winston);
 
 module.exports = winston;
 
