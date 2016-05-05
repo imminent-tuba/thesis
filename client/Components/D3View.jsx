@@ -4,20 +4,21 @@ import BarChart from './BarChart.jsx';
 import Taxonomy from './Taxonomy.jsx';
 
 
-const D3View = ({ view, emotions }) => {
+const D3View = ({ view, data, methods }) => {
   D3View.propTypes = {
+    data: React.PropTypes.object,
     view: React.PropTypes.string,
-    emotions: React.PropTypes.object,
+    methods: React.PropTypes.object,
   };
 
   return (
     <div>
       {(() => {
         switch (view) {
-          case 'pie': return <EmotionPieChart data={emotions}/>;
+          case 'pie': return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
           case 'bar': return <BarChart />;
           case 'tax': return <Taxonomy />;
-          default: return <EmotionPieChart data={emotions} />;
+          default: return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
         }
       })()}
     </div>

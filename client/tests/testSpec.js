@@ -1,13 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react/lib/ReactTestUtils');
-var App = require('../App.jsx').default;
+var SocketWrapper = require('../Components/SocketWrapper.jsx').default;
 
-describe('App', () => {
-  console.log(App);
+describe('SocketWrapper', () => {
   it('renders without problems', () => {
-    var app = TestUtils.renderIntoDocument(<App />);
-    var renderedApp = ReactDOM.findDOMNode(app);
+
+    var socketWrapper = TestUtils.renderIntoDocument(<SocketWrapper />);
+    var renderedApp = ReactDOM.findDOMNode(socketWrapper);
     expect(renderedApp.tagName).to.equal('DIV');
   });
 });
