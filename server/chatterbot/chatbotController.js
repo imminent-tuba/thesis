@@ -1,68 +1,43 @@
-const PyShell = require('python-shell');
-const dgram = require('dgram');
-const pySettings = require('../config/pythonSettings.js');
 const logger = require('../logger.js');
+const io = require('socket.io').listen(1234);
 
-const LOCALHOST = '127.0.0.1';
-const NODE_PORT = 41234;
-
+const clients = {};
 const callbacks = {};
 let callcount = 0;
 
-// create UDP socket for conversing with bot
-const server = dgram.createSocket('udp4');
+io.on('connection', (socket) => {
+  let ID = 0;
+  logger.log('info', 'a bot connected: ', socket.conn.id);
 
-server.on('error', (err) => {
-  logger.log('error', `server error:\n${err.stack}`);
-  server.close();
-});
+  socket.on('botID', (id) => {
+    logger.log('info', 'bot registered - ', id);
+    ID = id;
+    clients[ID] = socket;
+  });
 
-server.on('message', (msg /* rinfo*/) => {
-  const myMsg = JSON.parse(msg);
-  myMsg.message = myMsg.message.replace('\n', '');
-  callbacks[myMsg.id](null, myMsg.message);
-  delete callbacks[myMsg.id];
-});
+  socket.on('chat', (msg) => {
+    logger.log('info', 'from bot -', ID, msg);
+    msg = JSON.parse(msg);
+    callbacks[msg.id](null, msg.message);
+  });
 
-server.on('listening', () => {
-  const address = server.address();
-  logger.log('info', `node listening ${address.address}:${address.port}`);
-});
-
-server.bind(NODE_PORT, LOCALHOST);
-
-// create std in/out listeners for error handling
-const pyProcess = new PyShell('./server/chatterbot/chatterbot.py', pySettings);
-
-pyProcess.on('message', message => {
-  logger.log('info', message);
-});
-
-pyProcess.on('close', err => {
-  if (err) { logger.log('error', 'python error ', err); }
-  else { logger.log('info', 'python closed'); }
-});
-
-pyProcess.on('error', err => {
-  if (err) { logger.log('error', 'python error ', err); }
+  socket.on('disconnect', () => {
+    logger.log('info', 'bot disconnected', socket.conn.id);
+    delete clients[ID];
+  });
 });
 
 module.exports = {
-  response: (message, callback) => {
+  response: (id, message, callback) => {
     callcount = ++callcount % 3000;
-    const Uid = callcount.toString();
-    callbacks[Uid] = callback;
-    const toSend = { id: Uid, message: message };
-    server.send(JSON.stringify(toSend), 51234, 'localhost', (err) => {
-      if (err) { logger.log('error', 'socket error', err); }
-    });
+    callbacks[callcount] = callback;
+    const toSend = { id: callcount, message: message };
+    clients[id].emit('chat', JSON.stringify(toSend));
   },
-  train: conversation => {
-    conversation.unshift('xxstartxx');
-    conversation.push('xxendxx');
+  train: (id, conversation) => {
     for (var i in conversation) {
-      pyProcess.send(conversation[i]);
+      clients[id].emit('train', JSON.stringify(conversation[i]));
     }
+    clients[id].emit('train', 'end');
   },
-  init: () => pyProcess.send('xxinitxx'),
 };

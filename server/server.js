@@ -55,7 +55,7 @@ ioServer.on('connection', (socket) => {
   socket.on('message', (msg) => {
     logger.log('info', 'client - ', msg);
     analyzerController.setAnalysis(msg);
-    chatbot.response(msg, (err, response) => {
+    chatbot.response(999, msg, (err, response) => {
       if (err) { logger.log('error', err); }
       logger.log('info', 'bot says - ', response);
       socket.emit('message', response);
