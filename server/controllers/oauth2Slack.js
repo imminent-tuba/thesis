@@ -7,7 +7,13 @@ const SlackAPIKey = require('../config/SlackOAuth2ApiKey.js');
 // const User = require(/* some model */);
 const session = require('express-session');
 
-
+/* dummy model methods */
+// const User = {};
+// User.find = (obj, cb) => {
+//   if(obj.username === obj.username) {
+//     cb(null, user)
+//   }
+// }
 
 module.exports = {
   /* handles all login, logout, signup */
