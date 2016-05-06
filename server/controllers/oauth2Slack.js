@@ -1,7 +1,8 @@
 // const AuthyAPIKey = require('../config/Authy.js');
 // const authy = require('authy');
 /* passport.js */
-const passport = require('passport-slack');
+const passport = require('passport');
+const LocalStrategy = require('passport-slack').Strategy;
 const SlackAPIKey = require('../config/SlackOAuth2ApiKey.js');
 // const User = require(/* some model */);
 const session = require('express-session');
@@ -12,13 +13,6 @@ module.exports = {
   /* handles all login, logout, signup */
   IsLoggedIn: (req, res, next) => {
     // /* End point URL ::: https://slack.com/oauth/authorize */
-    // if (req.session.passport ? req.session.passport.user : false) {
-    //   next();
-    // } else {
-    //   req.session.error = 'Bad credentials.';
-    //   res.redirect('/');
-    // }
-
   },
 
   register: (req, res) => {
@@ -26,30 +20,20 @@ module.exports = {
   },
 
   login: (req, res) => {
-    passport.use(new SlackStrategy({
-           clientID: '',
-           clientSecret: '',
-           callbackURL: 'www.uai.website/',
-           scope: 'incoming-webhook, users:read',
-           skipUserProfile: false
-       }, (accessToken, refreshToken, profile, done)=>{
-         (accessToken, refreshToken, profile, (err, user) => {
-           console.log(accessToken, refreshToken, profile);
-           console.log(user);
-           return done(err, user);
-         })
-       }));
-    // passport.use(new SlackStrategy({
-    //   /* clientID : req.body */
-    //     clientID: "devJin86",
-    //     clientSecret: 'CLIENT_SECRET'
-    //   },
-    //   (accessToken, refreshToken, profile, done) => {
-    //     console.log(({ SlackId: profile.id }, function (err, user) {
-    //       return done(err, user);
-    //     }));
-    //   }
-    // ));
+    passport.use(new LocalStrategy(
+      function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username.' });
+          }
+          if (!user.validPassword(password)) {
+            return done(null, false, { message: 'Incorrect password.' });
+          }
+          return done(null, user);
+        });
+      }
+    ));
   },
 
   logout: (req, res) => {
