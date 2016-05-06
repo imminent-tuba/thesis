@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
 
+// this file is not being used currently
 // this.props.data = {emotion: emotion, number: [0-1]}
 
 export default class EmotionBar extends React.Component {
