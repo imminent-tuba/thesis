@@ -50,6 +50,8 @@
     "eslint-plugin-jsx-a11y": "^1.0.3",
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.13.4",
+    "express-session": "^1.11.3",
+    "express-sessions": "^1.0.5",
     "flexboxgrid": "^6.3.0",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^1.0.1",
@@ -63,7 +65,12 @@
     "material-ui": "^0.14.4",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.18",
+<<<<<<< 63f0bfedd53dd13ac130a027e658e160ae190bf9
     "mysql": "^2.4.2",
+=======
+    "passport": "^0.3.2",
+    "passport-slack": "0.0.6",
+>>>>>>> Add Slack authenication
     "phantomjs": "^2.1.7",
     "phantomjs-prebuilt": "^2.1.7",
     "python-shell": "^0.4.0",
