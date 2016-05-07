@@ -1,6 +1,7 @@
 import React from 'react';
 import EmotionPieChart from './EmotionPieChart.jsx';
-import BarChart from './BarChart.jsx';
+// import BarChart from './BarChart.jsx';
+import EmotionBarChart from './EmotionBarChart.jsx';
 import Taxonomy from './Taxonomy.jsx';
 
 
@@ -16,7 +17,7 @@ const D3View = ({ view, data, methods }) => {
       {(() => {
         switch (view) {
           case 'pie': return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
-          case 'bar': return <BarChart />;
+          case 'bar': return <EmotionBarChart data={data.emotions} getEmotions={methods.getEmotions} />;
           case 'tax': return <Taxonomy />;
           default: return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
         }

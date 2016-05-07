@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "start": "nodemon server/server.js --exec babel-node",
+    "start": "nodemon server/server.js",
     "webpack": "webpack --watch",
-    "build": "babel lib -d dist",
+    "build": "webpack",
     "serve": "nodemon dist/server.js"
   },
   "repository": {
