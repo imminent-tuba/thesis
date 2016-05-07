@@ -29,24 +29,31 @@ ioServer.on('connection', (socket) => {
       if (err) { logger.log('error', err); }
       logger.log('info', 'bot says - ', response);
       socket.emit('message', response);
-
-      analyzerController.getAnalysis((analysisErr, analysisResponse) => {
-        if (analysisErr) { logger.log('error', analysisErr); }
-        socket.emit('emotions', analysisResponse);
-      });
     });
 
-    analyzerController.getAnalysis((err, response) => {
-      if (err) { logger.log('error', 'Analyzer Socket msg', err); }
-      logger.log('debug', 'Socket response message -', response);
+    analyzerController.getEmotions(org, (err, response) => {
+      // if (err) { logger.log('error', 'Analyzer Socket msg', err); }
+      // logger.log('debug', 'Socket response message -', response);
+      console.log('analysisErr msg', response);
       ioServer.emit('emotions', response);
     });
   });
 
-  socket.on('emotions', () => {
-    analyzerController.getAnalysis((err, response) => {
-      if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
-      logger.log('debug', 'Socket response - ', response);
+  socket.on('emotions', (org) => {
+    console.log('org emotions', org);
+    analyzerController.getEmotions(org, (err, response) => {
+      // if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
+      // logger.log('debug', 'Socket response - ', response);
+      console.log('analysisErr emotions', response);
+      socket.emit('emotions', response);
+    });
+  });
+
+  socket.on('orgMessages', (org) => {
+    analyzerController.getAnalysis(org, (err, response) => {
+      // if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
+      // logger.log('debug', 'Socket response - ', response);
+      console.log('analysisErr emotions', response);
       socket.emit('emotions', response);
     });
   });

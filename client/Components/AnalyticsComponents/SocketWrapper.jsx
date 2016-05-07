@@ -28,6 +28,7 @@ export default class SocketWrapper extends React.Component {
     });
 
     socket.on('emotions', (emotions) => {
+      console.log('Client emotions -<<<<', emotions);
       let state = this.state;
       state.data.emotions = emotions;
       this.setState({ state });

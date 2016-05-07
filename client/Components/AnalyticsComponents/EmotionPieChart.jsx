@@ -15,6 +15,7 @@ export default class EmotionPieChart extends React.Component {
       return (<div></div>);
     } else {
       for (let key in this.props.data) {
+        if(key === 'username') continue;
         sumEmotions += this.props.data[key];
       }
     }
@@ -33,7 +34,7 @@ export default class EmotionPieChart extends React.Component {
         radius={100}
         innerRadius={20}
         sectorBorderColor="white"
-        title="Pie Chart"
+        title={this.props.data.username}
       />
     );
   }
