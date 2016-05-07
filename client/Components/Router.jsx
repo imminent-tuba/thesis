@@ -4,9 +4,6 @@ import { Router, Route } from 'react-router';
 // TODO: implement redirects
 import AnalyticsSockets from './Analytics.Sockets.jsx';
 
-// import HeaderNavBar from './HeaderNavBar.jsx';
-    // <HeaderNavBar />
-
 import Admin from './Admin.jsx';
 import About from './About.jsx';
 import Home from './Home.jsx';
