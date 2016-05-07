@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react/lib/ReactTestUtils');
-var SocketWrapper = require('../Components/SocketWrapper.jsx').default;
+var SocketWrapper = require('../Components/App.jsx').default;
 
 describe('SocketWrapper', () => {
   it('renders without problems', () => {
