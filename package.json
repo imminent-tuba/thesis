@@ -42,6 +42,7 @@
     "body-parser": "^1.15.0",
     "chai": "^3.5.0",
     "classnames": "^2.2.4",
+    "cookie-parser": "^1.4.1",
     "core-js": "^2.3.0",
     "css-loader": "^0.23.1",
     "eslint": "^2.8.0",
@@ -50,7 +51,7 @@
     "eslint-plugin-jsx-a11y": "^1.0.3",
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.13.4",
-    "express-session": "^1.11.3",
+    "express-session": "^1.13.0",
     "express-sessions": "^1.0.5",
     "flexboxgrid": "^6.3.0",
     "karma-chai": "^0.1.0",
@@ -73,6 +74,7 @@
     "mongoose": "^4.4.14",
 >>>>>>> add mongoose module
     "passport": "^0.3.2",
+    "passport-http-bearer": "^1.0.1",
     "passport-slack": "0.0.6",
 >>>>>>> Add Slack authenication
     "phantomjs": "^2.1.7",

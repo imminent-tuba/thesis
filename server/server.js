@@ -11,13 +11,29 @@ const app = express();
 const theServer = http.Server(app);
 const ioServer = io(theServer);
 const logger = require('./logger.js');
+// const cookieParser = require('cookie-parser');
+// const session = require('express-session');
+const passport = require('passport');
 
 logger.log('debug', 'environment port', process.env.PORT);
 const port = process.env.PORT || 1337;
+
+routes(app);
+/* config */
 app.use(express.static(`${__dirname}/../client`));
 app.use(bodyparser.json()); /* For req.body */
 app.use(bodyparser.urlencoded({ extended: true }));
-routes(app);
+// app.use(express.cookieParser());
+// app.use(passport.session({
+//   secret: 'session test'
+//   // cookie:{ maxAge: 60000 }
+// }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(require('cookie-parser')());
+
+
 
 
 ioServer.on('connection', (socket) => {
