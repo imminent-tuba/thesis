@@ -13,49 +13,35 @@ AlchemyAPI.prototype.emotion = function(data, options, cb) {
 
 module.exports = {
   setAnalysis: (data) => {
-    alchemyapi.emotion(data, {}, (err, response) => {
-      if (err) { logger.log('error', 'alchemy error - ', err); }
-      logger.log('debug', 'Response Alchemy - ', response);
-      const emotionData = {
+    alchemyapi.emotion(data, {}, (errEmotion, responseEmotions) => {
+      const alchemyData = {
+        msg: data,
         channel: 'general',
-        language: response.language,
-        emotions: response.docEmotions,
+        user: 'user',
+        emotions: responseEmotions.docEmotions,
       };
-      analyzerModel.saveAnalysis(emotionData, (analysisData, db, callback) => {
-        const collection = db.collection('Analysis');
-        collection.insert(analysisData, (collectionErr, result) => {
-          if (collectionErr) { logger.log('error', 'Retrieve data err ', err); }
-          callback(collectionErr, result);
+      alchemyapi.taxonomies(data, {}, (errTaxonomy, responseTaxonomy) => {
+        alchemyData.taxonomy = responseTaxonomy.taxonomy;
+        analyzerModel.saveAnalysis(alchemyData, (errModel, result) => {
+          if (errModel != null) {
+            logger.log('debug', 'Response Alchemy - ', errModel);
+          }
         });
       });
     });
   },
-  getAnalysis: (callbackSocket) => {
-    const channel = 'general';
-    analyzerModel.getAnalysis(channel, (data, db, callback) => {
-      const emotionsData = db.collection('Analysis').find({ channel: channel });
-      const emotionAVG = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
-      let numOfData = 0;
-      db.collection('Analysis').find({ channel: channel }).count((err, count) => {
-        if (err) { logger.log('error', 'ERR COUNT ', err); }
-        numOfData = count;
-      });
-      let numOfEmotions = 0;
-      emotionsData.each((err, result) => {
-        if (err) { logger.log('error', 'find emotions error - ', err); }
-        numOfData--;
-        if (result != null) {
-          numOfEmotions++;
-          for (let key in result.emotions) {
-            emotionAVG[key] += +result.emotions[key];
-            if (numOfData === 0) {
-              emotionAVG[key] /= numOfEmotions;
-            }
-          }
-        }
-        callback(err, result);
-        if (numOfData === 0) { callbackSocket(err, emotionAVG); }
-      });
+  getEmotions: (org, callbackSocket) => {
+    const organization = org || 'HackReactor';
+    analyzerModel.getEmotions(organization, (err, analysis) => {
+      logger.log('debug', 'Response getEmotions Model - ', err);
+      callbackSocket(err, analysis);
+    });
+  },
+
+  getAnalysis: (data, callbackSocket) => {
+    analyzerModel.getMessages(data, (err, messages) => {
+      logger.log('debug', 'Response getMessages Model - ', err);
+      callbackSocket(err, messages);
     });
   },
 };
