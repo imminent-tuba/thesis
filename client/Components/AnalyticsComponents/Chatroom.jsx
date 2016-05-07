@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-import badWords from '../badWords.js';
+import badWords from '../../resources/badWords.js';
 
 export default class Chatroom extends React.Component {
 
