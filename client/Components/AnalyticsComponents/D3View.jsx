@@ -3,6 +3,7 @@ import EmotionPieChart from './EmotionPieChart.jsx';
 // import BarChart from './BarChart.jsx';
 import EmotionBarChart from './EmotionBarChart.jsx';
 import Taxonomy from './Taxonomy.jsx';
+import BubbleChart from './BubbleChart.jsx';
 
 
 const D3View = ({ view, data, methods }) => {
@@ -18,6 +19,7 @@ const D3View = ({ view, data, methods }) => {
         switch (view) {
           case 'pie': return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
           case 'bar': return <EmotionBarChart data={data.emotions} getEmotions={methods.getEmotions} />;
+          case 'bubble': return <BubbleChart data={data.emotions} getEmotions={methods.getEmotions} />;
           case 'tax': return <Taxonomy />;
           default: return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
         }
