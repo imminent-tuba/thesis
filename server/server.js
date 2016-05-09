@@ -18,7 +18,9 @@ const passport = require('passport');
 logger.log('debug', 'environment port', process.env.PORT);
 const port = process.env.PORT || 1337;
 
+app.use(passport.initialize());
 routes(app);
+
 /* config */
 app.use(express.static(`${__dirname}/../client`));
 app.use(bodyparser.json()); /* For req.body */
@@ -28,11 +30,22 @@ app.use(bodyparser.urlencoded({ extended: true }));
 //   secret: 'session test'
 //   // cookie:{ maxAge: 60000 }
 // }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+// app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+//
+// app.use(passport.session());
+/* passport session with mongoose store */
+const session = require('express-session');
+// const MongoStore = require('connect-mongo')(session);
+app.use(require('cookie-parser')());
+app.use(session({
+    // store: new MongoStore(options),
+    resave: true,
+    saveUninitialized: true,
+    secret: 'fooooooo'
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(require('cookie-parser')());
-
 
 
 

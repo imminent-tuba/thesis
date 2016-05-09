@@ -1,30 +1,46 @@
 const analyzerController = require('../controllers/analyzerController.js');
 const slackBot = require('../controllers/slackController.js');
-const OAuth2 = require('../controllers/OAuth2.js');
+// const OAuth2 = require('../controllers/OAuth2.js');
 /* Passort */
 const passport = require('passport');
+const SlackStrategy = require('passport-slack').Strategy;
+const slackKeys = require('../config/SlackOAuth2ApiKey.js');
+const User = require('../models/UserSchema.js');
+
 
 module.exports = (app) => {
-  // app.get('/analysis', analyzerController.setAnalysis);
+  app.get('/analysis', analyzerController.setAnalysis);
   app.get('/getanalysis', analyzerController.getAnalysis);
   app.post('/slackBot', slackBot.postMessage);
-  /* Passport Slack */
-  // app.post('/login', OAuth2.Authenicate); /* cb(req, res) */
-  app.get('/auth/slack', passport.authorize('slack'));
-  app.get('/auth/slack/callback',
-    passport.authorize('slack', {failureRedirect: '/failedUrl'}),
-    function(req, res) {
-      console.log('got to auth');
-      res.redirect('/');
-    }
-  );
 
-  // app.post('/signup', Oauth2.signup);
-  // app.get('/', chatterBot)
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
   });
 
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
 
+  /* Passport Slack */
+  passport.use(new SlackStrategy({
+          clientID: slackKeys.clientID,
+          clientSecret: slackKeys.clientSecret,
+          callbackURL: slackKeys.callbackURL,
+          scope: 'users:read',
+          extendedUserProfile: false
+    },  (accessToken, refreshToken, profile, done) => {
+      /* save session. */
+    }
+  ))
+  app.get('/auth/slack', passport.authenticate('slack'));
+  app.get('/auth/slack/callback',
+    passport.authenticate('slack', { failureRedirect: '/#/admin' }),
+      function(req, res) {
+        console.log('im inside of /auth/lack/callback');
+        req.session.token = req.param('token');
+        req.session.foo = 'foo';
+        res.redirect('/#/analytics');
+      });
 };

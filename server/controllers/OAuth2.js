@@ -1,3 +1,5 @@
+
+
 // const AuthyAPIKey = require('../config/Authy.js');
 // const authy = require('authy');
 /* passport.js */
@@ -11,17 +13,26 @@ const User = require('../models/UserSchema.js');
 
 
 module.exports = (req, res, passport) => {
+  console.log('this is fron AUTH CTRL', SlackStrategy);
 
-  passport.use(new SlackStrategy({
-		clientID: slackKeys.clientID,
-		clientSecret: slackKeys.clientSecret,
-		callbackURL: slackKeys.callbackURL,
-		scope: 'incoming-webhook users:read',
-    // extendedUserProfile: true
-	}, (accessToken, refreshToken, profile, done)=>{
-    User.findOrCreate({ SlackId: profile.id}, (err, user) => {
-
-      return done(err, user);
-    })
-  }));
+  // passport.use(new SlackStrategy({
+  //         clientID: slackKeys.clientID,
+  //         clientSecret: slackKeys.clientSecret,
+  //         callbackURL: slackKeys.callbackURL,
+  //         scope: 'incoming-webhook users:read',
+  //         // extendedUserProfile: false
+  //   },  (accessToken, refreshToken, profile, done) => {
+  //     User.findOrCreate({ SlackId: profile.id}, (err, user) => {
+  //       console.log('user');
+  //       return done(err, user);
+  //     })
+  //   }
+  // ))
 }
+// passport.use(new SlackStrategy({
+// 	clientID: slackKeys.clientID,
+// 	clientSecret: slackKeys.clientSecret
+// 	// callbackURL: slackKeys.callbackURL,
+// 	// scope: 'incoming-webhook users:read',
+//   // extendedUserProfile: true
+// },));
