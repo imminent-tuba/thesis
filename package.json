@@ -67,19 +67,13 @@
     "material-ui": "^0.14.4",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.18",
-<<<<<<< 103c2f16248786cf06996865d5d92249f10da047
-<<<<<<< 63f0bfedd53dd13ac130a027e658e160ae190bf9
     "mysql": "^2.4.2",
-=======
-=======
     "mongoose": "^4.4.14",
->>>>>>> add mongoose module
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "passport-slack": "0.0.6",
->>>>>>> Add Slack authenication
     "phantomjs": "^2.1.7",
     "phantomjs-prebuilt": "^2.1.7",
     "python-shell": "^0.4.0",
