@@ -1,5 +1,10 @@
+<<<<<<< 63f0bfedd53dd13ac130a027e658e160ae190bf9
 // const MongoClient = require('mongodb').MongoClient;
 // const logger = require('../logger.js');
+=======
+const MongoClient = require('mongodb');
+const logger = require('../logger.js');
+>>>>>>> Add Slack authenication
 
 // const url = 'mongodb://localhost:27017/myproject';
 // // Use connect method to connect to the Server
