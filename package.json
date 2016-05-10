@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "start": "nodemon server/server.js",
+    "start": "nodemon server/server.js && python server/chatterbot/chatterbot.py 0 test",
     "webpack": "webpack --watch",
     "serve": "webpack && PORT=80 forever start forever.json && python server/chatterbot/chatterbot.py 0 test"
   },
