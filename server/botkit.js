@@ -1,4 +1,7 @@
 const Botkit = require('botkit');
+const botkitModel = require('./models/botkitModel.js');
+const logger = require('./logger.js');
+const BOT_KEY = require('./config/botKey.js');
 
 module.exports = () => {
   const controller = Botkit.slackbot({
@@ -10,12 +13,12 @@ module.exports = () => {
 
   // connect the bot to a stream of messages
   controller.spawn({
-    token: 'xoxb-41474260885-wLxyiIapDFEakA8GRS9UIyPr',
+    token: BOT_KEY,
   }).startRTM();
 
   // give the bot something to listen for.
   controller.on('ambient', (bot, message) => {
-    console.log('message', message.text);
-    bot.reply(message, 'HeY!.');
+    logger.log('info', 'slack message - ', message.text);
+    botkitModel.trainingStore.push(message.text);
   });
 };
