@@ -29,7 +29,7 @@ module.exports = (app) => {
           clientSecret: slackKeys.clientSecret,
           callbackURL: slackKeys.callbackURL,
           scope: 'users:read',
-          extendedUserProfile: false
+          extendedUserProfile: false,
     },  (accessToken, refreshToken, profile, done) => {
       /* save session. */
     }
