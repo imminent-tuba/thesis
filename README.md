@@ -19,6 +19,24 @@ npm install
 ### Deployment
 Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
 
+### Contributing
+To start the server using the babel transpiler and nodemon, run
+```
+$ npm run start
+```
+The front end code is packaged with webpack. It is nice to have two terminal windows open with nodemon
+running in one and webpack running in the other. This way you can see errors in either process.
+To start webpack, run
+```
+$ npm run webpack
+```
+
+#### INITIALIZING THE DB
+mysql, need to make a table called chatanalysis
+```
+$ mysql -u root < server/Schema.sql
+```
+
 ### Authors
 
 ### License
