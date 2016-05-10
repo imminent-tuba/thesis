@@ -1,6 +1,5 @@
 module.exports = {
   'clientID': '11495581584.40629389573',
-  // 'clientID': 'xoxp-11495581584-17631574400-40378652469-10b2809981',
-  'clientSecret': 'fdd39ec952b2e8627de9ace2dc7cf403',
+  'clientSecret': 'cfd5c8969242e705e9fe159c93404f33',
   'callbackURL': '/auth/slack/callback'
 }
