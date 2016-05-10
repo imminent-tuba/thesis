@@ -7,6 +7,7 @@ let callcount = 0;
 
 io.on('connection', (socket) => {
   let ID = 0;
+  socket.emit('botID');
   logger.log('info', 'a bot connected: ', socket.conn.id);
 
   socket.on('botID', (id) => {

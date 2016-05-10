@@ -26,7 +26,9 @@ HOST = "127.0.0.1"
 PORT = 1234
 
 socketIO = SocketIO(HOST, PORT)
-socketIO.emit('botID', botID)
+
+def connect():
+  print('connected')
 
 trainList = []
 def training(msg):
@@ -42,7 +44,6 @@ def chat(ID, msg):
   socketIO.emit('chat', json.dumps(toSend))
 
 def on_chat(msg):
-
   msg = json.loads(msg)
   print('incoming : ', msg)
   if threaded:
@@ -51,7 +52,12 @@ def on_chat(msg):
   else:
     chat(msg)
 
+def sendID():
+  socketIO.emit('botID', botID)
+
 socketIO.on('chat', on_chat)
 socketIO.on('train', training)
+socketIO.on('connect', connect)
+socketIO.on('botID', sendID)
 
 socketIO.wait()
