@@ -36,6 +36,9 @@ export default class SocketWrapper extends React.Component {
 
   methods() {
     return {
+      sendInfo: (userInfo) => {
+        socket.emit('userInfo', userInfo);
+      },
       sendChat: (msg) => {
         socket.emit('message', msg);
         const updateChat = this.state.chats.splice(0);

@@ -1,2 +1,3 @@
 python-Levenshtein==0.12.0
 chatterbot==0.3.6
+socketIO_client==0.6.5
