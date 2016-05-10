@@ -21,24 +21,29 @@ module.exports = {
         emotions: responseEmotions.docEmotions,
       };
       alchemyapi.taxonomies(data, {}, (errTaxonomy, responseTaxonomy) => {
+        if (errTaxonomy) { logger.log('error', 'Alchemy taxonomy error', errTaxonomy); }
         alchemyData.taxonomy = responseTaxonomy.taxonomy;
         analyzerModel.saveAnalysis(alchemyData, (errModel, result) => {
           if (errModel != null) {
-            logger.log('debug', 'Response Alchemy - ', errModel);
+            logger.log('error', 'save analysis error - ', errModel);
           }
         });
       });
     });
   },
   getEmotions: (org, callbackSocket) => {
-    const organization = org || 'HackReactor';
-    analyzerModel.getEmotions(organization, (err, analysis) => {
-      logger.log('debug', 'Response getEmotions Model - ', err);
-      callbackSocket(err, analysis);
+    analyzerModel.getEmotions(org, (err, analysis) => {
+      if (err) {
+        logger.log('error', 'getEmotions error - ', err);
+        callbackSocket(err, null);
+      } else {
+        logger.log('debug', 'Response getEmotions Model - ', analysis);
+        callbackSocket(null, analysis);
+      }
     });
   },
 
-  getAnalysis: (data, callbackSocket) => {
+  getMessages: (data, callbackSocket) => {
     analyzerModel.getMessages(data, (err, messages) => {
       logger.log('debug', 'Response getMessages Model - ', err);
       callbackSocket(err, messages);

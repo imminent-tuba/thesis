@@ -9,8 +9,6 @@ const User = require('../models/UserSchema.js');
 
 
 module.exports = (app) => {
-  app.get('/analysis', analyzerController.setAnalysis);
-  app.get('/getanalysis', analyzerController.getAnalysis);
   app.post('/slackBot', slackBot.postMessage);
 
   passport.serializeUser(function(user, done) {
