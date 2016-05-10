@@ -1,4 +1,5 @@
 const db = require('../db/dbConfig.js');
+const logger = require('../logger.js');
 
 module.exports = {
   saveAnalysis: (data, callback) => {
@@ -44,8 +45,17 @@ module.exports = {
   getTaxonomy: (data, callback) => {
     const org = data.org;
 
-    const queryMSG = 'SELECT'
-  }
+    const queryMSG = 'SELECT * FROM TAXONOMY';
+    db.query(queryMSG, (err, results) => {
+      if (err) {
+        logger.log('error', 'db taxonomy error - ', err);
+        callback(err, null);
+      } else {
+        logger.log('debug', 'db taxonomy response - ', results);
+        callback(null, results);
+      }
+    });
+  },
 };
 
 

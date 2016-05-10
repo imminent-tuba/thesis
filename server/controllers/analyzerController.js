@@ -45,8 +45,21 @@ module.exports = {
 
   getMessages: (data, callbackSocket) => {
     analyzerModel.getMessages(data, (err, messages) => {
-      logger.log('debug', 'Response getMessages Model - ', err);
+      if (err) { logger.log('error', 'get messages error - ', err); }
+      logger.log('debug', 'Response getMessages Model - ', messages);
       callbackSocket(err, messages);
+    });
+  },
+
+  getTaxonomy: (data, callbackSocket) => {
+    analyzerModel.getTaxonomy(data, (err, taxonomy) => {
+      if (err) {
+        logger.log('error', 'get taxonomy error - ', err);
+        callbackSocket(err, null);
+      } else {
+        logger.log('debug', 'taxonomy response - ', taxonomy);
+        callbackSocket(null, taxonomy);
+      }
     });
   },
 };
