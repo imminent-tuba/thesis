@@ -5,7 +5,6 @@ import EmotionBarChart from './EmotionBarChart.jsx';
 import Taxonomy from './Taxonomy.jsx';
 import BubbleChart from './BubbleChart.jsx';
 
-
 const D3View = ({ view, data, methods }) => {
   D3View.propTypes = {
     data: React.PropTypes.object,

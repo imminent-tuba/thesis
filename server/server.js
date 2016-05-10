@@ -47,8 +47,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 ioServer.on('connection', (socket) => {
   logger.log('info', 'a user connected: ', socket.conn.id);
 
@@ -62,9 +60,8 @@ ioServer.on('connection', (socket) => {
     });
 
     analyzerController.getEmotions(org, (err, response) => {
-      // if (err) { logger.log('error', 'Analyzer Socket msg', err); }
-      // logger.log('debug', 'Socket response message -', response);
-      console.log('analysisErr msg', response);
+      if (err) { logger.log('error', 'Analyzer Socket error ', err); }
+      logger.log('debug', 'Socket response message -', response);
       ioServer.emit('emotions', response);
     });
   });
@@ -72,18 +69,16 @@ ioServer.on('connection', (socket) => {
   socket.on('emotions', (org) => {
     console.log('org emotions', org);
     analyzerController.getEmotions(org, (err, response) => {
-      // if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
-      // logger.log('debug', 'Socket response - ', response);
-      console.log('analysisErr emotions', response);
+      if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
+      logger.log('debug', 'Socket response - ', response);
       socket.emit('emotions', response);
     });
   });
 
   socket.on('orgMessages', (org) => {
     analyzerController.getAnalysis(org, (err, response) => {
-      // if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
-      // logger.log('debug', 'Socket response - ', response);
-      console.log('analysisErr emotions', response);
+      if (err) { logger.log('error', 'Analyzer Socket orgMessages', err); }
+      logger.log('debug', 'Socket response - ', response);
       socket.emit('emotions', response);
     });
   });

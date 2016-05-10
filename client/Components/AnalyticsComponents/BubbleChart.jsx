@@ -1,5 +1,6 @@
 import React from 'react';
-import chart from './visualizations/bubbleChart.js';
+import chart from './visualizations/bubbleChartv1.js';
+// import d3 from 'd3';
 
 export default class BubbleChart extends React.Component {
   constructor(props) {
@@ -11,11 +12,11 @@ export default class BubbleChart extends React.Component {
   }
 
   componentDidMount() {
-    chart();
+    this.chart = chart();
   }
 
   shouldComponentUpdate(nextProps) {
-    // chart.newData(nextProps.data);
+    this.chart(nextProps.data);
     return false;
   }
 
