@@ -4,7 +4,8 @@ const io = require('socket.io');
 const bodyparser = require('body-parser');
 const chatbot = require('./chatterbot/chatbotController.js');
 const analyzerController = require('./controllers/analyzerController.js');
-
+const botkit = require('./botkit.js');
+botkit();
 const routes = require('./config/routes.js');
 
 const app = express();
