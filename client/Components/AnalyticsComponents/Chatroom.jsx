@@ -4,6 +4,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import badWords from '../../resources/badWords.js';
+import TextField from 'material-ui/lib/TextField';
 
 export default class Chatroom extends React.Component {
 
@@ -49,6 +50,13 @@ export default class Chatroom extends React.Component {
               type="text"
               ref='currentInputMessage'
             />
+
+            <TextField
+              hintText="Message Field"
+              floatingLabelText="Message"
+              type="text"
+            />
+
             <button type='submit'> submit </button>
           </form>
         </div>
