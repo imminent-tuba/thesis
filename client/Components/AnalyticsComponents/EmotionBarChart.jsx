@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import d3 from 'd3';
-import EmotionBar from './EmotionBar.jsx';
 import barchart from './visualizations/barchart.js';
 
 export default class EmotionBarChart extends React.Component {

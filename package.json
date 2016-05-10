@@ -7,8 +7,7 @@
     "test": "./node_modules/karma/bin/karma start karma.conf.js",
     "start": "nodemon server/server.js",
     "webpack": "webpack --watch",
-    "build": "webpack",
-    "serve": "nodemon dist/server.js"
+    "serve": "webpack && PORT=80 forever start forever.json && python server/chatterbot/chatterbot.py 0 test"
   },
   "repository": {
     "type": "git",

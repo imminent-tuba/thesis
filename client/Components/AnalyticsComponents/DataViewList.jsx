@@ -30,6 +30,7 @@ export default class DataViewList extends React.Component {
         <Menu style={style.menu}>
           <MenuItem primaryText="Pie Chart" onClick={() => this.props.handleClick('pie')} />
           <MenuItem primaryText="Bar Chart" onClick={() => this.props.handleClick('bar')} />
+          <MenuItem primaryText="Bubble Chart" onClick={() => this.props.handleClick('bubble')} />
           <MenuItem primaryText="Taxonomy" onClick={() => this.props.handleClick('tax')} />
         </Menu>
       </div>

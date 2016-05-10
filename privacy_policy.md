@@ -1,0 +1,1 @@
+http://opensource-template.wikidot.com/legal:privacy-policy
