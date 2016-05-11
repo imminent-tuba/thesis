@@ -6,7 +6,6 @@ const margin = 60;
 // data looks like this
 // { emotion: emotion, data: object[emotion], index: i }
 barChart.create = (el, props, data) => {
-  console.log(el, 'svg inside create');
   // functions to grab specific parts of the data
   const emotion = d => d.emotion;
   // const yAxisMargin = {'margin-top': '25%'};
@@ -18,15 +17,14 @@ barChart.create = (el, props, data) => {
     .attr('id', 'barChart')
     .attr('width', props.width)
     .attr('height', props.height);
-  // both x and y axes don't currently render
-
+    
   const xScale = d3.scale.ordinal()
     .domain(data.map(d => d.emotion))
     .rangeRoundBands([100, 450], 0.1); // magic #40, width is a %
   /* [height, width], distance <> bars */
-  //
+
   const yScale = d3.scale.linear()
-    .domain([0, d3.max(data, emotionsData)]) // ?
+    .domain([0, d3.max(data, emotionsData)]) 
     .range([400 - margin, 0]); // height - margin, 300
   const xAxis = d3.svg.axis().scale(xScale);
   const yAxis = d3.svg.axis().scale(yScale).orient('left');
