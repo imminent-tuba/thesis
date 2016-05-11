@@ -13,7 +13,10 @@ AlchemyAPI.prototype.emotion = function(data, options, cb) {
 
 module.exports = {
   setAnalysis: (data) => {
+    console.log('Controller data ------> ', data);
     alchemyapi.emotion(data, {}, (errEmotion, responseEmotions) => {
+      console.log('Controller data errEmotion-> ', errEmotion);
+      console.log('Controller data responseEmotions-> ', responseEmotions);
       const alchemyData = {
         msg: data,
         channel: 'general',
