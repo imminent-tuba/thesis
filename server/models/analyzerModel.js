@@ -31,7 +31,7 @@ module.exports = {
   },
 
   getEmotions: (org, callback) => {
-    const queryMSG = 'SELECT AVG(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
+    const queryMSG = 'SELECT SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
     db.query(queryMSG, (errEmotions, resultsEmotions) => {
       if (errEmotions) {
         logger.log('debug', 'Response Retreive EMOTIONS - ', errEmotions);
