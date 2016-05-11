@@ -2,6 +2,7 @@ const Botkit = require('botkit');
 const botkitModel = require('./models/botkitModel.js');
 const logger = require('./logger.js');
 const BOT_KEY = require('./config/botKey.js');
+const chatbot = require('./chatterbot/chatbotController.js');
 
 module.exports = () => {
   const controller = Botkit.slackbot({

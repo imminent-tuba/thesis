@@ -41,7 +41,7 @@ app.use(passport.session());
 
 const clients = {};
 
-ioServer.on('connection', (socket) => {
+ioServer.on('connection', socket => {
   logger.log('info', 'a user connected: ', socket.conn.id);
   clients[socket.conn.id] = { org: 'HackReactor' };
 
@@ -51,7 +51,7 @@ ioServer.on('connection', (socket) => {
     clients[socket.conn.id] = info;
   });
 
-  socket.on('message', (msg) => {
+  socket.on('message', msg => {
     logger.log('info', 'client - ', msg);
     analyzerController.setAnalysis(msg);
     chatbot.response(0, msg, (err, response) => {
@@ -67,17 +67,21 @@ ioServer.on('connection', (socket) => {
     });
   });
 
-  socket.on('emotions', (org) => {
-    logger.log('debug', 'org emotions', org);
-    analyzerController.getEmotions(org, (err, response) => {
+  socket.on('emotions', () => {
+    logger.log('debug', 'emotions query', clients[socket.conn.id].org);
+    analyzerController.getEmotions(clients[socket.conn.id].org, (err, response) => {
       if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
-      logger.log('debug', 'Socket response - ', response);
-      socket.emit('emotions', response);
+      const analysis = { emotions: response };
+      analyzerController.getTaxonomy(clients[socket.conn.id], (taxErr, taxResponse) => {
+        if (!taxErr) { analysis.taxonomy = taxResponse; }
+        socket.emit('emotions', analysis);
+        logger.log('debug', 'Socket response - ', analysis);
+      });
     });
   });
 
-  socket.on('orgMessages', (org) => {
-    analyzerController.getAnalysis(org, (err, response) => {
+  socket.on('orgMessages', () => {
+    analyzerController.getMessages(clients[socket.conn.id].org, (err, response) => {
       if (err) { logger.log('error', 'Analyzer Socket orgMessages', err); }
       logger.log('debug', 'Socket response - ', response);
       socket.emit('emotions', response);
