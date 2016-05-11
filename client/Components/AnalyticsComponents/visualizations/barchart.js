@@ -12,7 +12,7 @@ barChart.create = (el, props, data) => {
   // const yAxisMargin = {'margin-top': '25%'};
   const emotionsData = d => d.data;
   // const index = (d) => d.index;
-  let svg = d3.select(el)
+  const svg = d3.select(el)
     .append('svg')
     .style('padding-top', '20%')
     .attr('id', 'barChart')
@@ -20,16 +20,16 @@ barChart.create = (el, props, data) => {
     .attr('height', props.height);
   // both x and y axes don't currently render
 
-  let xScale = d3.scale.ordinal()
+  const xScale = d3.scale.ordinal()
     .domain(data.map(d => d.emotion))
     .rangeRoundBands([100, 450], 0.1); // magic #40, width is a %
   /* [height, width], distance <> bars */
   //
-  let yScale = d3.scale.linear()
+  const yScale = d3.scale.linear()
     .domain([0, d3.max(data, emotionsData)]) // ?
     .range([400 - margin, 0]); // height - margin, 300
-  let xAxis = d3.svg.axis().scale(xScale);
-  let yAxis = d3.svg.axis().scale(yScale).orient('left');
+  const xAxis = d3.svg.axis().scale(xScale);
+  const yAxis = d3.svg.axis().scale(yScale).orient('left');
 
   d3.select('svg')
     .append('g')
@@ -66,17 +66,17 @@ barChart.create = (el, props, data) => {
 
 barChart.update = (el, props, data) => {
   const emotionsData = d => d.data;
-  let xScale = d3.scale.ordinal()
+  const xScale = d3.scale.ordinal()
     .domain(data.map(d => d.emotion))
     .rangeRoundBands([100, 450], 0.1); // magic #40, width is a %
       /* [height, width], distance <> bars */
-  let yScale = d3.scale.linear()
+  const yScale = d3.scale.linear()
     .domain([0, d3.max(data, emotionsData)]) // ?
     .range([400 - margin, 0]); // height - margin, 300
-  let xAxis = d3.svg.axis().scale(xScale);
-  let yAxis = d3.svg.axis().scale(yScale).orient('left');
+  const xAxis = d3.svg.axis().scale(xScale);
+  const yAxis = d3.svg.axis().scale(yScale).orient('left');
 
-  let svg = d3.select('#barChart');
+  const svg = d3.select('#barChart');
   console.log(data);
   svg.selectAll('rect')
     .data(data)
