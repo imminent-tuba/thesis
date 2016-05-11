@@ -1,7 +1,7 @@
 import d3 from 'd3';
 import taxUpdate from './taxParser.js';
 
-const width = 600;
+const width = 500;
 const height = 500;
 
 module.exports = () => {
@@ -58,6 +58,7 @@ module.exports = () => {
         .attr('class', 'label')
         .attr('x', d => d.x)
         .attr('y', d => d.y)
+        .style('text-anchor', 'middle')
         .text(d => d.name)
         .call(force.drag);
 

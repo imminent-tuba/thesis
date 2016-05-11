@@ -22,6 +22,7 @@ module.exports = {
       };
       alchemyapi.taxonomies(data, {}, (errTaxonomy, responseTaxonomy) => {
         if (errTaxonomy) { logger.log('error', 'Alchemy taxonomy error', errTaxonomy); }
+        logger.log('debug', 'alchemy taxonomy response - ', responseTaxonomy);
         alchemyData.taxonomy = responseTaxonomy.taxonomy;
         analyzerModel.saveAnalysis(alchemyData, (errModel, result) => {
           if (errModel != null) {

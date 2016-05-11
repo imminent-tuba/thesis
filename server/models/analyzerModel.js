@@ -48,10 +48,8 @@ module.exports = {
     const queryMSG = 'SELECT label, SUM(score), COUNT(*) AS times FROM taxonomy GROUP BY label';
     db.query(queryMSG, (err, results) => {
       if (err) {
-        logger.log('error', 'db taxonomy error - ', err);
         callback(err, null);
       } else {
-        logger.log('debug', 'db taxonomy response - ', results);
         callback(null, results);
       }
     });
