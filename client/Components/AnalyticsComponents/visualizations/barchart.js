@@ -24,6 +24,7 @@ barChart.create = (el, props, data) => {
     .domain(data.map(d => d.emotion))
     .rangeRoundBands([100, 450], 0.1); // magic #40, width is a %
   /* [height, width], distance <> bars */
+  // 
   let yScale = d3.scale.linear()
     .domain([0, d3.max(data, emotionsData)]) // ?
     .range([400 - margin, 0]); // height - margin, 300
