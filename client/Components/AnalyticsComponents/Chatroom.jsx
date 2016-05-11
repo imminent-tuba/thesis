@@ -27,9 +27,8 @@ export default class Chatroom extends React.Component {
   _handleSubmitEvent(e) {
     e.preventDefault();
     const message = this.refs.currentInputMessage.getValue();
-    if (!this.isBadWord(message)) {
-      this.props.sendChat(message);
-    } else if (message === '') {
+    
+    if (message === '') {
       return;
     } else if (!this.isBadWord(message)) {
       this.props.sendChat(message);
