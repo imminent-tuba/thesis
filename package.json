@@ -67,6 +67,10 @@
     "material-ui": "^0.14.4",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.18",
+<<<<<<< c937a6519efb6a6e602f0bfcfba5555605f47c8c
+=======
+    "mysql": "^2.4.2",
+>>>>>>> Style and Modify queries
     "mongoose": "^4.4.14",
     "mysql": "^2.4.2",
     "passport": "^0.3.2",

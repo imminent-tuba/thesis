@@ -53,6 +53,7 @@ ioServer.on('connection', socket => {
 
   socket.on('message', msg => {
     logger.log('info', 'client - ', msg);
+    console.log('org msg', msg);
     analyzerController.setAnalysis(msg);
     chatbot.response(0, msg, (err, response) => {
       if (err) { logger.log('error', err); }
@@ -67,6 +68,7 @@ ioServer.on('connection', socket => {
     });
   });
 
+<<<<<<< c937a6519efb6a6e602f0bfcfba5555605f47c8c
   socket.on('emotions', () => {
     logger.log('debug', 'emotions query', clients[socket.conn.id].org);
     analyzerController.getEmotions(clients[socket.conn.id].org, (err, response) => {
@@ -77,6 +79,14 @@ ioServer.on('connection', socket => {
         socket.emit('emotions', analysis);
         logger.log('debug', 'Socket response - ', analysis);
       });
+=======
+  socket.on('emotions', (org) => {
+    analyzerController.getEmotions(org, (err, response) => {
+      if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
+      logger.log('debug', 'Socket response - ', response);
+      console.log('org emotions response ', response);
+      socket.emit('emotions', response);
+>>>>>>> Style and Modify queries
     });
   });
 

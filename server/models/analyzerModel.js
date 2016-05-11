@@ -8,13 +8,19 @@ module.exports = {
     const emotions = data.emotions;
     const taxonomy = data.taxonomy[0];
 
-    const queryMSG = 'INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "' + msg + '", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "' + msg + '" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1';
+    console.log('Model data -> ', emotions);
+    console.log('Model data -> ', taxonomy);
+
+    const queryMSG = 'INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "' + msg  + '", (select org_id from user where username = "Charlie"),(select id from USER where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "' + msg + '" and user_id = (SELECT id from USER where username = "Charlie"))LIMIT 1';
     db.query(queryMSG, (errMsg, resultsMsg) => {
-      const queryEmotions = 'INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("' + emotions.anger + '","' + emotions.disgust + '","' + emotions.fear + '","' + emotions.joy + '","' + emotions.sadness + '", (SELECT id FROM MESSAGE WHERE text_msg= "' + data.msg + '"))';
+      if (errMsg) {logger.log('debug', 'Response Insert MESSAGE - ', errMsg);}
+      const queryEmotions = 'INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("' + emotions.anger +'","' + emotions.disgust + '","' + emotions.fear + '","' + emotions.joy + '","' + emotions.sadness + '", (SELECT id FROM MESSAGE WHERE text_msg= "' + data.msg + '"))';
       db.query(queryEmotions, (errEmotions, resultsEmotions) => {
+        if (errEmotions) {logger.log('debug', 'Response Insert EMOTIONS - ', errEmotions);}
         if (taxonomy) {
           const queryTaxonomy = 'INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("' + taxonomy.label + '","' + taxonomy.score + '", (SELECT id FROM MESSAGE WHERE text_msg= "' + data.msg + '"))';
           db.query(queryTaxonomy, (errTaxonomy, resultsTaxonomy) => {
+            if (errTaxonomy) {logger.log('debug', 'Response Insert TAXONOMY - ', errTaxonomy);}
             callback(errTaxonomy, resultsTaxonomy);
           });
         } else {
@@ -25,9 +31,13 @@ module.exports = {
   },
 
   getEmotions: (org, callback) => {
-    const queryMSG = 'SELECT AVG(anger) as anger,AVG(disgust)as disgust,AVG(fear) as fear,AVG(joy) as joy,AVG(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
+    const queryMSG = 'SELECT AVG(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
     db.query(queryMSG, (errEmotions, resultsEmotions) => {
-      callback(errEmotions, resultsEmotions[0]);
+      if (errEmotions) {
+        logger.log('debug', 'Response Retreive EMOTIONS - ', errEmotions);
+      } else {
+        callback(errEmotions, resultsEmotions[0]);  
+      }
     });
   },
 
@@ -38,7 +48,11 @@ module.exports = {
 
     const queryMSG = 'SELECT m.text_msg, u.username FROM MESSAGE m inner join user u on m.user_id = u.id BETWEEN "' + startDate + '%"" AND "' + endDate + '%""';
     db.query(queryMSG, (errMsg, resultsMsg) => {
-      callback(errMsg, resultsMsg);
+      if (errMsg) {
+        logger.log('debug', 'Response Retreive MESSAGES - ', errMsg);
+      } else {
+        callback(errMsg, resultsMsg);  
+      }
     });
   },
 
