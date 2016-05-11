@@ -71,10 +71,11 @@ ioServer.on('connection', socket => {
     logger.log('debug', 'emotions query', clients[socket.conn.id].org);
     analyzerController.getEmotions(clients[socket.conn.id].org, (err, response) => {
       if (err) { logger.log('error', 'Analyzer Socket emotions', err); }
-      logger.log('debug', 'Socket response - ', response);
+      const analysis = { emotions: response };
       analyzerController.getTaxonomy(clients[socket.conn.id], (taxErr, taxResponse) => {
-        if (!taxErr) { response.taxonomy = taxResponse; }
-        socket.emit('emotions', response);
+        if (!taxErr) { analysis.taxonomy = taxResponse; }
+        socket.emit('emotions', analysis);
+        logger.log('debug', 'Socket response - ', analysis);
       });
     });
   });

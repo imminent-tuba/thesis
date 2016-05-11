@@ -1,6 +1,5 @@
 import React from 'react';
 import chart from './visualizations/bubbleChartv1.js';
-// import d3 from 'd3';
 
 export default class BubbleChart extends React.Component {
   constructor(props) {

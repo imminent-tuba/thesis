@@ -45,7 +45,7 @@ module.exports = {
   getTaxonomy: (data, callback) => {
     const org = data.org;
 
-    const queryMSG = 'SELECT * FROM TAXONOMY';
+    const queryMSG = 'SELECT label, SUM(score), COUNT(*) AS times FROM taxonomy GROUP BY label';
     db.query(queryMSG, (err, results) => {
       if (err) {
         logger.log('error', 'db taxonomy error - ', err);
