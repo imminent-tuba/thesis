@@ -6,7 +6,7 @@ Talk to our chatbot and our website will update live with data based on the conv
 Our chatbot will be found on Slack and possibly Facebook Messenger.
 
 ### Installation
-
+If you need to set up a Python dev environment, check out this [guide](https://github.com/imminent-tuba/thesis/wiki/Python-Environment-Setup) in our wiki.
 
 ### Usage
 
