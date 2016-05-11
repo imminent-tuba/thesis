@@ -1,5 +1,5 @@
 import d3 from 'd3';
-import taxUpdate from './taxParser.js'
+import taxUpdate from './taxParser.js';
 
 const width = 500;
 const height = 400;
@@ -10,50 +10,69 @@ module.exports = () => {
     .attr('height', height);
 
   let chartData = {
-    nodes: [],
+    nodes: [{
+      name: 'bot',
+      r: 5,
+      color: '#999',
+      alpha: 1,
+    }],
     links: [],
-  }
+  };
 
   let force = d3.layout.force()
-      .gravity(0.1)
-      .distance(100)
-      .charge(-50)
+      .charge(-100)
+      .linkDistance(50)
       .nodes(chartData.nodes)
       .links(chartData.links)
-      .size([width, height]);
-
-  force.start();
+      .size([width, height])
+      .start();
 
   const update = () => {
     const nodes = svg.selectAll('.bubble')
-        .data(chartData.nodes)
-        .call(force.drag);
+        .data(chartData.nodes);
 
-    const links = svg.selectAll('.line')
-        .data(chartData.nodes)
-        .call(force.drag);
+    const links = svg.selectAll('.link')
+        .data(chartData.links);
 
-    nodes.transition().duration(100)
-        .attr('x', d => d.x)
-        .attr('y', d => d.y);
+    links.enter().append('line')
+        .attr('class', 'link')
+        .style('stroke-width', '10');
 
-    nodes.enter().append('image')
+    nodes.enter().append('circle')
         .attr('class', 'bubble')
         .style('position', 'absolute')
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-        .attr('width', d => d.val)
-        .attr('height', d => d.val)
-        .attr('xlink:href', '../assets/grumpy.png');
+        .attr('r', d => Math.sqrt(d.r * 40))
+        .style('fill', d => {
+          if (d.color) {
+            return d.color;
+          } else {
+            return 'red';
+          } })
+        .style('fill-opacity', d => d.alpha)
+        .call(force.drag);
 
+    links.exit().remove();
     nodes.exit().remove();
+
+    links.attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y)
+        .style('stroke-width', '5')
+        .style('stroke', '#999')
+        .style('stroke-opacity', '.6');
+
+
+    nodes.attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+        .attr('r', d => Math.sqrt(d.r * 40));
   };
 
   d3.timer(update);
 
-  return Sax => {
+  return tax => {
     force.stop();
-    chartData = taxUpdate(tax);
+    chartData = taxUpdate(tax, chartData);
     force.start();
   };
 };
