@@ -10,24 +10,33 @@ export default class EmotionBarChart extends React.Component {
   }
   componentDidMount() {
     this.d3Node = this.refs.DOMnode;
-    const chartSize = { width: '100%', height: '400px' };
+    const chartSize = { width: '100%', height: '500px' };
     const data = this.handleEmotionData(this.props.data);
+
     barchart.create(this.d3Node, chartSize, data);
   }
 
-  componentDidUpdate() {
+  shouldComponentUpdate(nextProps) {
     // reference to the SVG
     const el = this.d3Node.children[0];
+    // console.log(el);
     const chartSize = { width: '100%', height: '400px' };
-    const data = this.handleEmotionData(this.props.data);
+    const data = this.handleEmotionData(nextProps.data);
     barchart.update(el, chartSize, data);
+    return false;
   }
 
   handleEmotionData(object) {
     return Object.keys(object)
       .map((key, i) => {
-        const emotion = key;
-        return { emotion: emotion, data: object[emotion], index: i };
+        if(key !== "username") {
+          return { emotion: key, data: object[key], index: i };
+        }
+      })
+      .filter((key, i) => {
+        if(key !== undefined) {
+          return { emotion: key, data: object[key], index: i };
+        }
       });
   }
 
