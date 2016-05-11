@@ -11,6 +11,7 @@ If you need to set up a Python dev environment, check out this [guide](https://g
 ### Usage
 
 ### Deployment
+Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
 
 ### Authors
 
