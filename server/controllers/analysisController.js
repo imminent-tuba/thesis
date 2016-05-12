@@ -34,10 +34,12 @@ module.exports = {
       response.emotions = emotions;
       db.getTaxonomy((err, taxonomy) => {
         response.taxonomy = taxonomy;
-        db.getMessages(data, (err, messages) => {
-          response.messages = messages;
-          callback(null, response);
-        });
+        // db.getMessages(data, (err, messages) => {
+          // migrate to keywords
+          // remove data requirements - no start & end date
+          // response.messages = messages;
+        callback(null, response);
+        // });
       });
     });
   },
