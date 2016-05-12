@@ -18,7 +18,6 @@ const alchemyCallback = (action, callback) =>
     }
   };
 
-
 module.exports = {
   getEmotions: (message, callback) => {
     alchemyapi.emotion(message, {}, alchemyCallback('get emotions', callback));

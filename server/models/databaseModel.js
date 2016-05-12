@@ -11,7 +11,6 @@ const dbCallback = (action, callback) =>
     }
   };
 
-
 module.exports = {
   saveMessage: (data, callback) => {
     const query = `INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "${data.msg}", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "${data.msg}" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1`;
@@ -34,7 +33,7 @@ module.exports = {
     const query = `SELECT m.text_msg, u.username FROM MESSAGE m inner join user u on m.user_id = u.id BETWEEN "${data.startDate}%"" AND "${data.endDate}%""`;
     db.query(query, dbCallback('Get Messages', callback));
   },
-  getTaxonomy: (callback) => {
+  getTaxonomy: callback => {
     const query = 'SELECT label, SUM(score), COUNT(*) AS times FROM taxonomy GROUP BY label';
     db.query(query, dbCallback('Get taxonomy', callback));
   },

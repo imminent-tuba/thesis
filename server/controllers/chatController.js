@@ -16,13 +16,12 @@ module.exports = {
       });
     });
   },
-  startDbPoll: socket => {
-    setInterval(() => {
-      // remove first arg after migration to keywords in analysisCtrl
+  callDb: (ioServer, wasUpdated) => {
+    if (wasUpdated) {
       analysis.getAnalysis(null, (err, res) => {
-        // rename socket channel from emotions to something more general
-        socket.emit('emotions', res);
+        ioServer.emit('populateGraph', res);
       });
-    }, 1000);
+    }
+    return false;
   },
 };
