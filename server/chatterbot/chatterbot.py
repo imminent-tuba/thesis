@@ -41,6 +41,7 @@ def training(msg):
 def chat(ID, msg):
   msg = bot.get_response(msg)
   toSend = {'id': ID, 'message': msg}
+  print('outgoing: ', toSend)
   socketIO.emit('chat', json.dumps(toSend))
 
 def on_chat(msg):

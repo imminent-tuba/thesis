@@ -29,10 +29,8 @@ export default class SocketWrapper extends React.Component {
     });
 
     socket.on('emotions', (emotions) => {
-      const state = this.state;
-      state.data.emotions = emotions.emotions;
-      state.data.taxonomy = emotions.taxonomy;
-      this.setState({ state });
+      console.log('socket emotions ', emotions);
+      this.setState({ data: { emotions: emotions.emotions, taxonomy: emotions.taxonomy } });
     });
   }
 

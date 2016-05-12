@@ -44,7 +44,7 @@ module.exports = () => {
     nodes.enter().append('circle')
         .attr('class', 'bubble')
         .style('position', 'absolute')
-        .attr('r', d => Math.sqrt(d.r * 100))
+        .attr('r', d => Math.sqrt(d.r * 200))
         .style('fill', d => {
           if (d.color) {
             return d.color;
@@ -76,7 +76,7 @@ module.exports = () => {
 
     nodes.attr('cx', d => d.x)
         .attr('cy', d => d.y)
-        .attr('r', d => Math.sqrt(d.r * 100));
+        .attr('r', d => Math.sqrt(d.r * 200));
 
     text.attr('x', d => d.x)
         .attr('y', d => d.y);
