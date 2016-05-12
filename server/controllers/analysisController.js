@@ -19,9 +19,9 @@ module.exports = {
   saveAnalysis: (analysis, callback) => {
     db.saveMessage(analysis.message, (err, res) => {
       logger.log('debug', 'Message saved', res);
-      db.saveEmotions(analysis.emotions, (err, res) => {
+      db.saveEmotions(analysis.emotions, analysis.message, (err, res) => {
         logger.log('debug', 'Emotions saved', res);
-        db.saveTaxonomy(analysis.taxonomy, (err, res) => {
+        db.saveTaxonomy(analysis.taxonomy, analysis.message, (err, res) => {
           logger.log('debug', 'Taxonomy saved', res);
           callback(null, analysis);
         });
@@ -31,7 +31,7 @@ module.exports = {
   getAnalysis: (data, callback) => {
     const response = {};
     db.getEmotions((err, emotions) => {
-      response.emotions = emotions;
+      response.emotions = emotions[0];
       db.getTaxonomy((err, taxonomy) => {
         response.taxonomy = taxonomy;
         // db.getMessages(data, (err, messages) => {

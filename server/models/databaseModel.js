@@ -11,17 +11,33 @@ const dbCallback = (action, callback) =>
     }
   };
 
+const isPresent = (data, type) => {
+  if (!data.length) {
+    logger.log('debug', type, 'is empty');
+    return false;
+  }
+  return true;
+};
+
 module.exports = {
-  saveMessage: (data, callback) => {
-    const query = `INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "${data.msg}", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "${data.msg}" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1`;
+  saveMessage: (message, callback) => {
+    const query = `INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "${message}", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "${message}" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1`;
     db.query(query, dbCallback('Save Message', callback));
   },
-  saveEmotions: (data, callback) => {
-    const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${data.emotions.anger}","${data.emotions.disgust}","${data.emotions.fear}","${data.emotions.joy}","${data.emotions.sadness}", (SELECT id FROM MESSAGE WHERE text_msg= "${data.msg}"))`;
+  saveEmotions: (emotions, message, callback) => {
+    if (!isPresent(emotions, 'emotions')) {
+      callback(null, []);
+      return;
+    }
+    const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
     db.query(query, dbCallback('Save Emotions', callback));
   },
-  saveTaxonomy: (data, callback) => {
-    const query = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${data.taxonomy.label}","${data.taxonomy.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${data.msg}"))`;
+  saveTaxonomy: (taxonomy, message, callback) => {
+    if (!isPresent(taxonomy, 'taxonomy')) {
+      callback(null, []);
+      return;
+    }
+    const query = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${taxonomy.label}","${taxonomy.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
     db.query(query, dbCallback('Save Taxonomy', callback));
   },
   // getEmotions org as first argument?

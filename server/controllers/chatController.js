@@ -10,7 +10,7 @@ module.exports = {
   messageReceived: (message, callback) => {
     chatterbot.response(ID, message, callback);
     analysis.alchemyAnalyze(message, (err, res) => {
-      analysis.saveAnalysis(res, (/* wat do */) => {
+      analysis.saveAnalysis(res, () => {
         logger.log('debug', 'Message analysis saved', message);
         callback();
       });

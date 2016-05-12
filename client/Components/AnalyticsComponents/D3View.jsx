@@ -11,6 +11,7 @@ const D3View = ({ view, data, methods }) => {
     methods: React.PropTypes.object,
   };
 
+  console.log('data inside d3view', data);
   return (
     <div>
       {(() => {

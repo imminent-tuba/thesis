@@ -7,7 +7,7 @@ export default class Taxonomy extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getEmotions();
+    console.log('props inside Taxonomy.jsx', this.props);
   }
 
   componentDidMount() {
