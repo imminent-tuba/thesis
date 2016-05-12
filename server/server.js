@@ -53,6 +53,7 @@ ioServer.on('connection', socket => {
 
   socket.on('message', msg => {
     logger.log('info', 'client - ', msg);
+    console.log('org msg', msg);
     analyzerController.setAnalysis(msg);
     chatbot.response(0, msg, (err, response) => {
       if (err) { logger.log('error', err); }
