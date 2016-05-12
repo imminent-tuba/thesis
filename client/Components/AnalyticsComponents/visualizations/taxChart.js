@@ -1,7 +1,7 @@
 import d3 from 'd3';
 import taxUpdate from './taxParser.js';
 
-const width = 600;
+const width = 500;
 const height = 500;
 
 module.exports = () => {
@@ -44,7 +44,7 @@ module.exports = () => {
     nodes.enter().append('circle')
         .attr('class', 'bubble')
         .style('position', 'absolute')
-        .attr('r', d => Math.sqrt(d.r * 100))
+        .attr('r', d => Math.sqrt(d.r * 200))
         .style('fill', d => {
           if (d.color) {
             return d.color;
@@ -58,6 +58,7 @@ module.exports = () => {
         .attr('class', 'label')
         .attr('x', d => d.x)
         .attr('y', d => d.y)
+        .style('text-anchor', 'middle')
         .text(d => d.name)
         .call(force.drag);
 
@@ -75,7 +76,7 @@ module.exports = () => {
 
     nodes.attr('cx', d => d.x)
         .attr('cy', d => d.y)
-        .attr('r', d => Math.sqrt(d.r * 100));
+        .attr('r', d => Math.sqrt(d.r * 200));
 
     text.attr('x', d => d.x)
         .attr('y', d => d.y);
