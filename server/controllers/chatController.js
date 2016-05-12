@@ -5,7 +5,6 @@ const chatterbot = require('../chatterbot/chatbotController.js');
 const logger = require('../logger.js');
 
 const ID = 0; // this will be replaced with Bot ID
-const clients = {};
 
 module.exports = {
   messageReceived: (message, callback) => {
