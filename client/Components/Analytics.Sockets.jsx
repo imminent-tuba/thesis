@@ -29,7 +29,6 @@ export default class SocketWrapper extends React.Component {
     });
 
     socket.on('populateGraph', data => {
-      console.log('socket populateGraph ', data);
       this.setState({ data: {
         emotions: data.emotions,
         taxonomy: data.taxonomy,
@@ -58,10 +57,6 @@ export default class SocketWrapper extends React.Component {
           message: 'Don\'t be a troll please',
         });
         this.setState({ chats: updateChat });
-      },
-      // getEmotions is legacy?
-      getEmotions: () => {
-        socket.emit('emotions');
       },
     };
   }

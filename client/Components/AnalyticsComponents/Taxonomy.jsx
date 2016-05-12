@@ -3,11 +3,7 @@ import chart from './visualizations/taxChart.js';
 
 export default class Taxonomy extends React.Component {
   constructor(props) {
-    super();
-  }
-
-  componentWillMount() {
-    console.log('props inside Taxonomy.jsx', this.props);
+    super(props);
   }
 
   componentDidMount() {

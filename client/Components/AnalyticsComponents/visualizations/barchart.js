@@ -17,14 +17,14 @@ barChart.create = (el, props, data) => {
     .attr('id', 'barChart')
     .attr('width', props.width)
     .attr('height', props.height);
-    
+
   const xScale = d3.scale.ordinal()
     .domain(data.map(d => d.emotion))
     .rangeRoundBands([100, 450], 0.1); // magic #40, width is a %
   /* [height, width], distance <> bars */
 
   const yScale = d3.scale.linear()
-    .domain([0, d3.max(data, emotionsData)]) 
+    .domain([0, d3.max(data, emotionsData)])
     .range([400 - margin, 0]); // height - margin, 300
   const xAxis = d3.svg.axis().scale(xScale);
   const yAxis = d3.svg.axis().scale(yScale).orient('left');
@@ -75,7 +75,6 @@ barChart.update = (el, props, data) => {
   const yAxis = d3.svg.axis().scale(yScale).orient('left');
 
   const svg = d3.select('#barChart');
-  console.log(data);
   svg.selectAll('rect')
     .data(data)
     .transition()
@@ -83,10 +82,9 @@ barChart.update = (el, props, data) => {
     .attr('x', d => xScale(d.emotion))
     .attr('height', (d) => (yScale(0) - yScale(d.data)))
     .attr('y', d => yScale(d.data))
-    .attr('width', xScale.rangeBand())
+    .attr('width', xScale.rangeBand());
     // .attr('text-anchor', 'middle')
     // .attr('fill', 'green')
-
 };
 
 export default barChart;
