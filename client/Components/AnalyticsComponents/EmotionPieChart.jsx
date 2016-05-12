@@ -5,9 +5,6 @@ export default class EmotionPieChart extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentWillMount() {
-    this.props.getEmotions();
-  }
 
   render() {
     let sumEmotions = 0;
@@ -42,5 +39,4 @@ export default class EmotionPieChart extends React.Component {
 
 EmotionPieChart.propTypes = {
   data: React.PropTypes.object,
-  getEmotions: React.PropTypes.func,
 };

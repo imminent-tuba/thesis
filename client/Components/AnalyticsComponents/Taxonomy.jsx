@@ -24,5 +24,4 @@ export default class Taxonomy extends React.Component {
 
 Taxonomy.propTypes = {
   data: React.PropTypes.array,
-  getEmotions: React.PropTypes.func,
 };

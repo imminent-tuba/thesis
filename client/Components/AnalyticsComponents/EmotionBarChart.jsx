@@ -5,9 +5,7 @@ export default class EmotionBarChart extends React.Component {
   constructor(props) {
     super();
   }
-  componentWillMount() {
-    this.props.getEmotions();
-  }
+
   componentDidMount() {
     this.d3Node = this.refs.DOMnode;
     const chartSize = { width: '100%', height: '500px' };

@@ -6,10 +6,6 @@ export default class BubbleChart extends React.Component {
     super();
   }
 
-  componentWillMount() {
-    this.props.getEmotions();
-  }
-
   componentDidMount() {
     this.chart = chart();
   }
@@ -30,5 +26,4 @@ export default class BubbleChart extends React.Component {
 
 BubbleChart.propTypes = {
   data: React.PropTypes.object,
-  getEmotions: React.PropTypes.func,
 };
