@@ -2,15 +2,19 @@ const http = require('http');
 const express = require('express');
 const io = require('socket.io');
 const bodyparser = require('body-parser');
-const chatbot = require('./chatterbot/chatbotController.js');
-const analyzerController = require('./controllers/analyzerController.js');
 const botkit = require('./botkit.js');
 botkit();
 const routes = require('./config/routes.js');
 
+const chat = require('./controllers/chatController.js');
+
 const app = express();
+routes(app);
 const theServer = http.Server(app);
 const ioServer = io(theServer);
+chat.startDbPoll(ioServer);
+
+
 const logger = require('./logger.js');
 const passport = require('passport');
 
@@ -18,7 +22,6 @@ logger.log('debug', 'environment port', process.env.PORT);
 const port = process.env.PORT || 1337;
 
 app.use(passport.initialize());
-routes(app);
 
 /* config */
 app.use(express.static(`${__dirname}/../client`));
