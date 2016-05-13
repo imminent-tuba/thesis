@@ -15,11 +15,8 @@ bot = ChatBot(
   database=sys.argv[2]
 )
 
-try:
-  sys.argv[3]
+if sys.argv[3] == 1:
   bot.train("chatterbot.corpus.english")
-except:
-  pass
 
 from socketIO_client import SocketIO, BaseNamespace
 
@@ -29,7 +26,8 @@ PORT = 1234
 socketIO = SocketIO(HOST, PORT)
 
 def connect():
-  print('connected')
+  print('chatterbot connected')
+  sys.stdout.flush()
 
 def training(msg):
   global trainList
@@ -41,13 +39,15 @@ def training(msg):
 
 def chat(ID, msg):
   msg = bot.get_response(msg)
-  toSend = {'id': ID, 'message': msg}
+  toSend = {'id': ID, 'message': msg.rstrip()}
   print('outgoing: ', toSend)
+  sys.stdout.flush()
   socketIO.emit('chat', json.dumps(toSend))
 
 def on_chat(msg):
   msg = json.loads(msg)
   print('incoming : ', msg)
+  sys.stdout.flush()
   if threaded:
     r = threading.Thread(target=chat, args=([msg['id'], msg['message']]))
     r.start()

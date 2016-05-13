@@ -1,0 +1,7 @@
+{
+    "uid": "chatterbot",
+    "append": true,
+    "watch": true,
+    "script": "chatterbot_entry.js",
+    "sourceDir": "/home/ubuntu/thesis/server/chatterbot"
+}

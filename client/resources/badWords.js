@@ -15,4 +15,5 @@ module.exports = [
   'cock',
   'whore',
   'retard',
+  'nigger',
 ];
