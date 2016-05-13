@@ -12,7 +12,6 @@ module.exports = {
     analysis.alchemyAnalyze(message, (err, res) => {
       analysis.saveAnalysis(res, () => {
         logger.log('debug', 'Message analysis saved', message);
-        callback();
       });
     });
   },

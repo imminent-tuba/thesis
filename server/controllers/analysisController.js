@@ -5,12 +5,13 @@ const logger = require('../logger.js');
 module.exports = {
   alchemyAnalyze: (message, callback) => {
     const response = { message };
-    alchemy.getEmotions(message, (err, emotions) => {
-      response.emotions = emotions;
-      alchemy.getTaxonomy(message, (err, taxonomy) => {
-        response.taxonomy = taxonomy;
-        alchemy.getKeywords(message, (err, keywords) => {
-          response.keywords = keywords;
+    alchemy.getEmotions(message, (err, res) => {
+      response.emotions = res.docEmotions;
+      alchemy.getTaxonomy(message, (err, res) => {
+        response.taxonomy = res.taxonomy;
+        alchemy.getKeywords(message, (err, res) => {
+          response.keywords = res.keywords;
+          logger.log('debug', 'analysis compiled', response);
           callback(null, response);
         });
       });
@@ -23,7 +24,10 @@ module.exports = {
         logger.log('debug', 'Emotions saved', res);
         db.saveTaxonomy(analysis.taxonomy, analysis.message, (err, res) => {
           logger.log('debug', 'Taxonomy saved', res);
-          callback(null, analysis);
+          db.saveKeywords(analysis.keywords, analysis.message, (err, res) => {
+            logger.log('debug', 'Keywords saved', res);
+            callback(null, analysis);
+          });
         });
       });
     });
@@ -34,12 +38,11 @@ module.exports = {
       response.emotions = emotions[0];
       db.getTaxonomy((err, taxonomy) => {
         response.taxonomy = taxonomy;
-        // db.getMessages(data, (err, messages) => {
-          // migrate to keywords
-          // remove data requirements - no start & end date
-          // response.messages = messages;
-        callback(null, response);
-        // });
+        db.getKeywords((err, keywords) => {
+          response.keywords = keywords;
+          logger.log('debug', 'analysis pulled', response);
+          callback(null, response);
+        });
       });
     });
   },

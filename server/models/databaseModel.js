@@ -37,8 +37,22 @@ module.exports = {
       callback(null, []);
       return;
     }
-    const query = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${taxonomy.label}","${taxonomy.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
-    db.query(query, dbCallback('Save Taxonomy', callback));
+    taxonomy.forEach((value) => {
+      const query = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${value.label}","${value.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
+      db.query(query, dbCallback('Save Taxonomy', (err, res) => {}));
+    });
+    callback(null, taxonomy);
+  },
+  saveKeywords: (keywords, message, callback) => {
+    if (!isPresent(keywords, 'keywords')) {
+      callback(null, []);
+      return;
+    }
+    keywords.forEach((keyword) => {
+      const query = `INSERT INTO KEYWORDS (relevance,keyword_text,msg_id) VALUES ("${keyword.relevance}","${keyword.text}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
+      db.query(query, dbCallback('Save Keywords', (err, res) => {}));
+    });
+    callback(null, keywords);
   },
   // getEmotions org as first argument?
   getEmotions: callback => {
@@ -52,5 +66,9 @@ module.exports = {
   getTaxonomy: callback => {
     const query = 'SELECT label, SUM(score), COUNT(*) AS times FROM taxonomy GROUP BY label';
     db.query(query, dbCallback('Get taxonomy', callback));
+  },
+  getKeywords: callback => {
+    const query = 'SELECT keyword_text, SUM(relevance), COUNT(*) AS times FROM keywords GROUP BY keyword_text';
+    db.query(query, dbCallback('Get keywords', callback));
   },
 };
