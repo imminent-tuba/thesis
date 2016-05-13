@@ -34,6 +34,8 @@ module.exports = {
   },
   getEmotions: (org, callbackSocket) => {
     analyzerModel.getEmotions(org, (err, analysis) => {
+      console.log('err', err);
+      console.log('analysis', analysis);
       if (err) {
         logger.log('error', 'getEmotions error - ', err);
         callbackSocket(err, null);

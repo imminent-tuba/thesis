@@ -4,6 +4,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import badWords from '../../resources/badWords.js';
+import TextField from 'material-ui/lib/TextField';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 export default class Chatroom extends React.Component {
 
@@ -24,7 +26,8 @@ export default class Chatroom extends React.Component {
 
   _handleSubmitEvent(e) {
     e.preventDefault();
-    const message = this.refs.currentInputMessage.value;
+    const message = this.refs.currentInputMessage.getValue();
+
     if (message === '') {
       return;
     } else if (!this.isBadWord(message)) {
@@ -32,7 +35,8 @@ export default class Chatroom extends React.Component {
     } else {
       this.props.reject();
     }
-    this.refs.currentInputMessage.value = '';
+    this.refs.currentInputMessage.setValue('');
+
   }
 
   render() {
@@ -45,11 +49,14 @@ export default class Chatroom extends React.Component {
       <div>
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
-            <input id="chatInput"
+            <TextField id="chatInput"
+              hintText="Message"
+              floatingLabelText="Message"
               type="text"
               ref='currentInputMessage'
             />
-            <button type='submit'> submit </button>
+
+            <RaisedButton label="Send" secondary={true} type='submit' />
           </form>
         </div>
         <List>

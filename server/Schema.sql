@@ -55,3 +55,6 @@ CREATE TABLE TAXONOMY (
   score double(10,6),
   FOREIGN KEY (msg_id) REFERENCES message(id)
 );
+
+INSERT INTO ORG (name) VALUES ("HackReactor");
+INSERT INTO USER (username, org_id, token) VALUES ("Charlie", 1 ,"xoxb-XXXXXXXXXXXX-TTTTTTTTTTTTTT");
