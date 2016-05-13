@@ -21,7 +21,7 @@ const isPresent = (data, type) => {
 
 module.exports = {
   saveMessage: (message, callback) => {
-    const query = `INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "${message}", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "${message}" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1`;
+    const query = `INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "${message}", (SELECT org_id from USER where username = "Charlie"),(SELECT id from USER where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "${message}" and user_id = (SELECT id from USER where username = "Charlie"))LIMIT 1`;
     db.query(query, dbCallback('Save Message', callback));
   },
   saveEmotions: (emotions, message, callback) => {
@@ -56,11 +56,11 @@ module.exports = {
   },
   // getEmotions org as first argument?
   getEmotions: callback => {
-    const query = 'SELECT SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join user u on m.user_id = u.id group by username';
+    const query = 'SELECT SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
     db.query(query, dbCallback('Get Emotions', callback));
   },
   getMessages: (data, callback) => {
-    const query = `SELECT m.text_msg, u.username FROM MESSAGE m inner join user u on m.user_id = u.id BETWEEN "${data.startDate}%"" AND "${data.endDate}%""`;
+    const query = `SELECT m.text_msg, u.username FROM MESSAGE m inner join USER u on m.user_id = u.id BETWEEN "${data.startDate}%"" AND "${data.endDate}%""`;
     db.query(query, dbCallback('Get Messages', callback));
   },
   getTaxonomy: callback => {
