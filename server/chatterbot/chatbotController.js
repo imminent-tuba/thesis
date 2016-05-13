@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
   socket.on('chat', (msg) => {
     logger.log('info', 'from bot -', ID, msg);
     msg = JSON.parse(msg);
-    callbacks[msg.id](null, msg.message);
+    callbacks[msg.id](null, msg.message.replace('\n', ''));
   });
 
   socket.on('disconnect', () => {

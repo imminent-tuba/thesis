@@ -56,5 +56,13 @@ CREATE TABLE TAXONOMY (
   FOREIGN KEY (msg_id) REFERENCES message(id)
 );
 
+CREATE TABLE KEYWORDS (
+  id int NOT NULL AUTO_INCREMENT primary key,
+  msg_id int not null,
+  relevance double(10,6),
+  keyword_text varchar(255),
+  FOREIGN KEY (msg_id) REFERENCES message(id)
+);
+
 INSERT INTO ORG (name) VALUES ("HackReactor");
 INSERT INTO USER (username, org_id, token) VALUES ("Charlie", 1 ,"xoxb-XXXXXXXXXXXX-TTTTTTTTTTTTTT");
