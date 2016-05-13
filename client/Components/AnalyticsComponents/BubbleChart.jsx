@@ -8,12 +8,11 @@ export default class BubbleChart extends React.Component {
 
   componentDidMount() {
     this.chart = chart();
+    this.chart(this.props.data);
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.data) {
-      this.chart(nextProps.data);
-    }
+    if (nextProps.data) { this.chart(nextProps.data); }
     return false;
   }
 
