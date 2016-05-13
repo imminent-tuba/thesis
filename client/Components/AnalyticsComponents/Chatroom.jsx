@@ -28,8 +28,6 @@ export default class Chatroom extends React.Component {
     e.preventDefault();
     const message = this.refs.currentInputMessage.getValue();
 
-    console.log('message', message);
-
     if (message === '') {
       return;
     } else if (!this.isBadWord(message)) {
