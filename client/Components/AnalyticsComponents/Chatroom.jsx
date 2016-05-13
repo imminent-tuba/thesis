@@ -27,9 +27,10 @@ export default class Chatroom extends React.Component {
   _handleSubmitEvent(e) {
     e.preventDefault();
     const message = this.refs.currentInputMessage.getValue();
-    if (!this.isBadWord(message)) {
-      this.props.sendChat(message);
-    } else if (message === '') {
+
+    console.log('message', message);
+
+    if (message === '') {
       return;
     } else if (!this.isBadWord(message)) {
       this.props.sendChat(message);
@@ -50,7 +51,7 @@ export default class Chatroom extends React.Component {
       <div>
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
-            <TextField
+            <TextField id="chatInput"
               hintText="Message"
               floatingLabelText="Message"
               type="text"

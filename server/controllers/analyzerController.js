@@ -13,10 +13,7 @@ AlchemyAPI.prototype.emotion = function(data, options, cb) {
 
 module.exports = {
   setAnalysis: (data) => {
-    console.log('Controller data ------> ', data);
     alchemyapi.emotion(data, {}, (errEmotion, responseEmotions) => {
-      console.log('Controller data errEmotion-> ', errEmotion);
-      console.log('Controller data responseEmotions-> ', responseEmotions);
       const alchemyData = {
         msg: data,
         channel: 'general',
@@ -37,6 +34,8 @@ module.exports = {
   },
   getEmotions: (org, callbackSocket) => {
     analyzerModel.getEmotions(org, (err, analysis) => {
+      console.log('err', err);
+      console.log('analysis', analysis);
       if (err) {
         logger.log('error', 'getEmotions error - ', err);
         callbackSocket(err, null);
