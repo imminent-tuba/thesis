@@ -64,11 +64,11 @@ module.exports = {
     db.query(query, dbCallback('Get Messages', callback));
   },
   getTaxonomy: callback => {
-    const query = 'SELECT label, SUM(score), COUNT(*) AS times FROM taxonomy GROUP BY label';
+    const query = 'SELECT label, SUM(score), COUNT(*) AS times FROM TAXONOMY GROUP BY label';
     db.query(query, dbCallback('Get taxonomy', callback));
   },
   getKeywords: callback => {
-    const query = 'SELECT keyword_text, SUM(relevance), COUNT(*) AS times FROM keywords GROUP BY keyword_text';
+    const query = 'SELECT keyword_text, SUM(relevance), COUNT(*) AS times FROM KEYWORDS GROUP BY keyword_text';
     db.query(query, dbCallback('Get keywords', callback));
   },
 };
