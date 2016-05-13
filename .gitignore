@@ -42,6 +42,7 @@ server/config/*.js
 server/chatterbot/chatterbot/*.pyc
 server/chatterbot/chatterbot/**/*.pyc
 server/chatterbot/chatterbot/**/**/*.pyc
+server/chatterbot/Levenshtein/__pycache__/__init__.cpython-35.pyc
 
 # extras
 extras/

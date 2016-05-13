@@ -3,11 +3,7 @@ import chart from './visualizations/taxChart.js';
 
 export default class Taxonomy extends React.Component {
   constructor(props) {
-    super();
-  }
-
-  componentWillMount() {
-    this.props.getEmotions();
+    super(props);
   }
 
   componentDidMount() {
@@ -28,5 +24,4 @@ export default class Taxonomy extends React.Component {
 
 Taxonomy.propTypes = {
   data: React.PropTypes.array,
-  getEmotions: React.PropTypes.func,
 };

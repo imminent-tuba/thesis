@@ -28,9 +28,11 @@ export default class SocketWrapper extends React.Component {
       this.setState({ chats: updateChat });
     });
 
-    socket.on('emotions', (emotions) => {
-      console.log('socket emotions ', emotions);
-      this.setState({ data: { emotions: emotions.emotions, taxonomy: emotions.taxonomy } });
+    socket.on('populateGraph', data => {
+      this.setState({ data: {
+        emotions: data.emotions,
+        taxonomy: data.taxonomy,
+      } });
     });
   }
 
@@ -55,9 +57,6 @@ export default class SocketWrapper extends React.Component {
           message: 'Don\'t be a troll please',
         });
         this.setState({ chats: updateChat });
-      },
-      getEmotions: () => {
-        socket.emit('emotions');
       },
     };
   }

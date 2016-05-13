@@ -8,12 +8,12 @@ module.exports = {
     const emotions = data.emotions;
     const taxonomy = data.taxonomy[0];
 
-    const queryMSG = 'INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "' + msg + '", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "' + msg + '" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1';
+    const queryMSG = `INSERT INTO MESSAGE (text_msg, org_id, user_id) SELECT * FROM (select "${msg}", (select org_id from user where username = "Charlie"),(select id from user where username = "Charlie")) AS temp WHERE NOT EXISTS (SELECT id FROM MESSAGE WHERE text_msg= "${msg}" and user_id = (SELECT id from user where username = "Charlie"))LIMIT 1`;
     db.query(queryMSG, (errMsg, resultsMsg) => {
-      const queryEmotions = 'INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("' + emotions.anger + '","' + emotions.disgust + '","' + emotions.fear + '","' + emotions.joy + '","' + emotions.sadness + '", (SELECT id FROM MESSAGE WHERE text_msg= "' + data.msg + '"))';
+      const queryEmotions = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE WHERE text_msg= "${data.msg}"))`;
       db.query(queryEmotions, (errEmotions, resultsEmotions) => {
         if (taxonomy) {
-          const queryTaxonomy = 'INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("' + taxonomy.label + '","' + taxonomy.score + '", (SELECT id FROM MESSAGE WHERE text_msg= "' + data.msg + '"))';
+          const queryTaxonomy = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${taxonomy.label}","${taxonomy.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${data.msg}"))`;
           db.query(queryTaxonomy, (errTaxonomy, resultsTaxonomy) => {
             callback(errTaxonomy, resultsTaxonomy);
           });
@@ -36,7 +36,7 @@ module.exports = {
     const startDate = data.startDate;
     const endDate = data.endDate;
 
-    const queryMSG = 'SELECT m.text_msg, u.username FROM MESSAGE m inner join user u on m.user_id = u.id BETWEEN "' + startDate + '%"" AND "' + endDate + '%""';
+    const queryMSG = `SELECT m.text_msg, u.username FROM MESSAGE m inner join user u on m.user_id = u.id BETWEEN "${startDate}%"" AND "${endDate}%""`;
     db.query(queryMSG, (errMsg, resultsMsg) => {
       callback(errMsg, resultsMsg);
     });

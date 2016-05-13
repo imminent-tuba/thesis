@@ -5,9 +5,7 @@ export default class EmotionBarChart extends React.Component {
   constructor(props) {
     super();
   }
-  componentWillMount() {
-    this.props.getEmotions();
-  }
+
   componentDidMount() {
     this.d3Node = this.refs.DOMnode;
     const chartSize = { width: '100%', height: '500px' };
@@ -19,7 +17,6 @@ export default class EmotionBarChart extends React.Component {
   shouldComponentUpdate(nextProps) {
     // reference to the SVG
     const el = this.d3Node.children[0];
-    // console.log(el);
     const chartSize = { width: '100%', height: '400px' };
     const data = this.handleEmotionData(nextProps.data);
     barchart.update(el, chartSize, data);

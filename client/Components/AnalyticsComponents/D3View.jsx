@@ -15,11 +15,11 @@ const D3View = ({ view, data, methods }) => {
     <div>
       {(() => {
         switch (view) {
-          case 'pie': return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
-          case 'bar': return <EmotionBarChart data={data.emotions} getEmotions={methods.getEmotions} />;
-          case 'bubble': return <BubbleChart data={data.emotions} getEmotions={methods.getEmotions} />;
-          case 'tax': return <Taxonomy data={data.taxonomy} getEmotions={methods.getEmotions} />;
-          default: return <EmotionPieChart data={data.emotions} getEmotions={methods.getEmotions} />;
+          case 'pie': return <EmotionPieChart data={data.emotions} />;
+          case 'bar': return <EmotionBarChart data={data.emotions} />;
+          case 'bubble': return <BubbleChart data={data.emotions} />;
+          case 'tax': return <Taxonomy data={data.taxonomy} />;
+          default: return <EmotionPieChart data={data.emotions} />;
         }
       })()}
     </div>
