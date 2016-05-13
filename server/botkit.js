@@ -2,7 +2,6 @@ const Botkit = require('botkit');
 const botkitModel = require('./models/botkitModel.js');
 const logger = require('./logger.js');
 const BOT_KEY = require('./config/botKey.js');
-const chatbot = require('./chatterbot/chatbotController.js');
 
 module.exports = () => {
   const controller = Botkit.slackbot({
@@ -20,6 +19,6 @@ module.exports = () => {
   // give the bot something to listen for.
   controller.on('ambient', (bot, message) => {
     logger.log('info', 'slack message - ', message.text);
-    botkitModel.trainingStore.push(message.text);
+    botkitModel.push(message.text);
   });
 };

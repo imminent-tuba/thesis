@@ -5,6 +5,7 @@ import sys
 
 threaded = True
 botID = sys.argv[1]
+trainList = []
 
 bot = ChatBot(
   "My ChatterBot",
@@ -30,8 +31,8 @@ socketIO = SocketIO(HOST, PORT)
 def connect():
   print('connected')
 
-trainList = []
 def training(msg):
+  global trainList
   if msg != 'end':
     trainList.append(msg)
   else:

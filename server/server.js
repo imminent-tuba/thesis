@@ -3,16 +3,18 @@ const express = require('express');
 const io = require('socket.io');
 const bodyparser = require('body-parser');
 const logger = require('./logger.js');
-const routes = require('./config/routes.js');
+const routes = require('./config/routes.js'); // TODO: Do we need this?
 const socketRoutes = require('./controllers/socketController.js');
+const botkitAutoTrain = require('./controllers/botkitController.js');
 const passport = require('passport'); // TODO: Do we need this?
 
 const app = express();
 routes(app); // TODO: Do we need these?
-app.use(passport.initialize()); // TODO: Do we need this
-app.use(passport.session()); // TODO: Do we need this
 const botkit = require('./botkit.js');
 botkit();
+botkitAutoTrain();
+app.use(passport.initialize()); // TODO: Do we need this
+app.use(passport.session()); // TODO: Do we need this
 
 /* config */
 app.use(express.static(`${__dirname}/../client`));
