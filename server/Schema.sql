@@ -12,7 +12,7 @@ CREATE TABLE BOT (
   ip varchar(39) not null,
   port int not null,
   org_id int,
-  FOREIGN KEY (org_id) REFERENCES org(id)
+  FOREIGN KEY (org_id) REFERENCES ORG(id)
 );
 
 CREATE TABLE USER (
@@ -21,7 +21,7 @@ CREATE TABLE USER (
   token varchar(40),
   type_user varchar(30) DEFAULT 'customer',
   org_id int,
-  FOREIGN KEY (org_id) REFERENCES org(id)
+  FOREIGN KEY (org_id) REFERENCES ORG(id)
 );
 
 CREATE TABLE MESSAGE(
@@ -32,9 +32,9 @@ CREATE TABLE MESSAGE(
   user_id int,
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   changed_at timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (bot_id) REFERENCES bot(id),
-  FOREIGN KEY (org_id) REFERENCES org(id),
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  FOREIGN KEY (bot_id) REFERENCES BOT(id),
+  FOREIGN KEY (org_id) REFERENCES ORG(id),
+  FOREIGN KEY (user_id) REFERENCES USER(id)
 );
 
 CREATE TABLE EMOTIONS (
@@ -45,7 +45,7 @@ CREATE TABLE EMOTIONS (
   fear double(10,6),
   joy double(10,6),
   sadness double(10,6),
-  FOREIGN KEY (msg_id) REFERENCES message(id)
+  FOREIGN KEY (msg_id) REFERENCES MESSAGE(id)
 );
 
 CREATE TABLE TAXONOMY (
@@ -53,7 +53,7 @@ CREATE TABLE TAXONOMY (
   msg_id int not null,
   label varchar(255),
   score double(10,6),
-  FOREIGN KEY (msg_id) REFERENCES message(id)
+  FOREIGN KEY (msg_id) REFERENCES MESSAGE(id)
 );
 
 CREATE TABLE KEYWORDS (
@@ -61,7 +61,7 @@ CREATE TABLE KEYWORDS (
   msg_id int not null,
   relevance double(10,6),
   keyword_text varchar(255),
-  FOREIGN KEY (msg_id) REFERENCES message(id)
+  FOREIGN KEY (msg_id) REFERENCES MESSAGE(id)
 );
 
 INSERT INTO ORG (name) VALUES ("HackReactor");
