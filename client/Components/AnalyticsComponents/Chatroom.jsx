@@ -46,7 +46,7 @@ export default class Chatroom extends React.Component {
     };
 
     return (
-      <div>
+      <div style={{ pointerEvents: 'auto' }} >
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
             <TextField id="chatInput"

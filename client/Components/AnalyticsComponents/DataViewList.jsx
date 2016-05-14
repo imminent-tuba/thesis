@@ -19,8 +19,8 @@ export default class DataViewList extends React.Component {
         width: '75%',
         height: '100%',
         display: 'inline-block',
-        float: 'left',
         margin: '16px 32px 16px 0',
+        pointerEvents: 'auto',
       },
       rightIcon: {
         textAlign: 'center',
