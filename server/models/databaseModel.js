@@ -13,7 +13,7 @@ const dbCallback = (action, callback) =>
 
 const isPresent = (data, type) => {
   if (!data.length) {
-    logger.log('debug', type, 'is empty');
+    logger.log('info', type, 'is empty');
     return false;
   }
   return true;
@@ -25,11 +25,11 @@ module.exports = {
     db.query(query, dbCallback('Save Message', callback));
   },
   saveEmotions: (emotions, message, callback) => {
-    if (!isPresent(emotions, 'emotions')) {
+    if (!isPresent(Object.keys(emotions), 'emotions')) {
       callback(null, []);
       return;
     }
-    const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
+    const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE where text_msg= "${message}"))`;
     db.query(query, dbCallback('Save Emotions', callback));
   },
   saveTaxonomy: (taxonomy, message, callback) => {

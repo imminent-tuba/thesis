@@ -8,7 +8,7 @@ export default class EmotionPieChart extends React.Component {
 
   render() {
     let sumEmotions = 0;
-    if (!this.props.data.anger) {
+    if (!Object.keys(this.props.data).length) {
       return (<div></div>);
     } else {
       for (let key in this.props.data) {
