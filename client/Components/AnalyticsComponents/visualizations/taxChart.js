@@ -21,7 +21,7 @@ module.exports = () => {
 
   const force = d3.layout.force()
       .charge(-250)
-      .linkDistance(60)
+      .linkDistance(40)
       .nodes(chartData.nodes)
       .links(chartData.links)
       .size([width * 0.83, height * 0.85])

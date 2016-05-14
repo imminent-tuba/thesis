@@ -52,7 +52,7 @@ def on_chat(msg):
     r = threading.Thread(target=chat, args=([msg['id'], msg['message']]))
     r.start()
   else:
-    chat(msg)
+    chat(msg['id'], msg['message'])
 
 def sendID():
   socketIO.emit('botID', botID)
