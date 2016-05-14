@@ -8,11 +8,12 @@ export default class Taxonomy extends React.Component {
 
   componentDidMount() {
     this.chart = chart();
-    this.chart(this.props.data);
+    this.chart.update(this.props.data);
+    window.addEventListener('resize', this.chart.resize);
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.data) { this.chart(nextProps.data); }
+    if (nextProps.data) { this.chart.update(nextProps.data); }
     return false;
   }
 

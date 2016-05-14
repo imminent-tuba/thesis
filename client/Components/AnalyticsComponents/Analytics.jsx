@@ -22,23 +22,50 @@ class Analytics extends React.Component {
     this.setState({ d3View: view });
   }
 
+  styleA() {
+    return {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      top: '70px',
+      left: '10px',
+      pointerEvents: 'none',
+      background: 'none',
+    };
+  }
+
+  styleB() {
+    return {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      top: '70px',
+      left: '10px',
+      pointerEvents: 'auto',
+    };
+  }
+
   render() {
     const methods = this.props.methods;
     return (
       <div>
         <Grid fluid>
-          <Row>
+          <Row style={this.styleB()}>
+            <Col md={12}>
+              <D3View
+                  data={this.props.data}
+                  view={this.state.d3View}
+                  methods={this.props.methods}
+                />
+            </Col>
+          </Row>
+          <Row style={this.styleA()}>
             <Col md={3}>
               <DataViewList
                 handleClick={this.handleDataViewListClick.bind(this)}
               />
             </Col>
             <Col md={5}>
-              <D3View
-                data={this.props.data}
-                view={this.state.d3View}
-                methods={this.props.methods}
-              />
             </Col>
             <Col md={4}>
               <Chatroom

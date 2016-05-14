@@ -10,14 +10,13 @@ const D3View = ({ view, data, methods }) => {
     view: React.PropTypes.string,
     methods: React.PropTypes.object,
   };
-
   return (
     <div>
       {(() => {
         switch (view) {
           case 'pie': return <EmotionPieChart data={data.emotions} />;
           case 'bar': return <EmotionBarChart data={data.emotions} />;
-          case 'bubble': return <BubbleChart data={data.emotions} />;
+          case 'bubble': return <BubbleChart data={data.keywords} />;
           case 'tax': return <Taxonomy data={data.taxonomy} />;
           default: return <EmotionPieChart data={data.emotions} />;
         }

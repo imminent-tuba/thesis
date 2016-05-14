@@ -1,10 +1,10 @@
 import d3 from 'd3';
 import taxUpdate from './taxParser.js';
 
-const width = 500;
-const height = 500;
-
 module.exports = () => {
+  let width = window.innerWidth;
+  const height = window.innerHeight - 100;
+
   const svg = d3.select('#d3container').append('svg')
     .attr('width', width)
     .attr('height', height);
@@ -19,12 +19,12 @@ module.exports = () => {
     links: [],
   };
 
-  let force = d3.layout.force()
+  const force = d3.layout.force()
       .charge(-250)
-      .linkDistance(40)
+      .linkDistance(60)
       .nodes(chartData.nodes)
       .links(chartData.links)
-      .size([width, height])
+      .size([width * 0.83, height * 0.85])
       .start();
 
   const update = () => {
@@ -44,7 +44,7 @@ module.exports = () => {
     nodes.enter().append('circle')
         .attr('class', 'bubble')
         .style('position', 'absolute')
-        .attr('r', d => Math.sqrt(d.r * 200))
+        .attr('r', d => Math.sqrt(d.r * 100))
         .style('fill', d => {
           if (d.color) {
             return d.color;
@@ -58,7 +58,16 @@ module.exports = () => {
         .attr('class', 'label')
         .attr('x', d => d.x)
         .attr('y', d => d.y)
+        .style('font-family', 'Arial')
         .style('text-anchor', 'middle')
+        .style('fill', 'white')
+        .style('font-weight', 'bold')
+        .style('fill-opacity', 1)
+        .style('stroke', '#000000')
+        .style('stroke-width', '1px')
+        .style('stroke-linecap', 'butt')
+        .style('stroke-linejoin', 'miter')
+        .style('stroke-opacity', 1)
         .text(d => d.name)
         .call(force.drag);
 
@@ -76,7 +85,7 @@ module.exports = () => {
 
     nodes.attr('cx', d => d.x)
         .attr('cy', d => d.y)
-        .attr('r', d => Math.sqrt(d.r * 200));
+        .attr('r', d => Math.sqrt(d.r * 100));
 
     text.attr('x', d => d.x)
         .attr('y', d => d.y);
@@ -84,9 +93,16 @@ module.exports = () => {
 
   d3.timer(update);
 
-  return tax => {
-    force.stop();
-    chartData = taxUpdate(tax, chartData);
-    force.start();
+  return {
+    update: tax => {
+      force.stop();
+      chartData = taxUpdate(tax, chartData);
+      force.start();
+    },
+    resize: () => {
+      force.stop();
+      width = window.innerWidth;
+      force.size([width * 0.83, height * 0.85]).start();
+    },
   };
 };

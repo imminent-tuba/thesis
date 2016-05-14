@@ -10,7 +10,8 @@ export default class SocketWrapper extends React.Component {
       chats: [],
       data: {
         emotions: {},
-        taxonomy: {},
+        taxonomy: [],
+        keywords: [],
         // all data to generate graphs held in state here
         // state is passed down to app
         // to be passed down to d3View
@@ -29,10 +30,7 @@ export default class SocketWrapper extends React.Component {
     });
 
     socket.on('populateGraph', data => {
-      this.setState({ data: {
-        emotions: data.emotions,
-        taxonomy: data.taxonomy,
-      } });
+      this.setState({ data });
     });
   }
 
