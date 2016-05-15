@@ -30,6 +30,15 @@ export default class SocketWrapper extends React.Component {
     });
 
     socket.on('populateGraph', data => {
+      if (!data.emotions) {
+        data.emotions = this.state.data.emotions;
+      }
+      if (!data.taxonomy) {
+        data.taxonomy = this.state.data.taxonomy;
+      }
+      if (!data.keywords) {
+        data.keywords = this.state.data.keywords;
+      }
       this.setState({ data });
     });
   }
