@@ -66,3 +66,5 @@ CREATE TABLE KEYWORDS (
 
 INSERT INTO ORG (name) VALUES ("HackReactor");
 INSERT INTO USER (username, org_id, token) VALUES ("Charlie", 1 ,"xoxb-XXXXXXXXXXXX-TTTTTTTTTTTTTT");
+INSERT INTO USER (username, org_id, token) VALUES ("Slack", 1 ,"xoxc-XXXXXXXXXXXX-TTTTTTTTTTTTTT");
+
