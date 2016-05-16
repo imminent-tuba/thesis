@@ -1,6 +1,6 @@
 // export the router to be rendered at entry.jsx
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 // TODO: implement redirects
 import AnalyticsSockets from './Analytics.Sockets.jsx';
 

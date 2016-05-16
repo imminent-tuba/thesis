@@ -18,6 +18,7 @@ module.exports = {
     });
   },
   saveAnalysis: (analysis, callback) => {
+    console.log('from analysisctrl', analysis);
     db.saveMessage(analysis.message, (err, res) => {
       logger.log('debug', 'Message saved', res);
       db.saveEmotions(analysis.emotions, analysis.message, (err, res) => {
@@ -47,4 +48,3 @@ module.exports = {
     });
   },
 };
-
