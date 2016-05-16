@@ -27,7 +27,6 @@ module.exports = {
   saveEmotions: (emotions, message, callback) => {
     // const message_id = 0;
     const get_message_id = db.query('SELECT id FROM MESSAGE where text_msg='+ message +  'LIMIT 1)', (err, res) => {
-      console.log('response back from db', res);
       let message_id = res;
     });
 
@@ -37,7 +36,6 @@ module.exports = {
       return;
     }
     const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE where text_msg= "${message}" LIMIT 1))`;
-    console.log('***********CALLBACK***', callback);
     db.query(query, dbCallback('Save Emotions', callback));
   },
   saveTaxonomy: (taxonomy, message, callback) => {
