@@ -1,3 +1,5 @@
+/*use 'esversion:6'*/
+
 import d3 from 'd3';
 import _ from 'lodash';
 
@@ -75,6 +77,7 @@ barChart.update = (el, props, data) => {
   const yAxis = d3.svg.axis().scale(yScale).orient('left');
 
   const svg = d3.select('#barChart');
+  console.log(data);
   svg.selectAll('rect')
     .data(data)
     .transition()
@@ -85,6 +88,7 @@ barChart.update = (el, props, data) => {
     .attr('width', xScale.rangeBand());
     // .attr('text-anchor', 'middle')
     // .attr('fill', 'green')
+
 };
 
 export default barChart;

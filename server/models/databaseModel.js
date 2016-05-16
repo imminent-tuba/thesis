@@ -25,11 +25,17 @@ module.exports = {
     db.query(query, dbCallback('Save Message', callback));
   },
   saveEmotions: (emotions, message, callback) => {
+    // const message_id = 0;
+    const get_message_id = db.query('SELECT id FROM MESSAGE where text_msg='+ message +  'LIMIT 1)', (err, res) => {
+      let message_id = res;
+    });
+
+
     if (!isPresent(Object.keys(emotions), 'emotions')) {
       callback(null, []);
       return;
     }
-    const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE where text_msg= "${message}"))`;
+    const query = `INSERT INTO EMOTIONS (anger,disgust,fear,joy,sadness,msg_id) VALUES ("${emotions.anger}","${emotions.disgust}","${emotions.fear}","${emotions.joy}","${emotions.sadness}", (SELECT id FROM MESSAGE where text_msg= "${message}" LIMIT 1))`;
     db.query(query, dbCallback('Save Emotions', callback));
   },
   saveTaxonomy: (taxonomy, message, callback) => {
@@ -38,7 +44,7 @@ module.exports = {
       return;
     }
     taxonomy.forEach((value) => {
-      const query = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${value.label}","${value.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
+      const query = `INSERT INTO TAXONOMY (label,score,msg_id) VALUES ("${value.label}","${value.score}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}" LIMIT 1))`;
       db.query(query, dbCallback('Save Taxonomy', (err, res) => {}));
     });
     callback(null, taxonomy);
@@ -49,7 +55,7 @@ module.exports = {
       return;
     }
     keywords.forEach((keyword) => {
-      const query = `INSERT INTO KEYWORDS (relevance,keyword_text,msg_id) VALUES ("${keyword.relevance}","${keyword.text}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}"))`;
+      const query = `INSERT INTO KEYWORDS (relevance,keyword_text,msg_id) VALUES ("${keyword.relevance}","${keyword.text}", (SELECT id FROM MESSAGE WHERE text_msg= "${message}" LIMIT 1))`;
       db.query(query, dbCallback('Save Keywords', (err, res) => {}));
     });
     callback(null, keywords);

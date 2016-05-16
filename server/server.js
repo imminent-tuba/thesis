@@ -12,7 +12,7 @@ const app = express();
 routes(app); // TODO: Do we need these?
 const botkit = require('./botkit.js');
 botkit();
-botkitAutoTrain();
+botkitAutoTrain.botkitAutoTrain();
 app.use(passport.initialize()); // TODO: Do we need this
 app.use(passport.session()); // TODO: Do we need this
 
