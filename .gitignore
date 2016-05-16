@@ -46,4 +46,5 @@ server/chatterbot/Levenshtein/__pycache__/__init__.cpython-35.pyc
 
 # extras
 extras/
+.DS_Store
 *.DS_Store

@@ -15,7 +15,7 @@ module.exports = () => {
       .distance(100)
       .charge(-150)
       .nodes(chartData)
-      .size([width, height]);
+      .size([width * 0.8, height * 0.8]);
 
   function collide(node) {
     var r = node.r + 8,
@@ -41,15 +41,6 @@ module.exports = () => {
     };
   }
 
-  const testBounds = (node) => {
-    if (node.x < 0 || node.x > width - (node.r * 2)) {
-      node.x = node.x < 0 ? 0 : width - (node.r * 2);
-    }
-    if (node.y < 0 || node.y > height - (node.r * 2)) {
-      node.y = node.y < 0 ? 0 : height - (node.r * 2);
-    }
-  };
-
   force.start();
 
   const update = () => {
@@ -59,7 +50,6 @@ module.exports = () => {
 
     while (++i < n) {
       q.visit(collide(chartData[i]));
-      testBounds(chartData[i]);
     }
 
     const charts = svg.selectAll('.bubble')
@@ -137,7 +127,7 @@ module.exports = () => {
     resize: () => {
       force.stop();
       width = window.innerWidth;
-      force.size([width, height]).start();
+      force.size([width * 0.8, height * 0.8]).start();
     },
   };
 };
