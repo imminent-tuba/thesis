@@ -21,8 +21,7 @@ module.exports = () => {
 
   controller.on('direct_mention', (bot, message) => {
     botKitcontroller.respondAnalyzeAndStore(message.text, (err, res) => {
-      console.log('Received Message is : ', message);
-      console.log('Received response is : ', res);
+      logger.log('info', 'Successful direct_mention');
       bot.reply(message, res);
     });
   });

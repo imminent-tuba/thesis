@@ -6,6 +6,7 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import badWords from '../../resources/badWords.js';
 import TextField from 'material-ui/lib/TextField';
 import RaisedButton from 'material-ui/lib/raised-button';
+import Avatar from 'material-ui/lib/avatar';
 
 export default class Chatroom extends React.Component {
 
@@ -69,8 +70,15 @@ export default class Chatroom extends React.Component {
             } else {
               /* when bot's message */
               return (
+              <div>
+                <Avatar
+                  src="../../../../favicon.ico"
+                  size={30}
+                  style={style}
+                />
                 <ListItem primaryText={val.message} key={idx}/>
-              );
+              </div>
+                );
             }
           })}
         </List>
