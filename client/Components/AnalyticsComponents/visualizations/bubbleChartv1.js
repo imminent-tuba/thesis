@@ -41,15 +41,6 @@ module.exports = () => {
     };
   }
 
-  const testBounds = (node) => {
-    if (node.x < 0 || node.x > width - (node.r * 2)) {
-      node.x = node.x < 0 ? 0 : width - (node.r * 2);
-    }
-    if (node.y < 0 || node.y > height - (node.r * 2)) {
-      node.y = node.y < 0 ? 0 : height - (node.r * 2);
-    }
-  };
-
   force.start();
 
   const update = () => {
@@ -59,7 +50,6 @@ module.exports = () => {
 
     while (++i < n) {
       q.visit(collide(chartData[i]));
-      testBounds(chartData[i]);
     }
 
     const charts = svg.selectAll('.bubble')

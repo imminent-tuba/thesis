@@ -28,6 +28,12 @@ module.exports = () => {
         .attr('cx', d => d.x)
         .attr('cy', d => d.y);
 
+    lines.transition().duration(100)
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+
     nodes.enter().append('circle')
         .attr('class', 'bubble')
         .style('position', 'absolute')

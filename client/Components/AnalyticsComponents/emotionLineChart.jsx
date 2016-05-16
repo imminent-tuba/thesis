@@ -30,7 +30,7 @@ export default class TimeChart extends React.Component {
     return (
       <Grid fluid>
         <Row>
-          <Col md={2}>
+          <Col style={{ position: 'absolute', bottom: 300, left: 150, fontFamily: 'Arial' }}>
             <h4 style={{ color: this.colors.anger }}>Anger</h4>
             <h4 style={{ color: this.colors.sadness }}>Sadness</h4>
             <h4 style={{ color: this.colors.fear }}>Fear</h4>

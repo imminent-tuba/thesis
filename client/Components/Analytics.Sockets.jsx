@@ -17,9 +17,6 @@ export default class SocketWrapper extends React.Component {
         // to be passed down to d3View
       },
     };
-  }
-
-  componentWillMount() {
     socket.on('message', (msg) => {
       const updateChat = this.state.chats.splice(0);
       updateChat.unshift({
