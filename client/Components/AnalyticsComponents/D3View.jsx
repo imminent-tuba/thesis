@@ -3,6 +3,7 @@ import EmotionPieChart from './EmotionPieChart.jsx';
 import EmotionBarChart from './EmotionBarChart.jsx';
 import Taxonomy from './Taxonomy.jsx';
 import BubbleChart from './BubbleChart.jsx';
+import RealTimeGraph from './RealTimeGraph.jsx';
 
 const D3View = ({ view, data, methods }) => {
   D3View.propTypes = {
@@ -18,6 +19,7 @@ const D3View = ({ view, data, methods }) => {
           case 'bar': return <EmotionBarChart data={data.emotions} />;
           case 'bubble': return <BubbleChart data={data.keywords} />;
           case 'tax': return <Taxonomy data={data.taxonomy} />;
+          case 'realTime': return <RealTimeGraph data={data.emotions} />;
           default: return <EmotionPieChart data={data.emotions} />;
         }
       })()}
