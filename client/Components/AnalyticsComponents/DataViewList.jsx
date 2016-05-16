@@ -36,6 +36,7 @@ export default class DataViewList extends React.Component {
           <MenuItem primaryText="Bubble Chart" rightIcon={<img height="27" width="25" src="https://www.miosoft.com/img/Scalable-Graph.png" />} onClick={() => this.props.handleClick('bubble')} />
           <MenuItem primaryText="Taxonomy" rightIcon={<img height="27" width="25" src="http://kamber.com.au/wp-content/uploads/2013/09/1378900097_basic3-137_relations_graph_connections_structure.png" />} onClick={() => this.props.handleClick('tax')} />
           <MenuItem primaryText="Real Time Emotions" rightIcon={<img height="27" width="25" src="http://kamber.com.au/wp-content/uploads/2013/09/1378900097_basic3-137_relations_graph_connections_structure.png" />} onClick={() => this.props.handleClick('realTime')} />
+          <MenuItem primaryText="Over Time" rightIcon={<img height="27" width="25" src="http://kamber.com.au/wp-content/uploads/2013/09/1378900097_basic3-137_relations_graph_connections_structure.png" />} onClick={() => this.props.handleClick('time')} />
         </Menu>
       </Paper>
     );
