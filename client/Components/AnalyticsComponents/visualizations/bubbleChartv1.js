@@ -106,7 +106,7 @@ module.exports = () => {
         for (let n in chartData) {
           if (keywords[i].keyword_text === chartData[n].text) {
             chartData[n].val = keywords[i]['SUM(relevance)'];
-            chartData[n].r = Math.ceil(keywords[i]['SUM(relevance)'] * 50);
+            chartData[n].r = Math.ceil(Math.sqrt(keywords[i]['SUM(relevance)'] * 1000));
             found = true;
             break;
           }
@@ -117,7 +117,7 @@ module.exports = () => {
             val: keywords[i]['SUM(relevance)'],
             x: Math.ceil(Math.random() * width),
             y: Math.ceil(Math.random() * height),
-            r: Math.ceil(keywords[i]['SUM(relevance)'] * 50),
+            r: Math.ceil(Math.sqrt(keywords[i]['SUM(relevance)'] * 1000)),
           };
           chartData.push(newVal);
         }
