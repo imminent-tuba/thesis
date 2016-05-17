@@ -37,7 +37,6 @@ export default class SocketWrapper extends React.Component {
         data.keywords = this.state.data.keywords;
       }
       this.setState({ data });
-      console.log(data.emotionsTime);
     });
   }
 
