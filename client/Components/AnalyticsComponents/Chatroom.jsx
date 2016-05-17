@@ -9,6 +9,10 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import Avatar from 'material-ui/lib/avatar';
 
 export default class Chatroom extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !(nextProps.chats.length === this.props.chats.length);
+  }
+
   componentDidUpdate() {
     document.getElementById('chatInput').focus();
     document.getElementById('chatInput').select();

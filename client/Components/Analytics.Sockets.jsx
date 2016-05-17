@@ -62,6 +62,9 @@ export default class SocketWrapper extends React.Component {
         });
         this.setState({ chats: updateChat });
       },
+      connect: () => {
+        socket.emit('data');
+      },
     };
   }
 

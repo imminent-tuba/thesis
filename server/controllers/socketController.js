@@ -11,9 +11,10 @@ module.exports = ioServer => {
   }, DATA_REFRESH_RATE);
 
   ioServer.on('connection', socket => {
-    chat.callDb(socket, true);
     logger.log('info', 'a user connected: ', socket.conn.id);
     clients[socket.conn.id] = { org: 'HackReactor' };
+
+    socket.on('data', () => chat.callDb(socket, true));
 
     socket.on('userInfo', info => {
       // TODO only log single parameter from client info
