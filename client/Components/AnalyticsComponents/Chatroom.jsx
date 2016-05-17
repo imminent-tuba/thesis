@@ -65,20 +65,30 @@ export default class Chatroom extends React.Component {
             /* when user's message */
             if(val.user === 'user') {
               return (
-                <ListItem primaryText={val.message} style={innerDivStyle[val.id]} key={idx}/>
+                <ListItem
+                  leftAvatar={
+                    <Avatar
+                      src='../../../user.ico'
+                    />
+                  }
+                  primaryText={val.message}
+                  style={innerDivStyle[val.id]}
+                  key={idx}
+                />
               );
             } else {
               /* when bot's message */
               return (
-              <div>
-                <Avatar
-                  src="../../../../favicon.ico"
-                  size={30}
-                  style={style}
-                />
-                <ListItem primaryText={val.message} key={idx}/>
-              </div>
-                );
+              <ListItem
+                leftAvatar={
+                  <Avatar
+                    src='../../../favicon.ico'
+                  />
+                }
+                primaryText={val.message}
+                key={idx}
+              />
+              );
             }
           })}
         </List>
