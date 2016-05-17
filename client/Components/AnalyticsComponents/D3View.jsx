@@ -6,27 +6,36 @@ import BubbleChart from './BubbleChart.jsx';
 import RealTimeGraph from './RealTimeGraph.jsx';
 import TimeChart from './emotionLineChart.jsx';
 
-const D3View = ({ view, data, methods }) => {
-  D3View.propTypes = {
-    data: React.PropTypes.object,
-    view: React.PropTypes.string,
-    methods: React.PropTypes.object,
-  };
-  return (
-    <div>
-      {(() => {
-        switch (view) {
-          case 'pie': return <EmotionPieChart data={data.emotions} />;
-          case 'bar': return <EmotionBarChart data={data.emotions} />;
-          case 'bubble': return <BubbleChart data={data.keywords} />;
-          case 'tax': return <Taxonomy data={data.taxonomy} />;
-          case 'realTime': return <RealTimeGraph data={data.emotions} />;
-          case 'time': return <TimeChart data={data.taxonomy} />;
-          default: return <EmotionPieChart data={data.emotions} />;
-        }
-      })()}
-    </div>
-  );
-};
+export default class D3View extends React.Component {
+  constructor(props) {
+    super();
+  }
 
-export default D3View;
+  componentDidMount() {
+    this.props.methods.connect();
+  }
+
+  render() {
+    return (
+      <div>
+        {(() => {
+          switch (this.props.view) {
+            case 'pie': return <EmotionPieChart data={this.props.data.emotions} />;
+            case 'bar': return <EmotionBarChart data={this.props.data.emotions} />;
+            case 'bubble': return <BubbleChart data={this.props.data.keywords} />;
+            case 'tax': return <Taxonomy data={this.props.data.taxonomy} />;
+            case 'realTime': return <RealTimeGraph data={this.props.data.emotions} />;
+            case 'time': return <TimeChart data={this.props.data.taxonomy} />;
+            default: return <EmotionPieChart data={this.props.data.emotions} />;
+          }
+        })()}
+      </div>
+    );
+  }
+}
+
+D3View.propTypes = {
+  data: React.PropTypes.object,
+  view: React.PropTypes.string,
+  methods: React.PropTypes.object,
+};

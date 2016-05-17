@@ -60,16 +60,16 @@ module.exports = () => {
         .data(chartData);
 
     charts.transition().duration(30)
-        .attr('x', (d) => d.x)
-        .attr('y', (d) => d.y);
+        .attr('x', d => d.x)
+        .attr('y', d => d.y);
 
     charts.enter().append('image')
         .attr('class', 'bubble')
         .style('position', 'absolute')
-        .attr('x', (d) => d.x)
-        .attr('y', (d) => d.y)
-        .attr('width', (d) => d.r * 2)
-        .attr('height', (d) => d.r * 2)
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .attr('width', d => d.r * 2)
+        .attr('height', d => d.r * 2)
         .attr('xlink:href', '../assets/bubble.png');
 
     text.enter().append('text')
