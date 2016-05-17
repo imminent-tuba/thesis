@@ -77,7 +77,7 @@ export default class Chatroom extends React.Component {
             <RaisedButton label="Send" secondary={true} type="submit" />
           </form>
         </div>
-        <List>
+        <List style={{ 'background-color': 'rgba(0,0,0,0.1)', 'font-weight': 'bold', 'text-shadow': '0px 0px 3px #fff' }}>
           {this.props.chats.map((val, idx) => {
             let avatar = val.user === 'user' ? '../../../user.ico' : '../../../favicon.ico';
             return (

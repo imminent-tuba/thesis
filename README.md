@@ -1,6 +1,6 @@
 # Charlie Chatterbot
 
-ec2-52-11-162-224.us-west-2.compute.amazonaws.com:1337  ---  52.11.162.224
+uai.website
 
 ### Machine Learning Slackbot + Data Visualizations
 Charlie the Chatterbot learns more and more over time.  It can be [difficult](http://blogs.microsoft.com/blog/2016/03/25/learning-tays-introduction/) to keep track of what a machine learning bot is learning, so we run the conversations through sentiment analysis and display live graphs on the "personality" of the bot.
@@ -12,6 +12,7 @@ If you need to set up a Python dev environment, check out this [guide](https://g
 From the root directory,
 ```
 npm install
+pip install -r requirememnts.txt
 ```
 
 ### Usage
@@ -20,21 +21,38 @@ npm install
 Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
 
 ### Contributing
-To start the server using the babel transpiler and nodemon, run
 ```
-$ npm run start
-```
-The front end code is packaged with webpack. It is nice to have two terminal windows open with nodemon
-running in one and webpack running in the other. This way you can see errors in either process.
-To start webpack, run
-```
-$ npm run webpack
+
 ```
 
 #### INITIALIZING THE DB
-mysql, need to make a table called chatanalysis
+This project uses mysql for the node/express server, and Mongodb for the chatterbot. Both must be installed and running.
+
+#### initialize the mysql database with the schema file
 ```
 $ mysql -u root < server/Schema.sql
+
+```
+if your mysql instance needs a password add -p <password> to this command
+
+#### start mongo
+```
+$ mongod
+```
+
+It is recommended that each of the following commands is run in it's own terminal window.
+
+#### 1. Run webpack to package the front-end code
+```
+$ npm run webpack
+```
+#### 2. Run the server using nodemon
+```
+$ nodemon server/server.js
+```
+#### 3. Run the chatterbot
+```
+$ nodemon server/chatterbot/chatterbot_entry.js
 ```
 
 ### Authors
