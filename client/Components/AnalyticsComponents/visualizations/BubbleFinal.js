@@ -88,7 +88,7 @@ module.exports = () => {
         .attr('xlink:href', (d) => {
           return 'http://zurapps.com/all/wp-content/uploads/2013/08/' + colorArray[2] + 'Bubble.png';
         });
-// colorArray[Math.floor(Math.random() * 8)]
+        
     text.enter().append('text')
         .attr('class', 'label')
         .attr("dy", ".3em")
@@ -147,15 +147,3 @@ module.exports = () => {
     },
   };
 };
-
-
-      // if (!found) {
-      //   const newVal = {
-      //     name: i,
-      //     val: keywords[i]['SUM(relevance)'],
-      //     x: Math.ceil(Math.random() * width-40),
-      //     y: Math.ceil(Math.random() * height-40),
-      //     r: Math.ceil(keywords[i]['SUM(relevance)'] * 50),
-      //   };
-      //   chartData.push(newVal);
-      // }
