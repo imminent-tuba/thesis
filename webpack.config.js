@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
   // entry point needs to be entry.jsx
   entry: './client/entry.jsx',
@@ -25,4 +27,14 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.ProvidePlugin({
+      react: 'react',
+    }),
+  ],
 };
