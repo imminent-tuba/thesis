@@ -6,4 +6,3 @@ import App from './Components/App.jsx';
 
 
 render(<App />, document.getElementById('app'));
-  

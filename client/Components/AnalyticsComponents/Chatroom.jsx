@@ -9,7 +9,6 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import Avatar from 'material-ui/lib/avatar';
 
 export default class Chatroom extends React.Component {
-
   componentDidUpdate() {
     document.getElementById('chatInput').focus();
     document.getElementById('chatInput').select();
@@ -28,7 +27,6 @@ export default class Chatroom extends React.Component {
   _handleSubmitEvent(e) {
     e.preventDefault();
     const message = this.refs.currentInputMessage.getValue();
-
     if (message === '') {
       return;
     } else if (!this.isBadWord(message)) {
@@ -37,7 +35,17 @@ export default class Chatroom extends React.Component {
       this.props.reject();
     }
     this.refs.currentInputMessage.setValue('');
-
+  }
+  handleEnterPress() {
+    const message = this.refs.currentInputMessage.getValue();
+    if (message === '') {
+      return;
+    } else if (!this.isBadWord(message)) {
+      this.props.sendChat(message);
+    } else {
+      this.props.reject();
+    }
+    this.refs.currentInputMessage.setValue('');
   }
 
   render() {
@@ -51,45 +59,31 @@ export default class Chatroom extends React.Component {
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
             <TextField id="chatInput"
-              hintText="Message"
+              multiLine={true}
               floatingLabelText="Message"
               type="text"
-              ref='currentInputMessage'
+              ref="currentInputMessage"
+              onKeyDown={(e) => { if (e.keyCode === 13) { e.preventDefault(); this.handleEnterPress(); } }}
             />
 
-            <RaisedButton label="Send" secondary={true} type='submit' />
+            <RaisedButton label="Send" secondary={true} type="submit" />
           </form>
         </div>
         <List>
-          {this.props.chats.map( (val, idx) => {
-            /* when user's message */
-            if(val.user === 'user') {
-              return (
-                <ListItem
-                  leftAvatar={
-                    <Avatar
-                      src='../../../user.ico'
-                    />
-                  }
-                  primaryText={val.message}
-                  style={innerDivStyle[val.id]}
-                  key={idx}
-                />
-              );
-            } else {
-              /* when bot's message */
-              return (
+          {this.props.chats.map((val, idx) => {
+            let avatar = val.user === 'user' ? '../../../user.ico' : '../../../favicon.ico';
+            return (
               <ListItem
                 leftAvatar={
                   <Avatar
-                    src='../../../favicon.ico'
+                    src={avatar}
                   />
                 }
                 primaryText={val.message}
+                style={innerDivStyle[val.id]}
                 key={idx}
               />
-              );
-            }
+            );
           })}
         </List>
       </div>
