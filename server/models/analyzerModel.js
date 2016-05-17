@@ -41,19 +41,17 @@ module.exports = {
     const startDate = data.startDate;
     const endDate = data.endDate;
 
-    const queryMSG = `SELECT m.text_msg, u.username FROM MESSAGE m inner join user u on m.user_id = u.id BETWEEN "${startDate}%"" AND "${endDate}%""`;
+    const queryMSG = `SELECT m.text_msg from MESSAGE m inner join EMOTIONS e on e.id = m.id WHERE e.created_at BETWEEN "'${startDate}%'" AND "'${endDate}%'"`;
     db.query(queryMSG, (errMsg, resultsMsg) => {
       if (errMsg) {
         logger.log('debug', 'Response Retreive MESSAGES - ', errMsg);
       } else {
-        callback(errMsg, resultsMsg);  
+        callback(errMsg, resultsMsg);
       }
     });
   },
 
   getTaxonomy: (data, callback) => {
-    const org = data.org;
-
     const queryMSG = 'SELECT label, SUM(score), COUNT(*) AS times FROM taxonomy GROUP BY label';
     db.query(queryMSG, (err, results) => {
       if (err) {

@@ -62,11 +62,11 @@ module.exports = {
   },
   // getEmotions org as first argument?
   getEmotions: callback => {
-    const query = 'SELECT SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness, u.username FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
+    const query = 'SELECT SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS e inner join MESSAGE m on e.msg_id = m.id inner join USER u on m.user_id = u.id group by username';
     db.query(query, dbCallback('Get Emotions', callback));
   },
   getMessages: (data, callback) => {
-    const query = `SELECT m.text_msg, u.username FROM MESSAGE m inner join USER u on m.user_id = u.id BETWEEN "${data.startDate}%"" AND "${data.endDate}%""`;
+    const query = `SELECT m.text_msg from MESSAGE m inner join EMOTIONS e on e.id = m.id WHERE e.created_at BETWEEN "'${data.startDate}%'" AND "'${data.endDate}%'"`;
     db.query(query, dbCallback('Get Messages', callback));
   },
   getTaxonomy: callback => {
@@ -76,5 +76,25 @@ module.exports = {
   getKeywords: callback => {
     const query = 'SELECT keyword_text, SUM(relevance), COUNT(*) AS times FROM KEYWORDS GROUP BY keyword_text';
     db.query(query, dbCallback('Get keywords', callback));
+  },
+  getEmotionsOverTime: (data, callback) => {
+    let query = '';
+    if (data === null) {
+      query = 'SELECT DATE(created_at) AS Date, HOUR(created_at) AS Hr, SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS GROUP BY Hr,Date';
+    } else {
+      query = `SELECT DATE(created_at) AS Date, HOUR(created_at) AS Hr, SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS WHERE created_at BETWEEN date('${data.startDate}') AND date('${data.endDate}') GROUP BY Hr,Date;`;
+    }
+    db.query(query, dbCallback('Get keywords', (err, result) => {
+      let cumulativeEmotions = { anger : 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
+      if (!err) {
+        for (let i = 0; i < result.length; i++) {
+          for (let key in cumulativeEmotions) {
+            cumulativeEmotions[key] += result[i][key];
+            result[i][key] = cumulativeEmotions[key];
+          }
+        }
+        callback(null, result);
+      }
+    }));
   },
 };

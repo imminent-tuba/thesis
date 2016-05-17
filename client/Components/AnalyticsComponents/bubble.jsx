@@ -8,12 +8,12 @@ export default class BubbleChart extends React.Component {
 
   componentDidMount() {
     this.chart = chart();
+    this.chart.update(this.props.data);
+    window.addEventListener('resize', this.chart.resize);
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.data) {
-      this.chart(nextProps.data);
-    }
+    if (nextProps.data) { this.chart.update(nextProps.data); }
     return false;
   }
 
@@ -25,5 +25,5 @@ export default class BubbleChart extends React.Component {
 }
 
 BubbleChart.propTypes = {
-  data: React.PropTypes.object,
+  data: React.PropTypes.array,
 };
