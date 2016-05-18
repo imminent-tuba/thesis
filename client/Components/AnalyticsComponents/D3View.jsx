@@ -28,7 +28,7 @@ export default class D3View extends React.Component {
             return <BubbleChart data={this.props.data.keywords}/>;
             case 'tax':
             return <Taxonomy data={this.props.data.taxonomy}/>;
-            case 'realTime':
+            case 'RT':
             return <RealTimeGraph data={this.props.data.allEmotions}/>;
             case 'time':
             return <TimeChart data={this.props.data.emotionsTime}/>;
