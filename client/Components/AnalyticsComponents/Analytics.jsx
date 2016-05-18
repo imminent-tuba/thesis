@@ -61,9 +61,7 @@ class Analytics extends React.Component {
           </Row>
           <Row style={this.styleA()}>
             <Col md={3}>
-              <DataViewList
-                handleClick={this.handleDataViewListClick.bind(this)}
-              />
+            
             </Col>
             <Col md={5}>
             </Col>
@@ -72,6 +70,7 @@ class Analytics extends React.Component {
                 sendChat={methods.sendChat.bind(this)}
                 chats={this.props.chats}
                 reject={methods.badWordReject.bind(this)}
+                handleClick={this.handleDataViewListClick.bind(this)}
               />
             </Col>
           </Row>
@@ -92,3 +91,9 @@ export default Analytics;
 // bug with babel, on import need Analytics.default in test until
 // this module is implemented
 // module.exports = Analytics;
+
+// <DataViewList
+//   data={this.props.data}
+//   view={this.state.d3View}
+//   handleClick={this.handleDataViewListClick.bind(this)}
+// />

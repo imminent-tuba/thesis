@@ -8,6 +8,8 @@ import TextField from 'material-ui/lib/TextField';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Avatar from 'material-ui/lib/avatar';
 
+import DataViewList from './DataViewList.jsx';
+
 export default class Chatroom extends React.Component {
   shouldComponentUpdate(nextProps) {
     return !(nextProps.chats.length === this.props.chats.length);
@@ -60,6 +62,8 @@ export default class Chatroom extends React.Component {
 
     return (
       <div style={{ pointerEvents: 'auto' }} >
+      <DataViewList handleClick={this.props.handleClick}/>
+
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
             <TextField id="chatInput"

@@ -25,37 +25,14 @@ const divStyle = {
 
 const myTabs = (
   <div style={divStyle}>
-    <IconMenu
-      iconButtonElement={
-        <FlatButton
-          href="#analytics"
-          linkButton={true}
-          label="Analytics"
-          labelStyle={labelStyle}
-        />
-      }
-    >
-      <DataViewList/>
-    </IconMenu>
-
-  <FlatButton
+    
+    <FlatButton
       href="#analytics"
       linkButton={true}
       label="Analytics"
       labelStyle={labelStyle}
     />
 
-    <IconMenu
-      iconButtonElement={
-        <IconButton touch={true}>
-            <NavigationExpandMoreIcon />
-          </IconButton>
-      }
-    >
-      <DataViewList/>
-    </IconMenu>
-
-    
     <FlatButton
       href="#"
       linkButton={true}

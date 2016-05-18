@@ -86,7 +86,7 @@ module.exports = () => {
         .attr('width', (d) => d.r * 2)
         .attr('height', (d) => d.r * 2)
         .attr('xlink:href', (d) => {
-          return 'http://zurapps.com/all/wp-content/uploads/2013/08/' + colorArray[2] + 'Bubble.png';
+          return 'http://zurapps.com/all/wp-content/uploads/2013/08/' + colorArray[Math.floor(Math.random() * 8)] + 'Bubble.png';
         });
 // colorArray[Math.floor(Math.random() * 8)]
     text.enter().append('text')

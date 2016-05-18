@@ -17,7 +17,7 @@ export default class TimeChart extends React.Component {
 
   componentDidMount() {
     this.chart = chart();
-    this.chart.update(example);
+    this.chart.update(this.props.data);
     window.addEventListener('resize', this.chart.resize);
   }
 
