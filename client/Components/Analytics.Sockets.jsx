@@ -13,6 +13,7 @@ export default class SocketWrapper extends React.Component {
         taxonomy: [],
         keywords: [],
         emotionsTime: [],
+        allEmotions: [],
         // all data to generate graphs held in state here
         // state is passed down to app
         // to be passed down to d3View
@@ -39,6 +40,9 @@ export default class SocketWrapper extends React.Component {
       }
       if(!data.emotionsTime) {
         data.emotionsTime = this.state.data.emotionsTime;
+      }
+      if (!data.allEmotions) {
+        data.allEmotions = this.state.data.allEmotions;
       }
       this.setState({ data });
     });

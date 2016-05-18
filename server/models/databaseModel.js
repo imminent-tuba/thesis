@@ -97,4 +97,8 @@ module.exports = {
       }
     }));
   },
+  getAllEmotions: callback => {
+    const query = "SELECT anger, disgust, fear, joy, sadness FROM EMOTIONS";
+    db.query(query, dbCallback('Get All Emotions', callback));
+  },
 };
