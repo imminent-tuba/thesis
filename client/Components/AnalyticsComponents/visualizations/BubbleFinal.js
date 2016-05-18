@@ -18,7 +18,6 @@ module.exports = () => {
       .distance(100)
       .charge(-150)
       .nodes(chartData)
-
       .size([width*.80, height*.55]);
 
   function collide(node) {
@@ -133,7 +132,7 @@ module.exports = () => {
     resize: () => {
       force.stop();
       width = window.innerWidth;
-      force.size([width, height]).start();
+      force.size([width*.80, height*.55]).start();
     },
   };
 };
