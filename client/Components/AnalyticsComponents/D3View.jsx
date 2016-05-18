@@ -20,13 +20,20 @@ export default class D3View extends React.Component {
       <div>
         {(() => {
           switch (this.props.view) {
-            case 'pie': return <EmotionPieChart data={this.props.data.emotions} />;
-            case 'bar': return <EmotionBarChart data={this.props.data.emotions} />;
-            case 'bubble': return <BubbleChart data={this.props.data.keywords} />;
-            case 'tax': return <Taxonomy data={this.props.data.taxonomy} />;
-            case 'realTime': return <RealTimeGraph data={this.props.data.emotions} />;
-            case 'time': return <TimeChart data={this.props.data.emotionsTime} />;
-            default: return <EmotionPieChart data={this.props.data.emotions} />;
+            case 'pie':
+              return <EmotionPieChart data={this.props.data.emotions}/>;
+            case 'bar':
+              return <EmotionBarChart data={this.props.data.emotions}/>;
+            case 'bubble':
+              return <BubbleChart data={this.props.data.keywords}/>;
+            case 'tax':
+              return <Taxonomy data={this.props.data.taxonomy}/>;
+            case 'RT':
+              return <RealTimeGraph data={this.props.data.allEmotions}/>;
+            case 'time':
+              return <TimeChart data={this.props.data.emotionsTime}/>;
+            default:
+              return <EmotionPieChart data={this.props.data.emotions}/>;
           }
         })()}
       </div>
