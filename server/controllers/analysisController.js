@@ -40,8 +40,11 @@ module.exports = {
         response.taxonomy = taxonomy;
         db.getKeywords((err, keywords) => {
           response.keywords = keywords;
-          logger.log('debug', 'analysis pulled', response);
-          callback(null, response);
+          db.getEmotionsOverTime(data, (err, emotionsTime) => {
+            response.emotionsTime = emotionsTime;
+            logger.log('debug', 'analysis pulled', response);
+            callback(null, response);
+          });
         });
       });
     });

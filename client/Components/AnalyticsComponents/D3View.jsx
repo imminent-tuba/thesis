@@ -2,7 +2,7 @@ import React from 'react';
 import EmotionPieChart from './EmotionPieChart.jsx';
 import EmotionBarChart from './EmotionBarChart.jsx';
 import Taxonomy from './Taxonomy.jsx';
-import BubbleChart from './BubbleChart.jsx';
+import BubbleChart from './bubble.jsx';
 import RealTimeGraph from './RealTimeGraph.jsx';
 import TimeChart from './emotionLineChart.jsx';
 
@@ -25,7 +25,7 @@ export default class D3View extends React.Component {
             case 'bubble': return <BubbleChart data={this.props.data.keywords} />;
             case 'tax': return <Taxonomy data={this.props.data.taxonomy} />;
             case 'realTime': return <RealTimeGraph data={this.props.data.emotions} />;
-            case 'time': return <TimeChart data={this.props.data.taxonomy} />;
+            case 'time': return <TimeChart data={this.props.data.emotionsTime} />;
             default: return <EmotionPieChart data={this.props.data.emotions} />;
           }
         })()}

@@ -26,10 +26,13 @@ export default class EmotionPieChart extends React.Component {
     return (
       <PieChart
         data={pieData}
-        width={window.innerWidth * 0.8}
-        height={300}
-        radius={100}
-        innerRadius={20}
+        cx={(window.innerWidth-200)/2}
+        cy={(window.innerHeight-250)/2}
+        width={window.innerWidth}
+        height={window.innerHeight-100}
+        radius={150}
+        innerRadius={40}
+        colors={d3.scale.category20c()}
         sectorBorderColor="white"
         title={this.props.data.username}
       />

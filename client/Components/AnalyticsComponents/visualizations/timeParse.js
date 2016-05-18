@@ -1,6 +1,6 @@
 module.exports = Emotions => {
   const data = { nodes: [], lines: [] };
-  let x = 200;
+  let x = 300;
   const lastNodes = {
     anger: null,
     fear: null,
@@ -12,13 +12,13 @@ module.exports = Emotions => {
     x = x + 50;
     let total = 0;
     for (let key in Emotions[i]) {
-      if (key !== 'timestamp') {
+      if (key !== 'Date' && key !== 'Hr') {
         total = total + Emotions[i][key];
       }
     }
     for (let n in Emotions[i]) {
-      const y = 600;
-      if (n !== 'timestamp') {
+      const y = 400;
+      if (n !== 'Date' && n !== 'Hr') {
         const newNode = {
           type: n,
           x,

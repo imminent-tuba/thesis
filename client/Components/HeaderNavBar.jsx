@@ -10,6 +10,10 @@ import {Tabs, Tab} from 'material-ui/lib/tabs';
 import FontIcon from 'material-ui/lib/font-icon';
 import MapsPersonPin from 'material-ui/lib/svg-icons/maps/person-pin';
 
+import NavigationExpandMoreIcon from 'material-ui/lib/svg-icons/navigation/expand-more';
+
+import DataViewList from './AnalyticsComponents/DataViewList.jsx';
+
 const labelStyle = {
   color: 'white',
   fontSize: 20,
@@ -21,12 +25,14 @@ const divStyle = {
 
 const myTabs = (
   <div style={divStyle}>
-  <FlatButton
+    
+    <FlatButton
       href="#analytics"
       linkButton={true}
       label="Analytics"
       labelStyle={labelStyle}
     />
+
     <FlatButton
       href="#"
       linkButton={true}
