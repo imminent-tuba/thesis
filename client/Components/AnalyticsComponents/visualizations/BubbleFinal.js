@@ -147,15 +147,3 @@ module.exports = () => {
     },
   };
 };
-
-
-      // if (!found) {
-      //   const newVal = {
-      //     name: i,
-      //     val: keywords[i]['SUM(relevance)'],
-      //     x: Math.ceil(Math.random() * width-40),
-      //     y: Math.ceil(Math.random() * height-40),
-      //     r: Math.ceil(keywords[i]['SUM(relevance)'] * 50),
-      //   };
-      //   chartData.push(newVal);
-      // }
