@@ -22,14 +22,10 @@ export default class DataViewList extends React.Component {
 
     return (
       <div>
-        <FloatingActionButton secondary={true} onTouchTap={this.handleToggle.bind(this)} style={{ marginRight: 20, marginTop: 20 }}>
-          Graphs
-        </FloatingActionButton>
-
         <RaisedButton
           label="More Graphs"
           onTouchTap={this.handleToggle.bind(this)}
-          primary={true}
+          secondary={true}
           style={{marginTop: 20 }}
         />
         <LeftNav width={250} height={200} openRight={false} open={this.state.open} style={{ marginTop : 7.5}}>
