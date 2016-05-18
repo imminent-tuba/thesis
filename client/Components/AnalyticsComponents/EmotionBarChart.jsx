@@ -7,19 +7,15 @@ export default class EmotionBarChart extends React.Component {
   }
 
   componentDidMount() {
-    this.d3Node = this.refs.DOMnode;
-    const chartSize = { width: '100%', height: '500px' };
     const data = this.handleEmotionData(this.props.data);
-
-    barchart.create(this.d3Node, chartSize, data);
+    this.chart = barchart();
+    this.chart.update(data);
+    window.addEventListener('resize', this.chart.resize);
   }
 
   shouldComponentUpdate(nextProps) {
-    // reference to the SVG
-    const el = this.d3Node.children[0];
-    const chartSize = { width: '100%', height: '400px' };
     const data = this.handleEmotionData(nextProps.data);
-    barchart.update(el, chartSize, data);
+    this.chart.update(data);
     return false;
   }
 
@@ -39,7 +35,7 @@ export default class EmotionBarChart extends React.Component {
 
   render() {
     return (
-      <div ref="DOMnode" className="bars" />
+      <div id="bars" />
     );
   }
 }
