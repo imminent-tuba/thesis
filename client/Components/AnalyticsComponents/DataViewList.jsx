@@ -12,28 +12,27 @@ export default class DataViewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { open: false };
-    console.log('Open constructor ', this.state);
   }
 
   handleToggle(e) {
-    console.log('Click');
-    console.log('Open before ', e.state);
     this.setState({ open: !this.state.open });
-    console.log('Open after ', this.state);
   }
 
   render() {
 
     return (
       <div>
+        <FloatingActionButton secondary={true} onTouchTap={this.handleToggle.bind(this)} style={{ marginRight: 20, marginTop: 20 }}>
+          Graphs
+        </FloatingActionButton>
 
         <RaisedButton
           label="More Graphs"
           onTouchTap={this.handleToggle.bind(this)}
-          secondary={true}
+          primary={true}
           style={{marginTop: 20 }}
         />
-        <LeftNav width={250} height={200} openRight={true} open={this.state.open} style={{ marginTop : 7.5}}>
+        <LeftNav width={250} height={200} openRight={false} open={this.state.open} style={{ marginTop : 7.5}}>
           <AppBar title="Graphs" showMenuIconButton={false}/>
 
           <MenuItem primaryText="Pie Chart" rightIcon={<img height="27" width="25" src="http://zizaza.com/cache/big_thumb/iconset/581423/581448/PNG/256/business_and_financial/business_financial_pie_chart_business_icon_png_pie_chart_png_pie_chart_icon.png" />}  onClick={() => this.props.handleClick('pie')} />
