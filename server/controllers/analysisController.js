@@ -42,8 +42,11 @@ module.exports = {
           response.keywords = keywords;
           db.getEmotionsOverTime(data, (err, emotionsTime) => {
             response.emotionsTime = emotionsTime;
-            logger.log('debug', 'analysis pulled', response);
-            callback(null, response);
+            db.getAllEmotions((err, allEmotions) => {
+              response.allEmotions = allEmotions;
+              logger.log('debug', 'analysis pulled', response);
+              callback(null, response);
+            })
           });
         });
       });
