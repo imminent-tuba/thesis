@@ -1,5 +1,5 @@
 import React from 'react';
-import chart from './visualizations/bubbleFinal.js';
+import chart from './visualizations/BubbleFinal.js';
 
 export default class BubbleChart extends React.Component {
   constructor(props) {
