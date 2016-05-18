@@ -63,10 +63,6 @@ module.exports = () => {
         .data(chartData)
         .call(force.drag);
 
-    charts.transition().duration(30)
-        .attr('x', d => d.x)
-        .attr('y', d => d.y);
-    
     charts.enter().append('image')
         .attr('class', 'bubble')
         .style('position', 'absolute')
@@ -74,18 +70,25 @@ module.exports = () => {
         .attr('y', d => d.y)
         .attr('width', d => d.r * 2)
         .attr('height', d => d.r * 2)
-        .attr('xlink:href', d => {
-          return 'http://zurapps.com/all/wp-content/uploads/2013/08/' + colorArray[Math.floor(Math.random() * 8)] + 'Bubble.png';
-        });
+        .attr('xlink:href', () => `http://zurapps.com/all/wp-content/uploads/2013/08/${colorArray[Math.floor(Math.random() * 8)]}Bubble.png`
+        );
 // colorArray[Math.floor(Math.random() * 8)]
     text.enter().append('text')
         .attr('class', 'label')
         .attr('dy', '.3em')
         .style('position', 'absolute')
+        .style('font-family', 'Arial')
+        .style('text-anchor', 'middle')
+        .style('fill', 'white')
+        .style('font-weight', 'bold')
+        .style('fill-opacity', 1)
+        .style('stroke', '#00cdcd')
+        .style('stroke-width', '1px')
+        .style('stroke-linecap', 'butt')
+        .style('stroke-linejoin', 'miter')
+        .style('stroke-opacity', 1)
         .attr('x', d => d.x + d.r)
         .attr('y', d => d.y + d.r)
-        .style('text-anchor', 'middle')
-        .style('fill', '#00cdcd')
         .text(d => {
           if (d.name.indexOf(' ') !== -1) {
            return d.name.substr(0, d.name.indexOf(' ')).toUpperCase();
@@ -99,6 +102,9 @@ module.exports = () => {
 
     text.attr('x', d => d.x + d.r)
         .attr('y', d => d.y + d.r);
+
+    charts.attr('x', d => d.x)
+        .attr('y', d => d.y);
   };
 
   d3.timer(update);

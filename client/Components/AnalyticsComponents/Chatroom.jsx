@@ -59,10 +59,15 @@ export default class Chatroom extends React.Component {
       bot: { align: 'right' },
       user: { align: 'left' },
     };
+    const msgStyle = {
+      'background-color': 'rgba(0,0,0,0)',
+      'font-weight': 'bold',
+      'text-shadow': '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff',
+    };
 
     return (
       <div style={{ pointerEvents: 'auto' }} >
-      <DataViewList handleClick={this.props.handleClick}/>
+      <DataViewList handleClick={this.props.handleClick} />
 
         <div>
           <form onSubmit={this._handleSubmitEvent.bind(this)}>
@@ -77,7 +82,7 @@ export default class Chatroom extends React.Component {
             <RaisedButton label="Send" secondary={true} type="submit" />
           </form>
         </div>
-        <List style={{ 'background-color': 'rgba(0,0,0,0.1)', 'font-weight': 'bold', 'text-shadow': '0px 0px 3px #fff' }}>
+        <List style={msgStyle}>
           {this.props.chats.map((val, idx) => {
             let avatar = val.user === 'user' ? '../../../user.ico' : '../../../favicon.ico';
             return (
