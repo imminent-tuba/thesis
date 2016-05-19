@@ -28,9 +28,9 @@ export default class DataViewList extends React.Component {
           secondary={true}
           style={{marginTop: 20 }}
         />
-        <LeftNav width={250} height={200} openRight={false} open={this.state.open} style={{ marginTop : 7.5}}>
+      <LeftNav width={250} height={200} openRight={true} open={this.state.open} style={{ marginTop : 7.5}}>
           <AppBar title="Graphs" showMenuIconButton={false}/>
-
+          
           <MenuItem primaryText="Pie Chart" rightIcon={<img height="27" width="25" src="http://zizaza.com/cache/big_thumb/iconset/581423/581448/PNG/256/business_and_financial/business_financial_pie_chart_business_icon_png_pie_chart_png_pie_chart_icon.png" />}  onClick={() => this.props.handleClick('pie')} />
           <MenuItem primaryText="Bar Chart" rightIcon={<img height="27" width="25" src="http://www.boya-agl.st.ieo.es/boya_agl/images/grafico_t.png" />} onClick={() => this.props.handleClick('bar')} />
           <MenuItem primaryText="Bubble Chart" rightIcon={<img height="27" width="25" src="https://www.miosoft.com/img/Scalable-Graph.png" />} onClick={() => this.props.handleClick('bubble')} />
