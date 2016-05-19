@@ -25,13 +25,7 @@ module.exports = {
     db.query(query, dbCallback('Save Message', callback));
   },
   saveEmotions: (emotions, message, callback) => {
-    // const message_id = 0;
-    const get_message_id = db.query(`SELECT id FROM MESSAGE where text_msg=${message} LIMIT 1)`, (err, res) => {
-      let message_id = res;
-    });
-
-
-    if (!isPresent(Object.keys(emotions), 'emotions')) {
+    if (!emotions || !isPresent(Object.keys(emotions), 'emotions')) {
       callback(null, []);
       return;
     }
@@ -39,7 +33,7 @@ module.exports = {
     db.query(query, dbCallback('Save Emotions', callback));
   },
   saveTaxonomy: (taxonomy, message, callback) => {
-    if (!isPresent(taxonomy, 'taxonomy')) {
+    if (!taxonomy || !isPresent(taxonomy, 'taxonomy')) {
       callback(null, []);
       return;
     }
@@ -50,7 +44,7 @@ module.exports = {
     callback(null, taxonomy);
   },
   saveKeywords: (keywords, message, callback) => {
-    if (!isPresent(keywords, 'keywords')) {
+    if (!keywords || !isPresent(keywords, 'keywords')) {
       callback(null, []);
       return;
     }
@@ -85,7 +79,7 @@ module.exports = {
       query = `SELECT DATE(created_at) AS Date, HOUR(created_at) AS Hr, SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS WHERE created_at BETWEEN date('${data.startDate}') AND date('${data.endDate}') GROUP BY Hr,Date;`;
     }
     db.query(query, dbCallback('Get keywords', (err, result) => {
-      let cumulativeEmotions = { anger : 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
+      const cumulativeEmotions = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
       if (!err) {
         for (let i = 0; i < result.length; i++) {
           for (let key in cumulativeEmotions) {
@@ -98,7 +92,7 @@ module.exports = {
     }));
   },
   getAllEmotions: callback => {
-    const query = "SELECT anger, disgust, fear, joy, sadness FROM EMOTIONS";
+    const query = 'SELECT anger, disgust, fear, joy, sadness FROM EMOTIONS';
     db.query(query, dbCallback('Get All Emotions', callback));
   },
 };

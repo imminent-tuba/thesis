@@ -19,7 +19,12 @@ io.on('connection', (socket) => {
   socket.on('chat', (msg) => {
     logger.log('info', 'from bot -', ID, msg);
     msg = JSON.parse(msg);
-    callbacks[msg.id](null, msg.message.trim());
+    try {
+      callbacks[msg.id](null, msg.message.trim());
+    }
+    catch(err) {
+      logger.log('error', 'chatterbot callback', err);
+    }
   });
 
   socket.on('disconnect', () => {

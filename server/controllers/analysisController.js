@@ -6,11 +6,11 @@ module.exports = {
   alchemyAnalyze: (message, callback) => {
     const response = { message };
     alchemy.getEmotions(message, (err, res) => {
-      response.emotions = res.docEmotions;
+      if (res) { response.emotions = res.docEmotions; }
       alchemy.getTaxonomy(message, (err, res) => {
-        response.taxonomy = res.taxonomy;
+        if (res) { response.taxonomy = res.taxonomy; }
         alchemy.getKeywords(message, (err, res) => {
-          response.keywords = res.keywords;
+          if (res) { response.keywords = res.keywords; }
           logger.log('debug', 'analysis compiled', response);
           callback(null, response);
         });

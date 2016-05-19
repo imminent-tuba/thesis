@@ -10,11 +10,12 @@ AlchemyAPI.prototype.emotion = function(data, options, cb) {
 
 const alchemyCallback = (action, callback) =>
   (err, res) => {
-    if (err) {
-      logger.log('error', `Alchemy ${action} failed`, err);
+    if (res.status === 'ERROR') {
+      logger.log('error', `Alchemy ${action} failed`, res.statusInfo);
       callback(err, null);
     } else {
       callback(null, res);
+      logger.log('debug', `alchemy ${action} response`, res);
     }
   };
 
