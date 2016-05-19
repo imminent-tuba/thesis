@@ -1,44 +1,26 @@
+<<<<<<< 1d18f7a1f9c9d88646054df9aaa1ef30ce336921
 import d3 from '../../../resources/d3.v4.0.0-alpha.33.min.js';
 // import d3 from 'd3';
+=======
+import d3 from '../../../../node_modules/d3/d3.v4.0.0-alpha.33.min.js';
+
+>>>>>>> ready to push real time data visualization
 const sampleColors = {
-  sadness: 'blue',
-  anger: 'red',
-  happiness: 'green',
-  disgust: 'violet',
-  fear: 'black',
-}
-const stroke = ((val) => {
-  // var letters = '0123456789ABCDEF'.split('');
-  // var color = '#';
-  // for (var i = 0; i < 6; i++ ) {
-  //   color += letters[Math.floor(Math.random() * 16)];
-  // }
-  // return color;
-  if(val === 'sadness') {
-    return 'blue';
-  }
-  if(val === 'anger') {
-    return 'red';
-  }
-  if(val === 'happiness') {
-    return 'green';
-  }
-  if(val === 'disgust') {
-    return 'violet';
-  }
-  if(val === 'fear') {
-    return 'black';
-  }
-  // var color = '';
-  // for(var key in sampleColors) {
-  //   color = sampleColors[key];
-  // }
-  // return color;
-});
+  sadness: '#0000FF',
+  anger: '#FF0000',
+  joy: '#FFFF00',
+  disgust: '#00FF00',
+  fear: '#7A378B',
+};
+
+const stroke = val => {
+  return sampleColors[val[0]];
+};
 
 const convertEmotionVals = (emotion) => {
   var max = 0,
       emotionKey;
+
   for(var key in emotion) {
     if(max < emotion[key]) {
       max = emotion[key];
@@ -46,27 +28,24 @@ const convertEmotionVals = (emotion) => {
     }
   }
   return [emotionKey, max];
-}
+};
 
+/* Main Body */
 const graph = (data) => {
+
   const canvas = document.getElementById( 'graph' ),
     context = canvas.getContext( '2d' ),
-    width = 300,
-    height = 200;
-
-
-    const pi = Math.PI,
+    width = 400,
+    height = 200,
+    pi = Math.PI,
     n = data.length,
     tau = 2 * pi;
-
-  // const nodes = [];
-  data.map(function(val, idx) {
-    return convertEmotionVals(val);
-  });
-  console.log(data);
-
-  const nodes = d3.range( n ).map( (val) => {
-    let r = Math.random() * width / 3,
+/* Updating only the updated nodes */
+  const convertToNode = (val) => {
+    console.log(val);
+    val = convertEmotionVals(val);
+    console.log('after ', val);
+    const r = Math.random() * width / 5,
       a = Math.random() * tau,
       x = width / 2 + r * Math.cos( a ),
       y = height / 2 + r * Math.sin( a ),
@@ -78,27 +57,23 @@ const graph = (data) => {
       vy: ( x - width / 2 ) * 0.006,
       z: z,
     };
-  } );
+  };
 
+  const nodes = data.map( convertToNode );
+  /* Node Descriptions */
   const force = d3.forceSimulation( nodes )
     .drag( 0 )
     .alphaDecay( 0 )
-    .force( "charge", d3.forceManyBody().strength( 0.01 ) )
-    .force( "center", d3.forceCenter( width / 2, height / 2 ) )
+    .force( "charge", d3.forceManyBody().strength( 0.05 ) )
+    .force( "center", d3.forceCenter( width / 3, height / 3 ) )
     .on( "tick", ticked );
 
-  // force(nodes);
-
-  // const stroke = d3.scaleLinear()
-  //   .domain( [ 0, 10, 20, 30, 40 ] )
-  //   .range( [ "blue", "red", "green", "yellow", "violet" ] );
-
+    /* Physics of the D3 Body */
   function ticked() {
     context.clearRect( 0, 0, width, height );
     context.lineWidth = 4;
-    context.lineCap = "square";
-
-    for ( let i = 0, node, vx, vy; i < n; ++i ) {
+    context.lineCap = "butt";
+    for ( let i = 0, node, vx, vy, z; i < n; ++i ) {
       node = nodes[ i ];
       context.beginPath();
       context.moveTo( node.x, node.y );
@@ -107,14 +82,18 @@ const graph = (data) => {
       context.stroke();
     }
   }
-  // return {
-  //   update: data => {
-  //
-  //   },
-  //   resize: () => {
-  //
-  //   }
-  // }
+
+  return {
+    /* Update when current props.data changes */
+    update: newData => {
+      let updatedData;
+      if(newData.length !== data.length && newData !== undefined) {
+        updatedData = newData.slice(data.length - 1);
+        const nodeData = updatedData.map(convertToNode);
+        data = data.concat(nodeData);
+      }
+    }
+  }
 };
 
 export default graph;
