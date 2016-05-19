@@ -27,7 +27,6 @@ const convertEmotionVals = (emotion) => {
 
 /* Main Body */
 const graph = (data) => {
-
   const canvas = document.getElementById( 'graph' ),
     context = canvas.getContext( '2d' ),
     width = 400,
@@ -37,9 +36,7 @@ const graph = (data) => {
     tau = 2 * pi;
 /* Updating only the updated nodes */
   const convertToNode = (val) => {
-    console.log(val);
     val = convertEmotionVals(val);
-    console.log('after ', val);
     const r = Math.random() * width / 5,
       a = Math.random() * tau,
       x = width / 2 + r * Math.cos( a ),
