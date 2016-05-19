@@ -24,11 +24,14 @@ module.exports = () => {
     const lines = svg.selectAll('.link')
         .data(chartData.lines);
 
-    nodes.transition().duration(100)
+    const labels = svg.selectAll('.label')
+        .data(chartData.labels);
+
+    nodes.transition().duration(500)
         .attr('cx', d => d.x)
         .attr('cy', d => d.y);
 
-    lines.transition().duration(100)
+    lines.transition().duration(500)
         .attr('x1', d => d.source.x)
         .attr('y1', d => d.source.y)
         .attr('x2', d => d.target.x)
@@ -39,7 +42,7 @@ module.exports = () => {
         .style('position', 'absolute')
         .attr('cx', d => d.x)
         .attr('cy', d => d.y)
-        .attr('r', d => d.r)
+        .attr('r', 2)
         .style('fill', d => colors[d.type]);
 
     lines.enter().append('line')
@@ -49,11 +52,22 @@ module.exports = () => {
         .attr('x2', d => d.target.x)
         .attr('y2', d => d.target.y)
         .style('stroke', d => colors[d.source.type])
-        .style('stroke-width', '5')
+        .style('stroke-width', '3')
         .style('stroke-opacity', '1');
+
+    labels.enter().append('text')
+        .attr('class', 'label')
+        .attr('x', d => d.x)
+        .attr('y', 400)
+        .style('font-family', 'Arial')
+        .style('text-anchor', 'middle')
+        .style('fill', 'black')
+        .style('font-weight', 'bold')
+        .text(d => d.name);
 
     nodes.exit().remove();
     lines.exit().remove();
+    labels.exit().remove();
   };
 
   return {
