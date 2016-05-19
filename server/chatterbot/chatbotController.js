@@ -37,7 +37,6 @@ module.exports = {
   response: (id, message, callback) => {
     callcount = ++callcount % 3000;
     callbacks[callcount] = callback;
-<<<<<<< 1d18f7a1f9c9d88646054df9aaa1ef30ce336921
     const toSend = { id: callcount, message };
     try {
       clients[id].emit('chat', JSON.stringify(toSend));
@@ -45,11 +44,6 @@ module.exports = {
     catch(err) {
       logger.log('error', 'chatterbot response', err);
     }
-=======
-    const toSend = { id: callcount, message: message };
-    clients[id].emit('chat', JSON.stringify(toSend));
-
->>>>>>> ready to push real time data visualization
   },
   train: (id, conversation) => {
     for (var i in conversation) {

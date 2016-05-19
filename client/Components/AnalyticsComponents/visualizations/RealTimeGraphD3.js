@@ -1,10 +1,5 @@
-<<<<<<< 1d18f7a1f9c9d88646054df9aaa1ef30ce336921
 import d3 from '../../../resources/d3.v4.0.0-alpha.33.min.js';
-// import d3 from 'd3';
-=======
-import d3 from '../../../../node_modules/d3/d3.v4.0.0-alpha.33.min.js';
 
->>>>>>> ready to push real time data visualization
 const sampleColors = {
   sadness: '#0000FF',
   anger: '#FF0000',
