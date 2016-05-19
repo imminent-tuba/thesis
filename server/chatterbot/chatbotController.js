@@ -19,7 +19,12 @@ io.on('connection', (socket) => {
   socket.on('chat', (msg) => {
     logger.log('info', 'from bot -', ID, msg);
     msg = JSON.parse(msg);
-    callbacks[msg.id](null, msg.message.trim());
+    try {
+      callbacks[msg.id](null, msg.message.trim());
+    }
+    catch(err) {
+      logger.log('error', 'chatterbot callback', err);
+    }
   });
 
   socket.on('disconnect', () => {
@@ -32,8 +37,13 @@ module.exports = {
   response: (id, message, callback) => {
     callcount = ++callcount % 3000;
     callbacks[callcount] = callback;
-    const toSend = { id: callcount, message: message };
-    clients[id].emit('chat', JSON.stringify(toSend));
+    const toSend = { id: callcount, message };
+    try {
+      clients[id].emit('chat', JSON.stringify(toSend));
+    }
+    catch(err) {
+      logger.log('error', 'chatterbot response', err);
+    }
   },
   train: (id, conversation) => {
     for (var i in conversation) {

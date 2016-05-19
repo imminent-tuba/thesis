@@ -1,4 +1,4 @@
-import d3 from '../../../../node_modules/d3/d3.v4.0.0-alpha.33.min.js';
+import d3 from '../../../resources/d3.v4.0.0-alpha.33.min.js';
 // import d3 from 'd3';
 const sampleColors = {
   sadness: 'blue',

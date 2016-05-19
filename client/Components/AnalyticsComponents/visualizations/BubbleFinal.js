@@ -18,7 +18,6 @@ module.exports = () => {
       .distance(100)
       .charge(-150)
       .nodes(chartData)
-
       .size([width*.80, height*.55]);
 
   function collide(node) {
@@ -45,15 +44,6 @@ module.exports = () => {
     };
   }
 
-  const testBounds = (node) => {
-    if (node.x < 0 || node.x > width - (node.r * 2)) {
-      node.x = node.x < 0 ? 0 : width - (node.r * 2);
-    }
-    if (node.y < 0 || node.y > height - (node.r * 2)) {
-      node.y = node.y < 0 ? 0 : height - (node.r * 2);
-    }
-  };
-
   force.start();
 
   const update = () => {
@@ -63,7 +53,6 @@ module.exports = () => {
 
     while (++i < n) {
       q.visit(collide(chartData[i]));
-      testBounds(chartData[i]);
     }
 
     const charts = svg.selectAll('.bubble')
@@ -74,29 +63,32 @@ module.exports = () => {
         .data(chartData)
         .call(force.drag);
 
-    charts.transition().duration(30)
-        .attr('x', (d) => d.x)
-        .attr('y', (d) => d.y);
-    
     charts.enter().append('image')
         .attr('class', 'bubble')
         .style('position', 'absolute')
-        .attr('x', (d) => d.x)
-        .attr('y', (d) => d.y)
-        .attr('width', (d) => d.r * 2)
-        .attr('height', (d) => d.r * 2)
-        .attr('xlink:href', (d) => {
-          return 'http://zurapps.com/all/wp-content/uploads/2013/08/' + colorArray[Math.floor(Math.random() * 8)] + 'Bubble.png';
-        });
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .attr('width', d => d.r * 2)
+        .attr('height', d => d.r * 2)
+        .attr('xlink:href', () => `http://zurapps.com/all/wp-content/uploads/2013/08/${colorArray[Math.floor(Math.random() * 8)]}Bubble.png`
+        );
 // colorArray[Math.floor(Math.random() * 8)]
     text.enter().append('text')
         .attr('class', 'label')
-        .attr("dy", ".3em")
+        .attr('dy', '.3em')
         .style('position', 'absolute')
-        .attr('x', (d) => d.x + d.r)
-        .attr('y', (d) => d.y + d.r)
+        .style('font-family', 'Arial')
         .style('text-anchor', 'middle')
-        .style('fill', '#00cdcd')
+        .style('fill', 'white')
+        .style('font-weight', 'bold')
+        .style('fill-opacity', 1)
+        .style('stroke', '#00cdcd')
+        .style('stroke-width', '1px')
+        .style('stroke-linecap', 'butt')
+        .style('stroke-linejoin', 'miter')
+        .style('stroke-opacity', 1)
+        .attr('x', d => d.x + d.r)
+        .attr('y', d => d.y + d.r)
         .text(d => {
           if (d.name.indexOf(' ') !== -1) {
            return d.name.substr(0, d.name.indexOf(' ')).toUpperCase();
@@ -110,11 +102,14 @@ module.exports = () => {
 
     text.attr('x', d => d.x + d.r)
         .attr('y', d => d.y + d.r);
+
+    charts.attr('x', d => d.x)
+        .attr('y', d => d.y);
   };
 
   d3.timer(update);
 
- return {
+  return {
     update: (keywords) => {
       force.stop();
       for (let i in keywords) {
@@ -122,7 +117,7 @@ module.exports = () => {
         for (let n in chartData) {
           if (keywords[i].keyword_text === chartData[n].name) {
             chartData[n].val = keywords[i]['SUM(relevance)'];
-            chartData[n].r = Math.ceil(keywords[i]['SUM(relevance)'] * 50);
+            chartData[n].r = Math.ceil(Math.sqrt(keywords[i]['SUM(relevance)'] * 1000));
             found = true;
             break;
           }
@@ -133,7 +128,7 @@ module.exports = () => {
             val: keywords[i]['SUM(relevance)'],
             x: Math.ceil(Math.random() * width),
             y: Math.ceil(Math.random() * height),
-            r: Math.ceil(keywords[i]['SUM(relevance)'] * 50),
+            r: Math.ceil(Math.sqrt(keywords[i]['SUM(relevance)'] * 1000)),
           };
           chartData.push(newVal);
         }
@@ -143,7 +138,7 @@ module.exports = () => {
     resize: () => {
       force.stop();
       width = window.innerWidth;
-      force.size([width, height]).start();
+      force.size([width*.80, height*.55]).start();
     },
   };
 };

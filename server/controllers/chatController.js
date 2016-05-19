@@ -8,6 +8,7 @@ const ID = 0; // this will be replaced with Bot ID
 
 module.exports = {
   messageReceived: (message, callback) => {
+    message = message.replace(/[^\x00-\x7F]/g, '');
     chatterbot.response(ID, message, callback);
     analysis.alchemyAnalyze(message, (err, res) => {
       analysis.saveAnalysis(res, () => {
