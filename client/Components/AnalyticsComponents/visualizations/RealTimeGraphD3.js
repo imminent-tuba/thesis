@@ -26,7 +26,7 @@ const convertEmotionVals = (data) => {
 };
 
 const generateMoreData = (data) => {
-  for(let idx = 0; idx < 3; idx++) {
+  for(let idx = 0; idx < 1; idx++) {
     data = data.concat(data.slice(0));
   }
   return data;

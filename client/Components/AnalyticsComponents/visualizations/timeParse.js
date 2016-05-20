@@ -14,15 +14,19 @@ module.exports = Emotions => {
   const hrStart = (Date.parse(new Date()) - Date.parse(Emotions[0].Date)) / 3600000 - Emotions[0].Hr;
   const Xunit = (size - 150) / hrStart;
 
-  let dayCount = hrStart;
+  let dayCount = hrStart + Emotions[0].Hr - 24;
+  const dateLabel = new Date(Emotions[0].Date);
+  let theDate = dateLabel.getDate() + 1;
   while (dayCount > 0) {
+    dateLabel.setDate(theDate);
     const newDate = {
-      name: moment(Emotions[0].Date).format('MM-DD'),
-      x: 10,
-      y: 420,
+      name: moment(dateLabel).format('MM-DD'),
+      x: size - dayCount * Xunit,
+      y: 425,
     };
     data.labels.push(newDate);
-    dayCount = 0;
+    theDate++;
+    dayCount -= 24;
   }
 
   let startHr = Emotions[0].Hr;
