@@ -13,6 +13,7 @@ module.exports = Emotions => {
 
   const size = window.innerWidth / 1.8;
   const hrStart = (Date.parse(new Date()) - Date.parse(Emotions[0].Date)) / 3600000 - Emotions[0].Hr;
+  console.log(hrStart);
   const Xunit = (size - 150) / hrStart;
 
   let dayCount = hrStart + Emotions[0].Hr - 24;
