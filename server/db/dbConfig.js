@@ -2,7 +2,7 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   user: 'root',
-  password: 'mysql',
+  password: '',
   database: 'chatAnalysis',
 });
 connection.connect();
