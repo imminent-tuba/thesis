@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 module.exports = Emotions => {
+  console.log(Emotions);
   const data = { nodes: [], lines: [], labels: [] };
   const lastNodes = {
     anger: null,
