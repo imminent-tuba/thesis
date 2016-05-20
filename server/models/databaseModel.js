@@ -74,11 +74,11 @@ module.exports = {
   getEmotionsOverTime: (data, callback) => {
     let query = '';
     if (data === null) {
-      query = 'SELECT DATE(created_at) AS Date, HOUR(created_at) AS Hr, SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS GROUP BY Hr,Date';
+      query = 'SELECT DATE(created_at) AS Date, HOUR(created_at) AS Hr, SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS GROUP BY Date, Hr';
     } else {
       query = `SELECT DATE(created_at) AS Date, HOUR(created_at) AS Hr, SUM(anger) as anger,SUM(disgust)as disgust,SUM(fear) as fear,SUM(joy) as joy,SUM(sadness) as sadness FROM EMOTIONS WHERE created_at BETWEEN date('${data.startDate}') AND date('${data.endDate}') GROUP BY Hr,Date;`;
     }
-    db.query(query, dbCallback('Get keywords', (err, result) => {
+    db.query(query, dbCallback('Get emotions over time', (err, result) => {
       const cumulativeEmotions = { anger: 0, disgust: 0, fear: 0, joy: 0, sadness: 0 };
       if (!err) {
         for (let i = 0; i < result.length; i++) {

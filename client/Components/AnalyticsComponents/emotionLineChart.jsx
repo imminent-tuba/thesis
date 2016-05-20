@@ -30,12 +30,12 @@ export default class TimeChart extends React.Component {
     return (
       <Grid fluid>
         <Row>
-          <Col style={{ position: 'absolute', bottom: 300, left: 150, fontFamily: 'Arial' }}>
-            <h4 style={{ color: this.colors.anger }}>Anger</h4>
-            <h4 style={{ color: this.colors.sadness }}>Sadness</h4>
-            <h4 style={{ color: this.colors.fear }}>Fear</h4>
-            <h4 style={{ color: this.colors.disgust }}>Disgust</h4>
-            <h4 style={{ color: this.colors.joy }}>Joy</h4>
+          <Col style={{ fontFamily: 'Arial', position: 'absolute', top: '80px' }}>
+            <h2 style={{ color: this.colors.anger }}>Anger</h2>
+            <h2 style={{ color: this.colors.sadness }}>Sadness</h2>
+            <h2 style={{ color: this.colors.fear }}>Fear</h2>
+            <h2 style={{ color: this.colors.disgust }}>Disgust</h2>
+            <h2 style={{ color: this.colors.joy }}>Joy</h2>
           </Col>
           <Col md={10}>
             <div id="d3container"></div>

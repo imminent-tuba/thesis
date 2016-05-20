@@ -14,11 +14,12 @@ module.exports = () => {
   let chartData = [];
 
   let force = d3.layout.force()
-      .gravity(0.2)
+      .gravity(0.03)
       .distance(100)
-      .charge(-150)
+      .charge(-50)
+      .chargeDistance(300)
       .nodes(chartData)
-      .size([width*.80, height*.55]);
+      .size([width * 0.70, height * 0.65]);
 
   function collide(node) {
     var r = node.r + 8,
