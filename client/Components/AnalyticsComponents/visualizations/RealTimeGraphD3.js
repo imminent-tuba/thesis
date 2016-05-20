@@ -12,28 +12,38 @@ const stroke = val => {
   return sampleColors[val[0]];
 };
 
-const convertEmotionVals = (emotion) => {
+const convertEmotionVals = (data) => {
   var max = 0,
       emotionKey;
 
-  for(var key in emotion) {
-    if(max < emotion[key]) {
-      max = emotion[key];
+  for(var key in data) {
+    if(max < data[key]) {
+      max = data[key];
       emotionKey = key;
     }
   }
   return [emotionKey, max];
 };
 
+const generateMoreData = (data) => {
+  for(let idx = 0; idx < 3; idx++) {
+    data = data.concat(data.slice(0));
+  }
+  return data;
+}
+
 /* Main Body */
 const graph = (data) => {
+  const doubleData = data.slice(0);
+  data = generateMoreData(data);
   const canvas = document.getElementById( 'graph' ),
     context = canvas.getContext( '2d' ),
-    width = 400,
-    height = 200,
+    width = canvas.width,
+    height = canvas.height,
     pi = Math.PI,
     n = data.length,
     tau = 2 * pi;
+
 /* Updating only the updated nodes */
   const convertToNode = (val) => {
     val = convertEmotionVals(val);
@@ -56,8 +66,8 @@ const graph = (data) => {
   const force = d3.forceSimulation( nodes )
     .drag( 0 )
     .alphaDecay( 0 )
-    .force( "charge", d3.forceManyBody().strength( 0.05 ) )
-    .force( "center", d3.forceCenter( width / 3, height / 3 ) )
+    .force( "charge", d3.forceManyBody().strength( 0.03 ) )
+    .force( "center", d3.forceCenter( width / 3.5, height / 2.5 ) )
     .on( "tick", ticked );
 
     /* Physics of the D3 Body */
@@ -79,13 +89,11 @@ const graph = (data) => {
     /* Update when current props.data changes */
     update: newData => {
       let updatedData;
-      if(newData.length !== data.length && newData !== undefined) {
-        updatedData = newData.slice(data.length - 1);
-        const nodeData = updatedData.map(convertToNode);
-        data = data.concat(nodeData);
-      }
-    }
-  }
+      updatedData = newData.slice(data.length - 1);
+      const nodeData = updatedData.map(convertToNode);
+      data = data.concat(nodeData);
+    },
+  };
 };
 
 export default graph;
