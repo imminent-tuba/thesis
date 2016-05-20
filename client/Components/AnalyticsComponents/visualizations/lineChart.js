@@ -58,7 +58,7 @@ module.exports = () => {
     labels.enter().append('text')
         .attr('class', 'label')
         .attr('x', d => d.x)
-        .attr('y', 400)
+        .attr('y', d => d.y)
         .style('font-family', 'Arial')
         .style('text-anchor', 'middle')
         .style('fill', 'black')
