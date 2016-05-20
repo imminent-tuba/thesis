@@ -31,10 +31,9 @@ export default class DataViewList extends React.Component {
         <LeftNav width={250} height={200} openRight={true} open={this.state.open} style={{ marginTop : 7.5}}>
           <AppBar title="Graphs" showMenuIconButton={false}/>
             <MenuItem primaryText="Pie Chart" rightIcon={<img height="27" width="25" src="../assets/pieChar.png" />}  onClick={() => this.props.handleClick('pie')} />
-            <MenuItem primaryText="Bar Chart" rightIcon={<img height="27" width="25" src="../assets/barChar.png" />} onClick={() => this.props.handleClick('bar')} />
             <MenuItem primaryText="Bubble Chart" rightIcon={<img height="27" width="25" src="../assets/Scalable-Graph.png" />} onClick={() => this.props.handleClick('bubble')} />
             <MenuItem primaryText="Taxonomy" rightIcon={<img height="27" width="25" src="../assets/graph.png" />} onClick={() => this.props.handleClick('tax')} />
-            <MenuItem primaryText="Real Time Emotions" rightIcon={<img height="27" width="25" src="../assets/icon.png" />} onClick={() => this.props.handleClick('realTime')} />
+            <MenuItem primaryText="Real Time Emotions" rightIcon={<img height="27" width="25" src="../assets/icon.png" />} onClick={() => this.props.handleClick('RT')} />
             <MenuItem primaryText="Over Time" rightIcon={<img height="27" width="25" src="../assets/linegraph.png" />} onClick={() => this.props.handleClick('time')} />
           <RaisedButton
             label="Close"
