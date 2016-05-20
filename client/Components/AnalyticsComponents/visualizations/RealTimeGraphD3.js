@@ -36,7 +36,6 @@ const generateMoreData = (data) => {
 const graph = (data) => {
   const doubleData = data.slice(0);
   data = generateMoreData(data);
-  console.log(data.length);
   const canvas = document.getElementById( 'graph' ),
     context = canvas.getContext( '2d' ),
     width = canvas.width,
