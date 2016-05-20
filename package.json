@@ -55,6 +55,7 @@
     "express-session": "^1.13.0",
     "express-sessions": "^1.0.5",
     "flexboxgrid": "^6.3.0",
+    "jquery": "^2.2.4",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.2",
