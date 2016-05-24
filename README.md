@@ -99,6 +99,10 @@ module.exports = (logger) => {
 ```
 
 ### Authors
+* [Jin Bok](https://www.linkedin.com/in/jinbok) - Product Owner
+* [Mark Tyneway](https://www.linkedin.com/in/marktyneway) - Scrum Master
+* [Jovani Marinez Rico](www.linkedin.com/in/jovanirico) - Developer Specialist
+* [Josh Wentworth](https://www.linkedin.com/in/joshwentworth) - Developer Specialist
 
 ### License
 MIT
