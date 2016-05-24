@@ -10,9 +10,10 @@ We are live at [uai.website](uai.website)!
 
 ### Table of Contents
  - [Installation](#installation)
+ - [Configuration](#configuration)
+ - [Architecture](#architecture)
  - [Contributing](#contributing)
  - [Authors](#authors)
- - [Contributing](#contributing)
 
 ### Installation
 If you need to set up a Python dev environment, check out this [guide](https://github.com/imminent-tuba/thesis/wiki/Python-Environment-Setup) in our wiki.
@@ -22,9 +23,6 @@ From the root directory,
 npm install
 pip install -r requirememnts.txt
 ```
-
-### Deployment
-Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
 
 #### INITIALIZING THE DB
 This project uses mysql for the node/express server, and Mongodb for the chat bot. Both must be installed and running.
@@ -57,7 +55,7 @@ $ nodemon server/server.js
 $ nodemon server/chatterbot/chatterbot_entry.js
 ```
 
-### Config Files
+### Configuration
 The following files must be added to the server/config folder.
 These files hold secrets, such as API keys.
 
@@ -99,6 +97,12 @@ module.exports = (logger) => {
 };
 
 ```
+
+### Architecture
+![Architecture](http://i66.tinypic.com/9fuujt.png)
+
+### Deployment
+Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
 
 ### Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) to see the Git Flow that we used in this project.
