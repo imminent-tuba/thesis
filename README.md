@@ -1,10 +1,12 @@
 # Charlie Chatterbot
 
-uai.website
+We are live at [uai.website](uai.website)!
 
 ### Machine Learning Slackbot + Data Visualizations
-Charlie the Chatterbot learns more and more over time.  It can be [difficult](http://blogs.microsoft.com/blog/2016/03/25/learning-tays-introduction/) to keep track of what a machine learning bot is learning, so we run the conversations through sentiment analysis and display live graphs on the "personality" of the bot.
-Currently, we support Slack messenger.
+Charlie the Chatterbot is a Machine Learning Chatbot that integrates with Slack.  Place the Slack bot into your channel
+and the bot will be automatically trained on all of the conversations in that particular channel.
+Over time, the bot will learn and represent the culture of the Slack channel.  All of the data that the bot learns
+from is also analyzed through Alchemy's sentiment analysis, and displayed in graph form.
 
 ### Installation
 If you need to set up a Python dev environment, check out this [guide](https://github.com/imminent-tuba/thesis/wiki/Python-Environment-Setup) in our wiki.
@@ -19,7 +21,7 @@ pip install -r requirememnts.txt
 Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
 
 #### INITIALIZING THE DB
-This project uses mysql for the node/express server, and Mongodb for the chatterbot. Both must be installed and running.
+This project uses mysql for the node/express server, and Mongodb for the chat bot. Both must be installed and running.
 
 #### initialize the mysql database with the schema file
 ```
@@ -34,6 +36,7 @@ $ mongod
 ```
 
 It is recommended that each of the following commands is run in it's own terminal window.
+This will help with development flow as you will be able to watch webpack, the server and the bot at the same time.
 
 #### 1. Run webpack to package the front-end code
 ```
@@ -43,7 +46,7 @@ $ npm run webpack
 ```
 $ nodemon server/server.js
 ```
-#### 3. Run the chatterbot
+#### 3. Run the chat bot
 ```
 $ nodemon server/chatterbot/chatterbot_entry.js
 ```
@@ -53,17 +56,17 @@ the following files must be in the server/config folder
 
 AlchemyApiKey.js
 ```
-module.exports = 'your alchemt API key';
+module.exports = <ALCHEMY_API_KEY>;
 ```
 botKey.js
 ```
-module.exports = 'your API key for slack's botkit;
+module.exports = <SLACK_BOT_KEY>;
 ```
 pythonSettings.js
 ```
 module.exports = {
   mode: 'text',
-  pythonPath: 'your environment variable for python', (or the path to it's bin/exe)
+  pythonPath: '<PATH_TO_PYTHON>',
   args: [0, 'test', 0],
 };
 ```
@@ -76,7 +79,7 @@ require('winston-loggly');
 module.exports = (logger) => {
   logger.level = 'info';
   // logger.add(winston.transports.Loggly, {
-  //   token: 'loggly API token',
+  //   token: '<LOGGLY_API_TOKEN>',
   //   subdomain: 'your loggly subdomain',
   //   tags: ['Winston-NodeJS'],
   //   json: true,
