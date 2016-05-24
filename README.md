@@ -1,12 +1,17 @@
 # Charlie Chatterbot
 
-We are live at [uai.website](uai.website)!
-
 ### Machine Learning Slackbot + Data Visualizations
 Charlie the Chatterbot is a Machine Learning Chatbot that integrates with Slack.  Place the Slack bot into your channel
 and the bot will be automatically trained on all of the conversations in that particular channel.
 Over time, the bot will learn and represent the culture of the Slack channel.  All of the data that the bot learns
 from is also analyzed through Alchemy's sentiment analysis, and displayed in graph form.
+
+We are live at [uai.website](uai.website)!
+
+### Table of Contents
+ - [Installation](#installation)
+ - [Contributing](#contributing)
+ - [Authors](#authors)
 
 ### Installation
 If you need to set up a Python dev environment, check out this [guide](https://github.com/imminent-tuba/thesis/wiki/Python-Environment-Setup) in our wiki.
