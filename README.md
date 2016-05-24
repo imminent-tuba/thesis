@@ -12,6 +12,7 @@ We are live at [uai.website](uai.website)!
  - [Installation](#installation)
  - [Contributing](#contributing)
  - [Authors](#authors)
+ - [Contributing](#contributing)
 
 ### Installation
 If you need to set up a Python dev environment, check out this [guide](https://github.com/imminent-tuba/thesis/wiki/Python-Environment-Setup) in our wiki.
@@ -33,9 +34,9 @@ This project uses mysql for the node/express server, and Mongodb for the chat bo
 $ mysql -u root < server/Schema.sql
 
 ```
-if your mysql instance needs a password add -p <password> to this command
+If your MySQL instance needs a password, add -p <password> to this command
 
-#### start mongo
+#### Start MongoDB
 ```
 $ mongod
 ```
@@ -56,8 +57,9 @@ $ nodemon server/server.js
 $ nodemon server/chatterbot/chatterbot_entry.js
 ```
 
-### config files
-the following files must be in the server/config folder
+### Config Files
+The following files must be added to the server/config folder.
+These files hold secrets, such as API keys.
 
 AlchemyApiKey.js
 ```
@@ -99,9 +101,7 @@ module.exports = (logger) => {
 ```
 
 ### Contributing
-```
-
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md) to see the Git Flow that we used in this project.
 
 ### Authors
 * [Jin Bok](https://www.linkedin.com/in/jinbok) - Product Owner
