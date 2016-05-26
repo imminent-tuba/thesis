@@ -16,29 +16,28 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+## Charlie Chatterbot
+  > Machine Learning Chatbot with sentiment analysis, d3.js visualizations and Slack integration.
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+## Summary
+  > Maintaining a high quality team culture is important for cooperation and the ultimate goal of delivering a
+  strong final product.  Monitor the health of your team using Charlie Chatterbot, a chat bot that learns from the
+  language that your team uses and grows to represent just another member of your team.  All of the conversations that
+  your team have are also sent through a sentiment analysis pipeline and visualized so that metrics on team health can
+  easily be seen.
 
-## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+## Problem
+  > Maintaining a high quality team culture can be difficult as an organization grows.  It is important
+  to do so because a high quality culture will attract the best talent.
 
-## Problem ##
-  > Describe the problem your product solves.
+## Solution
+  > Use visualizations to view the status of your team in real-time.  Talk to the bot to learn how
+  an average member of your team speaks.
 
-## Solution ##
-  > Describe how your product elegantly solves the problem.
-
-## Quote from You ##
-  > A quote from a spokesperson in your company.
+## Quote from You
+  > "Bots are the future. They will help organizations better keep track of all of the little things that can be hard to keep on your mind because there is always too much to do"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > It is as simple as placing a bot in your Slack channel and it will be constantly training on
+  all of the conversations had in that particular channel.  Mention the bot and it will respond with something
+  that it has learned.  
