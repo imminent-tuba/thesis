@@ -24,7 +24,7 @@ npm install
 pip install -r requirememnts.txt
 ```
 
-#### INITIALIZING THE DB
+#### Initializing the Database
 This project uses mysql for the node/express server, and Mongodb for the chat bot. Both must be installed and running.
 
 #### initialize the mysql database with the schema file
@@ -102,7 +102,6 @@ module.exports = (logger) => {
 
 ##### Front-end
 * [React](https://facebook.github.io/react/)
-* [Redux](http://redux.js.org/)
 * [D3.js](https://d3js.org/)
 * [Webpack](https://webpack.github.io/), see [this](https://github.com/naomiajacobs/reactBoilerplate)
 
