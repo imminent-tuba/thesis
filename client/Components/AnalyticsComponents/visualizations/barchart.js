@@ -49,7 +49,7 @@ export default () => {
       .append('rect')
       .attr('x', d => xScale(d.emotion) + (width / 3 - 200))
       // .attr('x', d => xScale(d.emotion))
-      .attr('y', d => yScale(d.data))
+      .attr('y', d => yScale(d.data) - 410)
       // .attr('y', d => yScale(d.data))
       .attr('width', xScale.rangeBand())
       .attr('height', d => (yScale(0) - yScale(d.data)))

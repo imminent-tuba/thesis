@@ -1,7 +1,8 @@
 import React from 'react';
+import AboutTemplate from './AnalyticsComponents/About.jsx';
 
 const About = () => (
-  <h1>About</h1>
+  <AboutTemplate/>
 );
 
 export default About;

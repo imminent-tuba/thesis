@@ -30,11 +30,11 @@ export default class DataViewList extends React.Component {
         />
         <LeftNav width={250} height={200} openRight={true} open={this.state.open} style={{ marginTop : 7.5}}>
           <AppBar title="Graphs" showMenuIconButton={false}/>
-          <MenuItem primaryText="Pie Chart" rightIcon={<img height="27" width="25" src="http://zizaza.com/cache/big_thumb/iconset/581423/581448/PNG/256/business_and_financial/business_financial_pie_chart_business_icon_png_pie_chart_png_pie_chart_icon.png" />}  onClick={() => this.props.handleClick('pie')} />
-          <MenuItem primaryText="Bubble Chart" rightIcon={<img height="27" width="25" src="https://www.miosoft.com/img/Scalable-Graph.png" />} onClick={() => this.props.handleClick('bubble')} />
-          <MenuItem primaryText="Taxonomy" rightIcon={<img height="27" width="25" src="http://kamber.com.au/wp-content/uploads/2013/09/1378900097_basic3-137_relations_graph_connections_structure.png" />} onClick={() => this.props.handleClick('tax')} />
-          <MenuItem primaryText="Real Time Emotions" rightIcon={<img height="27" width="25" src="http://kamber.com.au/wp-content/uploads/2013/09/1378900097_basic3-137_relations_graph_connections_structure.png" />} onClick={() => this.props.handleClick('RT')} />
-          <MenuItem primaryText="Over Time" rightIcon={<img height="27" width="25" src="http://kamber.com.au/wp-content/uploads/2013/09/1378900097_basic3-137_relations_graph_connections_structure.png" />} onClick={() => this.props.handleClick('time')} />
+            <MenuItem primaryText="Pie Chart" rightIcon={<img height="27" width="25" src="../assets/pieChar.png" />}  onClick={() => this.props.handleClick('pie')} />
+            <MenuItem primaryText="Bubble Chart" rightIcon={<img height="27" width="25" src="../assets/Scalable-Graph.png" />} onClick={() => this.props.handleClick('bubble')} />
+            <MenuItem primaryText="Taxonomy" rightIcon={<img height="27" width="25" src="../assets/graph.png" />} onClick={() => this.props.handleClick('tax')} />
+            <MenuItem primaryText="Real Time Emotions" rightIcon={<img height="27" width="25" src="../assets/icon.png" />} onClick={() => this.props.handleClick('RT')} />
+            <MenuItem primaryText="Over Time" rightIcon={<img height="27" width="25" src="../assets/linegraph.png" />} onClick={() => this.props.handleClick('time')} />
           <RaisedButton
             label="Close"
             onTouchTap={this.handleToggle.bind(this)}
