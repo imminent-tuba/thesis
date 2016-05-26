@@ -99,7 +99,34 @@ module.exports = (logger) => {
 ```
 
 ### Architecture
+
+##### Front-end
+* [React](https://facebook.github.io/react/)
+* [Redux](http://redux.js.org/)
+* [D3.js](https://d3js.org/)
+* [Webpack](https://webpack.github.io/), see [this](https://github.com/naomiajacobs/reactBoilerplate)
+
+##### APIs
+* AlchemyAPI - Sentiment analysis
+* Slack RTM
+
+##### Back-end
+* [Node/Express](http://expressjs.com/)
+* [Chatterbot](https://github.com/gunthercox/ChatterBot)
+* [Socket.io](http://socket.io/)
+* [MongoDB](https://www.mongodb.org/)
+* [MySQL](https://www.mysql.com/)
+
+##### Testing
+* [Travis CI](https://travis-ci.org/) - Continuous Integration Testing
+* Mocha/Chai
+* Karma
+
+##### Architecture Diagram
 ![Architecture](http://i66.tinypic.com/9fuujt.png)
+
+##### MySQL Schema
+![Schema](http://i67.tinypic.com/2drgz13.png)
 
 ### Deployment
 Our deployment strategy is explained in more detail in our [wiki](https://github.com/imminent-tuba/thesis/wiki/Deployment).
