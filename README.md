@@ -27,7 +27,7 @@ pip install -r requirememnts.txt
 #### Initializing the Database
 This project uses mysql for the node/express server, and Mongodb for the chat bot. Both must be installed and running.
 
-#### initialize the mysql database with the schema file
+#### Initialize the MySQL Database with the Schema File
 ```
 $ mysql -u root < server/Schema.sql
 
